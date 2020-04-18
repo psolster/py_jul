@@ -1,0 +1,4 @@
+OS info is 
+uname_result(system='Windows', node='lisa-PC', release='7', version='6.1.7601', machine='AMD64', processor='Intel64 Family 6 Model 42 Stepping 7, GenuineIntel')
+
+Python version is 3.7.0b3 (v3.7.0b3:4e7efa9c6f, Mar 29 2018, 18:42:04) [MSC v.1913 64 bit (AMD64)] ('64bit', 'WindowsPE')
