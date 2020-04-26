@@ -34,14 +34,14 @@ store = {
 # Рассчитать на какую сумму лежит каждого товара на складе
 # например для ламп
 
-lamps_cost = store[goods['Лампа']][0]['quantity'] * store[goods['Лампа']][0]['price']
+#lamps_cost = store[goods['Лампа']][0]['quantity'] * store[goods['Лампа']][0]['price']
 # или проще (/сложнее ?)
-lamp_code = goods['Лампа']
-lamps_item = store[lamp_code][0]
-lamps_quantity = lamps_item['quantity']
-lamps_price = lamps_item['price']
-lamps_cost = lamps_quantity * lamps_price
-print('Лампа -', lamps_quantity, 'шт, стоимость', lamps_cost, 'руб')
+#lamp_code = goods['Лампа']
+#lamps_item = store[lamp_code][0]
+#lamps_quantity = lamps_item['quantity']
+#lamps_price = lamps_item['price']
+#lamps_cost = lamps_quantity * lamps_price
+#print('Лампа -', lamps_quantity, 'шт, стоимость', lamps_cost, 'руб')
 
 # Вывести стоимость каждого вида товара на складе:
 # один раз распечать сколько всего столов и их общая стоимость,
@@ -52,8 +52,18 @@ print('Лампа -', lamps_quantity, 'шт, стоимость', lamps_cost, '�
 # WARNING для знающих циклы: БЕЗ циклов. Да, с переменными; да, неэффективно; да, копипаста.
 # Это задание на ручное вычисление - что бы потом понять как работают циклы и насколько с ними проще жить.
 
-# TODO здесь ваш код
+lamps_cost = store[goods['Лампа']][0]['quantity'] * store[goods['Лампа']][0]['price']
+print('Лампа -', store[goods['Лампа']][0]['quantity'], 'шт, стоимость', lamps_cost, 'руб')
 
+
+table_cost = store[goods['Стол']][0]['quantity'] * store[goods['Стол']][0]['price']+store[goods['Стол']][1]['quantity'] * store[goods['Стол']][1]['price']
+print('Стол -', store[goods['Стол']][0]['quantity']+store[goods['Стол']][1]['quantity'], 'шт, стоимость', table_cost, 'руб')
+
+sofa_cost = store[goods['Диван']][0]['quantity'] * store[goods['Диван']][0]['price']+store[goods['Диван']][1]['quantity'] * store[goods['Диван']][1]['price']
+print('Диван -', store[goods['Диван']][0]['quantity']+store[goods['Диван']][1]['quantity'], 'шт, стоимость', sofa_cost, 'руб')
+
+taburet_cost = store[goods['Стул']][0]['quantity'] * store[goods['Стул']][0]['price']+store[goods['Стул']][1]['quantity'] * store[goods['Стул']][1]['price']+store[goods['Стул']][2]['quantity'] * store[goods['Стул']][2]['price']
+print('Стул -', store[goods['Стул']][0]['quantity']+store[goods['Стул']][1]['quantity']+store[goods['Стул']][2]['quantity'], 'шт, стоимость', taburet_cost, 'руб')
 ##########################################################################################
 # ВНИМАНИЕ! После того как __ВСЯ__ домашняя работа сделана и запушена на сервер,         #
 # нужно зайти в ЛМС (LMS - Learning Management System ) по адресу http://go.skillbox.ru  #
