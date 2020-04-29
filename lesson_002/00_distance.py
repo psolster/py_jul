@@ -3,6 +3,7 @@
 
 
 from pprint import pprint
+
 sites = {
     'Moscow': (550, 370),
     'London': (510, 510),
@@ -11,11 +12,11 @@ sites = {
 
 distances = {}
 
-moscow=sites['Moscow']
+moscow = sites['Moscow']
 
-london=sites['London']
+london = sites['London']
 
-paris=sites['Paris']
+paris = sites['Paris']
 
 moscow_london = ((moscow[0] - london[0]) ** 2 + (moscow[1] - london[1]) ** 2) ** .5
 moscow_paris = ((moscow[0] - paris[0]) ** 2 + (moscow[1] - paris[1]) ** 2) ** .5

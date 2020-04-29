@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Есть список песен группы Depeche Mode со временем звучания с точностью до долей минут
-# Точность указывается в функции round(a, b)
-# где a, это число которое надо округлить, а b количество знаков после запятой
-# более подробно про функцию round смотрите в документации https://docs.python.org/3/search.html?q=round
 
 violator_songs_list = [
     ['World in My Eyes', 4.86],
@@ -18,14 +14,13 @@ violator_songs_list = [
     ['Clean', 5.83],
 ]
 
-# Распечатайте общее время звучания трех песен: 'Halo', 'Enjoy the Silence' и 'Clean' в формате
-#   Три песни звучат ХХХ.XX минут
-# TODO: Попробуйте ту также оформить столбиком. И лучше round использовать уже в принте:
-time_1 = round(violator_songs_list [3][1]+violator_songs_list [5][1]
-                                  +violator_songs_list [8][1],2)
-print('Три песни звучат-> ',time_1,' минут')
+time_1 = (
+    violator_songs_list [3][1]
+    + violator_songs_list [5][1]
+    + violator_songs_list [8][1]
+)
+print('Три песни звучат-> ', round(time_1,2), ' минут')
 
-# Есть словарь песен группы Depeche Mode
 violator_songs_dict = {
     'World in My Eyes': 4.76,
     'Sweetest Perfection': 4.43,
@@ -38,13 +33,12 @@ violator_songs_dict = {
     'Clean': 5.68,
 }
 
-# Распечатайте общее время звучания трех песен: 'Sweetest Perfection', 'Policy of Truth' и 'Blue Dress'
-#   А другие три песни звучат приблизительно ХХХ минут
-# TODO: Аналогично и здесь:
-time_2 = round(violator_songs_dict ['Sweetest Perfection']+violator_songs_dict ['Policy of Truth']
-                                  +violator_songs_dict ['Blue Dress'],0)
-# TODO: Пробелы после запятых:
-print('А другие 3 песни звучат приблизительно -> ',time_2,' минут')
+time_2 = (
+        violator_songs_dict['Sweetest Perfection']
+        + violator_songs_dict['Policy of Truth']
+        + violator_songs_dict ['Blue Dress']
+)
 
-# Обратите внимание, что делать много вычислений внутри print() - плохой стиль.
-# Лучше заранее вычислить необходимое, а затем в print(xxx, yyy, zzz)
+print('А другие 3 песни звучат приблизительно -> ', round(time_2,0), ' минут')
+
+
