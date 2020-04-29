@@ -23,6 +23,5 @@ print(garden_set & meadow_set)
 print(garden_set - meadow_set)
 
 # выведите на консоль те, которые растут на лугу, но не растут в саду
+# TODO: Отсутствующий пробел перед оператором минуса. Единственное что помешало принять работу:
 print(meadow_set- garden_set )
-
-
