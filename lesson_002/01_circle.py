@@ -7,15 +7,14 @@ print(round(pi * radius ** 2, 4))
 
 point_1 = (23, 34)
 
-distans = (point_1[0] ** 2 + point_1[1] ** 2) ** 0.5
+distance = (point_1[0] ** 2 + point_1[1] ** 2) ** 0.5
 
-print(radius > distans)
+print(radius > distance)
 
 point_2 = (30, 30)
 
-distans_2 = (point_2[0] ** 2 + point_2[1] ** 2) ** 0.5
+distance_2 = (point_2[0] ** 2 + point_2[1] ** 2) ** 0.5
 
-print(radius > distans_2)
+print(radius > distance_2)
 
-
-
+# Зачёт!
