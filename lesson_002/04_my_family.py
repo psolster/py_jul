@@ -12,11 +12,11 @@ my_family_height = [
 
 print('рост ', my_family_height[0])
 
-# TODO: 4 пробела в отступах:
+
 total_height = (
-        my_family_height[0][1]
-        + my_family_height[1][1]
-        + my_family_height[2][1]
+    my_family_height[0][1]
+    + my_family_height[1][1]
+    + my_family_height[2][1]
 )
 
 print('Общий рост семьи->', total_height)
