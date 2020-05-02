@@ -30,45 +30,47 @@ store = {
 lamps_cost = store[goods['Лампа']][0]['quantity'] * store[goods['Лампа']][0]['price']
 print('Лампа -', store[goods['Лампа']][0]['quantity'], 'шт, стоимость', lamps_cost, 'руб')
 
-# TODO: Я вам честно скажу - такое оформление кода меня совершенно не радует.
-# TODO: Особенно не радует перенос строки прямо при обращении к ключу словаря.
-# TODO: На всякий случай ещё раз укажу как форматировать подобные выражения, ниже, отформатируйте по подобию:
-table_cost = store[goods['Стол']][0]['quantity'] * store[goods['Стол']][0]['price'] + store[goods['Стол']][1][
-    'quantity'] * store[goods['Стол']][1]['price']
-print('Стол -', store[goods['Стол']][0]['quantity'] + store[goods['Стол']][1]['quantity'], 'шт, стоимость', table_cost,
-      'руб')
 
-sofa_cost = store[goods['Диван']][0]['quantity'] * store[goods['Диван']][0]['price'] + store[goods['Диван']][1][
-    'quantity'] * store[goods['Диван']][1]['price']
-print('Диван -', store[goods['Диван']][0]['quantity'] + store[goods['Диван']][1]['quantity'], 'шт, стоимость',
-      sofa_cost, 'руб')
-
-taburet_cost = store[goods['Стул']][0]['quantity'] * store[goods['Стул']][0]['price'] + store[goods['Стул']][1][
-    'quantity'] * store[goods['Стул']][1]['price'] + store[goods['Стул']][2]['quantity'] * store[goods['Стул']][2][
-                   'price']
-print('Стул -',
-      store[goods['Стул']][0]['quantity'] + store[goods['Стул']][1]['quantity'] + store[goods['Стул']][2]['quantity'],
-      'шт, стоимость', taburet_cost, 'руб')
-
-# TODO: Пример того о чём говорится. Обратите внимание что заметки преподавателя и примеры кода тоже нужно удалять.
-# TODO: Поскольку должен оставаться только ваш код в файлах.
-# NOTE: Т.е. как пример у нас есть подобные данные:
-example_data = [
-    ["some_data", 100],
-    ["some_other_data", 200]
-]
-
-# NOTE: И мы вычисляем эти данные в столбик:
-some_calculations = (
-    example_data[0][1]
-    + example_data[1][1]
+table_cost = (
+    store[goods['Стол']][0]['quantity'] *
+    store[goods['Стол']][0]['price'] +
+    store[goods['Стол']][1]['quantity'] *
+    store[goods['Стол']][1]['price']
 )
-print("Результат вычислений:", some_calculations)
+kolvo_stolov = (
 
-# NOTE: Правила простые: открывающая скобка после оператора присваивания (=);
-# NOTE: закрывающая скобка в начале строки;
-# NOTE: скобки не должны быть на одной строке с операторами и операндами;
-# NOTE: оператор должен идти перед операндом;
-# NOTE: должно быть 4 пробела отступов.
+    store[goods['Стол']][0]['quantity'] +
+    store[goods['Стол']][1]['quantity']
+)
+print('Стол -', kolvo_stolov, 'шт, стоимость', table_cost, 'руб')
 
-# NOTE: Вот, пусть послужит вам примером и сделайте аналогично ваши вычисления выше.
+sofa_cost = (
+    store[goods['Диван']][0]['quantity'] *
+    store[goods['Диван']][0]['price'] +
+    store[goods['Диван']][1]['quantity'] *
+    store[goods['Диван']][1]['price']
+)
+
+kolvo_sofa = (
+    store[goods['Диван']][0]['quantity'] +
+    store[goods['Диван']][1]['quantity']
+)
+
+print('Диван -', kolvo_sofa, 'шт, стоимость', sofa_cost, 'руб')
+
+taburet_cost = (
+    store[goods['Стул']][0]['quantity'] *
+    store[goods['Стул']][0]['price'] +
+    store[goods['Стул']][1]['quantity'] *
+    store[goods['Стул']][1]['price'] +
+    store[goods['Стул']][2]['quantity'] *
+    store[goods['Стул']][2]['price']
+)
+
+kolvo_taburet = (
+    store[goods['Стул']][0]['quantity'] +
+    store[goods['Стул']][1]['quantity'] +
+    store[goods['Стул']][2]['quantity']
+)
+
+print('Стул -', kolvo_taburet, 'шт, стоимость', taburet_cost, 'руб')
