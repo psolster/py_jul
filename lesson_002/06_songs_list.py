@@ -14,18 +14,13 @@ violator_songs_list = [
     ['Clean', 5.83],
 ]
 
-# TODO: Выбранное имя переменной слишком общее. Попробуйте выбрать более удачное имя для неё.
-# Подсказка: она должна быть очевидной относительно контекста в котором она находится,
-# причём не только вам, но и другим людям работающим с вашим кодом.
-# Т.е. стоит называть переменную не просто total, а как пример savannah_elephants_count,
-# если речь идёт о подсчёте количества слонов в джунглях африки, условно.
-time_1 = (
-    violator_songs_list [3][1]
-    + violator_songs_list [5][1]
-    + violator_songs_list [8][1]
+time_3_songs = (
+    violator_songs_list[3][1]
+    + violator_songs_list[5][1]
+    + violator_songs_list[8][1]
 )
-# TODO: Пробелы после запятых (в функции round):
-print('Три песни звучат-> ', round(time_1,2), ' минут')
+
+print('Три песни звучат-> ', round(time_3_songs, 2), ' минут')
 
 violator_songs_dict = {
     'World in My Eyes': 4.76,
@@ -39,12 +34,12 @@ violator_songs_dict = {
     'Clean': 5.68,
 }
 
-# TODO: 4 пробела в отступах. Ну и имя переменной тоже:
-time_2 = (
-        violator_songs_dict['Sweetest Perfection']
-        + violator_songs_dict['Policy of Truth']
-        + violator_songs_dict ['Blue Dress']
+
+other_3_songs = (
+    violator_songs_dict['Sweetest Perfection']
+    + violator_songs_dict['Policy of Truth']
+    + violator_songs_dict['Blue Dress']
 )
 
-# TODO: Пробелы после запятых (в функции round):
-print('А другие 3 песни звучат приблизительно -> ', round(time_2,0), ' минут')
+
+print('А другие 3 песни звучат приблизительно -> ', round(other_3_songs, 0), ' минут')
