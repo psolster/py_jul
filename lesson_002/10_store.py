@@ -74,3 +74,5 @@ kolvo_taburet = (
 )
 
 print('Стул -', kolvo_taburet, 'шт, стоимость', taburet_cost, 'руб')
+
+# Зачёт!
