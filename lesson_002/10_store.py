@@ -31,7 +31,6 @@ lamps_cost = store[goods['Лампа']][0]['quantity'] * store[goods['Лампа
 print('Лампа -', store[goods['Лампа']][0]['quantity'], 'шт, стоимость', lamps_cost, 'руб')
 
 
-# TODO: Операторы должны находиться до операндов:
 table_cost = (
     store[goods['Стол']][0]['quantity']
     * store[goods['Стол']][0]['price']
