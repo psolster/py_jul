@@ -33,45 +33,45 @@ print('Лампа -', store[goods['Лампа']][0]['quantity'], 'шт, стои
 
 # TODO: Операторы должны находиться до операндов:
 table_cost = (
-    store[goods['Стол']][0]['quantity'] *
-    store[goods['Стол']][0]['price'] +
-    store[goods['Стол']][1]['quantity'] *
-    store[goods['Стол']][1]['price']
+    store[goods['Стол']][0]['quantity']
+    * store[goods['Стол']][0]['price']
+    + store[goods['Стол']][1]['quantity']
+    * store[goods['Стол']][1]['price']
 )
 kolvo_stolov = (
 
-    store[goods['Стол']][0]['quantity'] +
-    store[goods['Стол']][1]['quantity']
+    store[goods['Стол']][0]['quantity']
+    + store[goods['Стол']][1]['quantity']
 )
 print('Стол -', kolvo_stolov, 'шт, стоимость', table_cost, 'руб')
 
 sofa_cost = (
-    store[goods['Диван']][0]['quantity'] *
-    store[goods['Диван']][0]['price'] +
-    store[goods['Диван']][1]['quantity'] *
-    store[goods['Диван']][1]['price']
+    store[goods['Диван']][0]['quantity']
+    * store[goods['Диван']][0]['price']
+    + store[goods['Диван']][1]['quantity']
+    * store[goods['Диван']][1]['price']
 )
 
 kolvo_sofa = (
-    store[goods['Диван']][0]['quantity'] +
-    store[goods['Диван']][1]['quantity']
+    store[goods['Диван']][0]['quantity']
+    + store[goods['Диван']][1]['quantity']
 )
 
 print('Диван -', kolvo_sofa, 'шт, стоимость', sofa_cost, 'руб')
 
 taburet_cost = (
-    store[goods['Стул']][0]['quantity'] *
-    store[goods['Стул']][0]['price'] +
-    store[goods['Стул']][1]['quantity'] *
-    store[goods['Стул']][1]['price'] +
-    store[goods['Стул']][2]['quantity'] *
-    store[goods['Стул']][2]['price']
+    store[goods['Стул']][0]['quantity']
+    * store[goods['Стул']][0]['price']
+    + store[goods['Стул']][1]['quantity']
+    * store[goods['Стул']][1]['price']
+    + store[goods['Стул']][2]['quantity']
+    * store[goods['Стул']][2]['price']
 )
 
 kolvo_taburet = (
-    store[goods['Стул']][0]['quantity'] +
-    store[goods['Стул']][1]['quantity'] +
-    store[goods['Стул']][2]['quantity']
+    store[goods['Стул']][0]['quantity']
+    + store[goods['Стул']][1]['quantity']
+    + store[goods['Стул']][2]['quantity']
 )
 
 print('Стул -', kolvo_taburet, 'шт, стоимость', taburet_cost, 'руб')
