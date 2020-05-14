@@ -54,7 +54,20 @@ store = {
 #         подсчет стоимости товара
 #     вывод на консоль количества и стоимости товара на складе
 
-# TODO здесь ваш код
+for name in goods:
+    art = goods[name]
+#    print(name, art)
+    total_quon = 0
+    total_cost = 0
+    inform = store[art]
+    for soder in enumerate(inform):
+        soder_vok = soder[1]
+        total_quon += soder_vok["quantity"]
+    total_cost = soder_vok["price"] * total_quon
+    print(name, total_quon, "шт", "стоимость", total_cost)
+
+
+
 
 
 
