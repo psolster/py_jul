@@ -10,4 +10,4 @@ while i < 10:
     expenses *= 1.03
 
     i += 1
-print("Студенту надо попросить", sum_expenses )
+print("Студенту надо попросить", round(sum_expenses, 2))
