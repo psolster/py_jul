@@ -20,13 +20,11 @@ end_point = sd.get_point(x_2, y_2)
 for color in rainbow_colors:
     sd.line(start_point, end_point, color, 4)
     x_1 += 5
-    y_1 + 5
+    y_1 += 5
     x_2 += 5
     y_2 += 5
     start_point = sd.get_point(x_1, y_1)
     end_point = sd.get_point(x_2, y_2)
-# Подсказка: цикл нужно делать сразу по тьюплу с цветами радуги.
-
 
 # Усложненное задание, делать по желанию.
 # Нарисовать радугу дугами от окружности (cсм sd.circle) за нижним краем экрана,
