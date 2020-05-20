@@ -33,7 +33,6 @@ for y in range(100, 400, 100):
         color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
         buble(point=point, step=5, color=color)
 
-
 point = sd.get_point(200, 200)
 
 
