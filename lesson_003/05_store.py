@@ -30,11 +30,23 @@ store = {
     ],
 }
 
+# TODO Обращайте внимание на предупреждения среды разработки о
+#  проблемах в коде или нарушении стандарта PEP 8.
+#  Попробуйте найти зеленую галочку справа над полосой прокрутки.
+#  Если вместо нее, квадрат красного, желтого или серого цвета,
+#  значит в файле есть недостатки оформления или ошибки.
+
+# TODO Удобнее использовать метод items словаря:
+#  for product_name, product_code  in goods.items():
 for name in goods:
     art = goods[name]
     total_quon = 0
     total_cost = 0
     inform = store[art]
+    # TODO Можно сделать цикл по store[art] не создавая
+    #  дополнительных переменных. Хорошо, что вы уже знаете про enumerate,
+    #  но здесь эту функцию лучше не использовать. Тогда вы сможете немного упростить код:
+    #  for soder_vok in store[art]:
     for soder in enumerate(inform):
         soder_vok = soder[1]
         total_cost += soder_vok["quantity"] * soder_vok["price"]
