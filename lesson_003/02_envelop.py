@@ -15,6 +15,7 @@ paper_x, paper_y = 9, 11
 
 if envelop_x >= paper_x and envelop_y >= paper_y:
     print("Да")
+# TODO Второе условие не исправили.
 elif envelop_y >= paper_x or envelop_y >= paper_y:
     print("Да")
 else:
@@ -27,7 +28,7 @@ else:
 # Определить, пройдет ли кирпич через отверстие (грани кирпича параллельны сторонам отверстия)
 
 hole_x, hole_y = 8, 9
-# brick_x, brick_y, brick_z = 11, 10, 2
+brick_x, brick_y, brick_z = 11, 10, 2
 # brick_x, brick_y, brick_z = 11, 2, 10
 # brick_x, brick_y, brick_z = 10, 11, 2
 # brick_x, brick_y, brick_z = 10, 2, 11
@@ -47,6 +48,13 @@ hole_x, hole_y = 8, 9
 # brick_x, brick_y, brick_z = 3, 11, 6
 # (просто раскоментировать нужную строку и проверить свой код)
 
+# TODO Вы проверяете не все возможные способы повернуть кирпич.
+#  У кирпича (параллелепипеда) 6, (3 пары одинаковых) сторон.
+#  У отверстия два измерения. Каждая сторона аналогична листу бумаги
+#  из первой части задания и нуждается в двух проверках.
+#  В результате получается 6 различных способов проверить попадёт
+#  ли кирпич в отверстие.
+
 if hole_x >= brick_x and hole_y >= brick_y:
     print("Да")
 elif hole_y >= brick_x or hole_x >= brick_y:
@@ -56,4 +64,4 @@ elif hole_x >= brick_z and hole_y >= brick_y:
 elif hole_y >= brick_z and hole_x >= brick_y:
     print("да")
 else:
-     print("нет")
+    print("нет")

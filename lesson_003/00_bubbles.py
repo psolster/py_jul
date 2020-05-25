@@ -12,6 +12,8 @@ for _ in range(3):
     sd.circle(center_position=point, radius=radius, width=2)
 
 
+# TODO Обратите внимание на предупреждение среды разработки о том, что внутри функции используются те же имена
+#  переменных, что и вне ее. Здесь это не критично но в других случаях может вызвать ошибки.
 def buble(point, step, color):
     radius = 50
     for _ in range(3):

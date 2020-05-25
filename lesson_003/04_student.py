@@ -12,3 +12,5 @@ while i < 10:
 
     i += 1
 print("Студенту надо попросить", round(sum_expenses, 2))
+
+# Зачёт!
