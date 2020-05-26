@@ -4,7 +4,7 @@ days_in_month = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 
 user_input = input("Введите, пожалуйста, номер месяца: ")
 month = int(user_input)
 print('Вы ввели', month)
-if month > 12:
-    print("Не корректный номер месяца ->", month)
+if month in days_in_month:
+    print("в месяце с номером ", month, days_in_month[month], "дней")
 else:
-    print("в месяце с номером ", month, days_in_month.get(month), "дней")
+    print("не корректный месяц ", month)
