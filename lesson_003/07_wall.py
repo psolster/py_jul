@@ -14,7 +14,8 @@ end_point = sd.get_point(x_2, y_2)
 for y in range(0, 551, 50):
     y_1 = y
     y_2 = y+50
-    for x in range(0, 1201, 100):
+
+    for x in range(y, 1251, 100):
         x_1 = x
         x_2 = x+100
         start_point = sd.get_point(x_1, y_1)
