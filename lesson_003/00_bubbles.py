@@ -16,6 +16,9 @@ def buble(central_point, step_radius, color_bubl):
     start_radius = 50
     for _ in range(3):
         start_radius += step_radius
+        # TODO Пузырьки рисуются неправильно. Они должны состоять из 3 окружностей.
+        #  Для исправления передавайте в аргумент radius функции рисования окржности
+        #  start_radius вместо radius.
         sd.circle(center_position=central_point, radius=radius, color=color_bubl, width=2)
 
 

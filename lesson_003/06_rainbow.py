@@ -16,6 +16,7 @@ y_2 = 450
 
 start_point = sd.get_point(x_1, y_1)
 end_point = sd.get_point(x_2, y_2)
+# TODO В условии задания, которое вы удалили можно было прочитать, что увеличивать координату y  не нужно.
 for color in rainbow_colors:
     sd.line(start_point, end_point, color, 4)
     x_1 += 5
