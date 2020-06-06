@@ -22,5 +22,6 @@ for y in range(0, 551, 50):
         end_point = sd.get_point(x_2, y_2)
         sd.rectangle(start_point, end_point, color, 2)
 
+# TODO  Нарисуйте прямоугольную стену, которая должна занимать весь экран.
 
 sd.pause()

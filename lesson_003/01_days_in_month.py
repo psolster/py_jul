@@ -8,3 +8,5 @@ if month in days_in_month:
     print("в месяце с номером ", month, days_in_month[month], "дней")
 else:
     print("не корректный месяц ", month)
+
+# Зачёт!
