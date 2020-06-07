@@ -30,3 +30,5 @@ for y in range(0, 551, 50):
 
 
 sd.pause()
+
+# Зачёт!

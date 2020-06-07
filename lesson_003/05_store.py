@@ -31,3 +31,5 @@ for product_name, product_code in goods.items():
         total_cost += sostav["quantity"] * sostav["price"]
         total_quon += sostav["quantity"]
     print(product_name, total_quon, "шт", "стоимость", total_cost)
+
+# Зачёт!

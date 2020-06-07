@@ -44,3 +44,5 @@ for _ in range(100):
     buble(central_point=point, step_radius=step, color_bubl=color)
 
 sd.pause()
+
+# Зачёт!
