@@ -24,3 +24,5 @@ for color in rainbow_colors:
     end_point = sd.get_point(x_2, y_2)
 
 sd.pause()
+
+# Зачёт!
