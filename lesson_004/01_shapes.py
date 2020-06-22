@@ -35,9 +35,79 @@ import simple_draw as sd
 # sd.get_vector()
 # sd.line()
 # Результат решения см lesson_004/results/exercise_01_shapes.jpg
+sd.resolution = (1200, 800)
+point_zer_triangle = sd.get_point(300, 300)
+point_zer_kub = sd.get_point(80, 80)
+point_zer_pent = sd.get_point(200, 200)
+point_zer_hex = sd.get_point(400, 400)
+dlinna = 80
+angle = 0
 
-# TODO здесь ваш код
 
+def trianlge(point_zero_triangle, angle_tr, lenght_tri):
+    v1 = sd.get_vector(start_point=point_zero_triangle, angle=angle_tr, length=lenght_tri, width=3)
+    v1.draw()
+    angle_tr += 120
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle_tr, length=lenght_tri, width=3)
+    v2.draw()
+    angle_tr += 120
+    v3 = sd.get_vector(start_point=v2.end_point, angle=angle_tr, length=lenght_tri, width=3)
+    v3.draw()
+
+
+def kub(point_zer_kub, angle, lenght):
+    v1_kub = sd.get_vector(start_point=point_zer_kub, angle=angle, length=lenght, width=3)
+    v1_kub.draw()
+    angle += 90
+    v2_kub = sd.get_vector(start_point=v1_kub.end_point, angle=angle, length=lenght, width=3)
+    v2_kub.draw()
+    angle += 90
+    v3_kub = sd.get_vector(start_point=v2_kub.end_point, angle=angle, length=lenght, width=3)
+    v3_kub.draw()
+    angle += 90
+    v4_kub = sd.get_vector(start_point=v3_kub.end_point, angle=angle, length=lenght, width=3)
+    v4_kub.draw()
+
+
+def pentakl(point_zer_pentakl, angle, lenght):
+    v1_pentakl = sd.get_vector(start_point=point_zer_pentakl, angle=angle, length=lenght, width=3)
+    v1_pentakl.draw()
+    angle += 72
+    v2_pentakl = sd.get_vector(start_point=v1_pentakl.end_point, angle=angle, length=lenght, width=3)
+    v2_pentakl.draw()
+    angle += 72
+    v3_pentakl = sd.get_vector(start_point=v2_pentakl.end_point, angle=angle, length=lenght, width=3)
+    v3_pentakl.draw()
+    angle += 72
+    v4_pentakl = sd.get_vector(start_point=v3_pentakl.end_point, angle=angle, length=lenght, width=3)
+    v4_pentakl.draw()
+    angle += 72
+    sd.line(start_point=v4_pentakl.end_point, end_point=v1_pentakl.start_point, width=3)
+
+
+def hexagon(point_zer_hex, angle, lenght):
+    v1_hex = sd.get_vector(start_point=point_zer_hex, angle=angle, length=lenght, width=3)
+    v1_hex.draw()
+    angle += 60
+    v2_hex = sd.get_vector(start_point=v1_hex.end_point, angle=angle, length=lenght, width=3)
+    v2_hex.draw()
+    angle += 60
+    v3_hex = sd.get_vector(start_point=v2_hex.end_point, angle=angle, length=lenght, width=3)
+    v3_hex.draw()
+    angle += 60
+    v4_hex = sd.get_vector(start_point=v3_hex.end_point, angle=angle, length=lenght, width=3)
+    v4_hex.draw()
+    angle += 60
+    v5_hex = sd.get_vector(start_point=v4_hex.end_point, angle=angle, length=lenght, width=3)
+    v5_hex.draw()
+    angle += 60
+    sd.line(start_point=v5_hex.end_point, end_point=v1_hex.start_point, width=3)
+
+
+trianlge(point_zer_triangle, angle, dlinna)
+kub(point_zer_kub, angle, dlinna)
+pentakl(point_zer_pent, angle, dlinna)
+hexagon(point_zer_hex, angle, dlinna)
 # Часть 1-бис.
 # Попробуйте прикинуть обьем работы, если нужно будет внести изменения в этот код.
 # Скажем, связывать точки не линиями, а дугами. Или двойными линиями. Или рисовать круги в угловых точках. Или...
