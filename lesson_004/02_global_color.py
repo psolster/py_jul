@@ -21,20 +21,14 @@ point_zer_pent = sd.get_point(200, 200)
 point_zer_hex = sd.get_point(400, 400)
 dlinna_vector = 80
 angle = 0
-COLOR_RED = (255, 0, 0)
-COLOR_ORANGE = (255, 127, 0)
-COLOR_YELLOW = (255, 255, 0)
-COLOR_GREEN = (0, 255, 0)
-COLOR_CYAN = (0, 255, 255)
-COLOR_BLUE = (0, 0, 255)
-COLOR_PURPLE = (255, 0, 255)
-color_maps = {1: COLOR_RED,
-              2: COLOR_ORANGE,
-              3: COLOR_YELLOW,
-              4: COLOR_GREEN,
-              5: COLOR_CYAN,
-              6: COLOR_BLUE,
-              7: COLOR_PURPLE
+
+color_maps = {1: (255, 0, 0),
+              2: (255, 127, 0),
+              3: (255, 255, 0),
+              4: (0, 255, 0),
+              5: (0, 255, 255),
+              6: (0, 0, 255),
+              7: (255, 0, 255)
               }
 
 
@@ -118,5 +112,5 @@ if 1 <= a <= 7:
     hexagon(point_zer=point_zer_hex, angle_hex=angle, lenght=dlinna_vector, line_color=a)
 else:
     print('ну не попал в нужный')
-
+    exit()
 sd.pause()
