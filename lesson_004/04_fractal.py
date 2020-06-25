@@ -26,7 +26,56 @@ import simple_draw as sd
 
 # можно поиграть -шрифтами- цветами и углами отклонения
 
-# TODO здесь ваш код
+# 1) Написать функцию draw_branches, которая должна рисовать две ветви дерева из начальной точки
+# sd.resolution = (600, 600)
+# start_point = sd.get_point(300, 5)
+# angle = 45
+# lenght = 100
+
+
+# def draw_branches(start_point_brench, angle_brench, lenght_brench):
+#
+#     angle_brench_1 = angle_brench - 30
+#     v1 = sd.get_vector(start_point_brench, angle_brench_1, lenght_brench, width=3)
+#     v1.draw()
+#     angle_brench_2 = angle_brench + 30
+#     v2 = sd.get_vector(start_point_brench, angle_brench_2, lenght_brench, width=3)
+#     v2.draw()
+#
+#
+# draw_branches(start_point_brench=start_point, angle_brench=angle, lenght_brench=lenght)
+#
+# 2) Сделать draw_branches рекурсивной
+sd.resolution = (600, 600)
+start_point = sd.get_point(300, 5)
+angle = 45
+lenght = 100
+next_lenght = lenght
+next_point = (0, 0)
+next_agle = angle
+
+
+def draw_branches(start_point_brench, angle_brench, lenght_brench):
+    next_point_1 = v1.end_point
+    next_point_2 = v2.end_point
+    angle_brench_1 = angle_brench - 30
+    angle_brench_2 = angle_brench + 30
+    v1 = sd.get_vector(start_point_brench, angle_brench_1, lenght_brench, width=3)
+    v1.draw()
+    v2 = sd.get_vector(start_point_brench, angle_brench_2, lenght_brench, width=3)
+    v2.draw()
+    draw_branches()
+
+
+
+# while next_lenght > 1:
+#     next_point_v1 = next_point[0]
+#     next_point_v2 = next_point[1]
+#     next_point = draw_branches(start_point_brench=start_point, angle_brench=angle, lenght_brench=lenght)
+#     next_agle = next_agle - 10
+#     next_lenght = next_lenght * 0.75
+#     draw_branches(start_point_brench=start_point, angle_brench=angle, lenght_brench=next_lenght)
+
 
 # 4) Усложненное задание (делать по желанию)
 # - сделать рандомное отклонение угла ветвей в пределах 40% от 30-ти градусов
@@ -37,5 +86,3 @@ import simple_draw as sd
 # sd.random_number()
 
 sd.pause()
-
-
