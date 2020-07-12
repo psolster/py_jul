@@ -77,7 +77,7 @@ def draw_branches(start_point_brench, angle_brench, lenght_brench):
 # 3) Запустить вашу рекурсивную функцию, используя следующие параметры:
 # root_point = sd.get_point(300, 30)
 # draw_branches(start_point=root_point, angle=90, length=100)
-# draw_branches(start_point_brench=start_point, angle_brench=angle, lenght_brench=lenght)
+draw_branches(start_point_brench=start_point, angle_brench=angle, lenght_brench=lenght)
 
 
 # 4) Усложненное задание (делать по желанию)

@@ -16,11 +16,26 @@ N = 20
 # sd.sleep()
 # sd.random_number()
 # sd.user_want_exit()
+coordin_x = {100: 500, 150: 450, 200: 400, 250: 350, 300: 300}
 
 
 while True:
     sd.clear_screen()
-    # TODO здесь ваш код
+    for x in coordin_x:
+        y = coordin_x[x]
+        point = sd.get_point(x, y)
+        sd.snowflake(center=point, length=50, color=(0, 8, 98))
+        coordin_x[x] -= 10
+
+        point = sd.get_point(x, y)
+        sd.snowflake(center=point, length=50)
+
+        # point2 = sd.get_point(x2, y2)
+        # sd.snowflake(center=point2, length=30, color=background_color)
+        # y2 -= 10
+        # if y2 < 50:
+        #     break
+        # x2 = x2 + 20
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
