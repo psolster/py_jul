@@ -24,6 +24,7 @@ while True:
     for x in coordin_x:
         y = coordin_x[x]
         point = sd.get_point(x, y)
+
         sd.snowflake(center=point, length=50, color=(0, 8, 98))
         coordin_x[x] -= 10
 
