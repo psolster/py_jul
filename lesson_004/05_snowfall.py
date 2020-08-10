@@ -16,8 +16,10 @@ N = 20
 # sd.sleep()
 # sd.random_number()
 # sd.user_want_exit()
-coordin_x = {100: 500, 250: 450, 350: 500, 450: 450, 550: 500}
-
+coordin_x = {100: 500, 200: 450, 300: 500, 400: 450, 500: 500}
+lenght_snowflake_line = {}
+for i in range(100, 501, 100):
+    lenght_snowflake_line[i] = sd.random_number(10, 100)
 
 while True:
     sd.clear_screen()
@@ -25,11 +27,11 @@ while True:
         y = coordin_x[x]
         point = sd.get_point(x, y)
 
-        sd.snowflake(center=point, length=50, color=(0, 8, 98))
+        sd.snowflake(center=point, length=lenght_snowflake_line[x], color=(0, 8, 98))
         coordin_x[x] -= 10
 
         point = sd.get_point(x, y)
-        sd.snowflake(center=point, length=50)
+        sd.snowflake(center=point, length=lenght_snowflake_line[x])
 
     sd.sleep(0.1)
     if sd.user_want_exit():
