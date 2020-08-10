@@ -43,6 +43,7 @@ point_zer_hex = sd.get_point(400, 400)
 dlinna_vector = 80
 angle = 0
 
+
 def trianlge(point_zero, angle_tr, lenght_tri):
     v1 = sd.get_vector(start_point=point_zero, angle=angle_tr, length=lenght_tri, width=3)
     v1.draw()

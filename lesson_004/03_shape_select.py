@@ -110,5 +110,3 @@ else:
     print('ну не попал в нужный')
     exit()
 sd.pause()
-
-
