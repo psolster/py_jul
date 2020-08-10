@@ -46,8 +46,8 @@ import simple_draw as sd
 # draw_branches(start_point_brench=start_point, angle_brench=angle, lenght_brench=lenght)
 #
 # 2) Сделать draw_branches рекурсивной
-sd.resolution = (600, 600)
-start_point = sd.get_point(300, 30)
+sd.resolution = (1200, 600)
+start_point = sd.get_point(600, 30)
 angle = 90
 lenght = 100
 
@@ -55,13 +55,15 @@ lenght = 100
 def draw_branches(start_point_brench, angle_brench, lenght_brench):
     if lenght_brench < 5:
         return
-    angle_brench_1 = angle_brench - 30
-    angle_brench_2 = angle_brench + 30
+    angle_brench_1 = angle_brench - sd.random_number(20, 50)
+    angle_brench_2 = angle_brench + sd.random_number(20, 50)
     v1 = sd.get_vector(start_point_brench, angle_brench_1, lenght_brench, width=1)
     v1.draw()
     v2 = sd.get_vector(start_point_brench, angle_brench_2, lenght_brench, width=1)
     v2.draw()
 
+    # next_lenght_1 = lenght_brench * (sd.random_number(3, 9)/10) было интересно попробовать дело случая
+    # next_lenght_2 = lenght_brench * (sd.random_number(3, 9)/10) было интересно попробовать дело случая
     next_lenght_1 = lenght_brench * .75
     next_lenght_2 = lenght_brench * .75
     next_angle_1 = angle_brench_1
