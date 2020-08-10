@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import simple_draw as sd
+sd.resolution = (1200, 600)
 
 
 # На основе кода из практической части реализовать снегопад:
@@ -9,29 +10,30 @@ import simple_draw as sd
 # - создать список рандомных длинн лучей снежинок (от 10 до 100) и пусть все снежинки будут разные
 
 N = 20
-
+coordin_x = {}
+for key_x_coordinat in range(0, 1201, 60):
+    coordin_x[key_x_coordinat] = sd.random_number(300, 600)
 # Пригодятся функции
 # sd.get_point()
 # sd.snowflake()
 # sd.sleep()
 # sd.random_number()
 # sd.user_want_exit()
-coordin_x = {100: 500, 200: 450, 300: 500, 400: 450, 500: 500}
+
 lenght_snowflake_line = {}
-for i in range(100, 501, 100):
+for i in range(0, 1201, 60):
     lenght_snowflake_line[i] = sd.random_number(10, 100)
 
 while True:
+
     sd.clear_screen()
     for x in coordin_x:
         y = coordin_x[x]
-        point = sd.get_point(x, y)
-
-        sd.snowflake(center=point, length=lenght_snowflake_line[x], color=(0, 8, 98))
-        coordin_x[x] -= 10
 
         point = sd.get_point(x, y)
+
         sd.snowflake(center=point, length=lenght_snowflake_line[x])
+        coordin_x[x] -= 10
 
     sd.sleep(0.1)
     if sd.user_want_exit():
