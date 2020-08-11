@@ -52,9 +52,13 @@ angle = 90
 lenght = 100
 
 
+# TODO Нужно разместить функцию над остальным кодом.
 def draw_branches(start_point_brench, angle_brench, lenght_brench):
     if lenght_brench < 5:
         return
+    # TODO В функции нужно рисовать одну ветку используя значения, переданные
+    #  в параметрах функции, а после этого вычислить новые параметры для двух
+    #  ветвей и сделать два рекурсивных вызова.
     angle_brench_1 = angle_brench - sd.random_number(20, 50)
     angle_brench_2 = angle_brench + sd.random_number(20, 50)
     v1 = sd.get_vector(start_point_brench, angle_brench_1, lenght_brench, width=1)

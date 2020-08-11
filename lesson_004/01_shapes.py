@@ -44,6 +44,12 @@ dlinna_vector = 80
 angle = 0
 
 
+# TODO Нужно разместить функции над остальным кодом.
+
+# TODO Вектора рисуются одинаковым способом.
+#  Для перехода к общей функции сделайте рисование векторов в цикле.
+# TODO Угол в 120 градусов для треугольников, 90 для квадратов, и т. д.
+#  можно вычислить. Сделайте такое вычисление перед циклом.
 def trianlge(point_zero, angle_tr, lenght_tri):
     v1 = sd.get_vector(start_point=point_zero, angle=angle_tr, length=lenght_tri, width=3)
     v1.draw()

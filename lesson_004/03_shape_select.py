@@ -27,6 +27,7 @@ color_maps = {1: (255, 0, 0),
               }
 
 
+# TODO Нужно разместить функции над остальным кодом.
 def trianlge(point_zero, angle_tr, lenght_tri, line_color):
     color = color_maps[line_color]
     v1 = sd.get_vector(start_point=point_zero, angle=angle_tr, length=lenght_tri, width=3)
@@ -98,6 +99,15 @@ a = int(input('''Укажите № желаемой фигуры. Фигуры 
       4. 6-ти угольник
       
 Ваш выбор-> '''))
+
+# TODO Будет удобнее создать словарь в значениях которого будут храниться
+#  названием фигур с ссылками на функции, а ключами словаря будут цифры,
+#  вводимые пользователем.
+#  Ссылки на функции, проще говоря их названия, можно поместить в структуру данных:
+#  список, кортеж, словарь, ... На примере списков это работает так:
+#  functs = [pentagon, hexagon, triangle]
+#  draw_function = functs[0]
+#  draw_function(start_point, start_angle, length
 if a == 1:
     trianlge(point_zero=point_zer_triangle, angle_tr=angle, lenght_tri=dlinna_vector, line_color=a)
 elif a == 2:
