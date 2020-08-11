@@ -10,6 +10,29 @@ sd.resolution = (1200, 600)
 # - создать список рандомных длинн лучей снежинок (от 10 до 100) и пусть все снежинки будут разные
 
 N = 20
+
+# TODO Удобнее хранить координаты и параметры снежинок в одной структуре данных.
+#  Так работать с ними будет проще:
+#  список со списками:
+#  snowflakes = [[0, 2, 4], [5, 6, 7], ...]
+#  for x, y, length in snowflakes:
+#      point = Point(x, y)
+#      snowflake(point, length)
+#  или список со словарями:
+#  snowflakes = [{"x": 0, "y": 2, "length": 4}, {"x": 5, "y": 6, "length": 7}, ]
+#  for snowflake in snowflakes:
+#      point = Point(snowflake['x'], snowflake['y'])
+#      snowflake(point, snowflake["length"])
+#  или словарь со словарями:
+#  snowflakes = {1: {"x": 0, "y": 2, "length": 4}, {"x": 5, "y": 6, "length": 7}, }
+#  for i, snowflake in snowflakes.items():
+#      point = Point(snowflake['x'], snowflake['y'])
+#      snowflake(point, snowflake["length"])
+#  Или с использованием enumerate, если нужен индекс элемента в списке:
+#  for i, (x, y, length) in enumerate(snowflake_param):
+#  Пример для словаря, содержащего список параметров снежинки:
+#  for i, (x, y, length) in snowflake_param.items():
+
 coordin_x = {}
 lenght_snowflake_line = {}
 for key_x_coordinat in range(0, 1201, 60):
@@ -47,7 +70,7 @@ sd.pause()
 #     немного поспать
 #     если пользователь хочет выйти
 #       прервать цикл
-
+# TODO Переходите ко второй части задания.
 
 # Часть 2 (делается после зачета первой части)
 #
