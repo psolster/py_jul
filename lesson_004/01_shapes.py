@@ -2,6 +2,7 @@
 
 import simple_draw as sd
 
+
 # Часть 1.
 # Написать функции рисования равносторонних геометрических фигур:
 # - треугольника
@@ -35,85 +36,56 @@ import simple_draw as sd
 # sd.get_vector()
 # sd.line()
 # Результат решения см lesson_004/results/exercise_01_shapes.jpg
+
+
+def trianlge(point_zero, angle_tr, lenght_tri):
+    angle_fig = [angle_tr + 0, angle_tr + 120, angle_tr + 240]
+    v = sd.get_vector(start_point=point_zero, angle=angle_fig[0], length=lenght_tri, width=3)
+    v.draw()
+    for i in range(1, 3):
+        v = sd.get_vector(start_point=v.end_point, angle=angle_fig[i], length=lenght_tri, width=3)
+        v.draw()
+
+
+def kub(point_zero, angle_kub, lenght):
+    angle_fig = [angle_kub + 0, angle_kub + 90, angle_kub + 180, angle_kub + 270]
+    v = sd.get_vector(start_point=point_zero, angle=angle_fig[0], length=lenght, width=3)
+    v.draw()
+    for i in range(1, 4):
+        v = sd.get_vector(start_point=v.end_point, angle=angle_fig[i], length=lenght, width=3)
+        v.draw()
+
+
+def pentakl(point_zero, angle_pent, lenght):
+    angle_fig = [angle_pent + 0, angle_pent + 72, angle_pent + 144, angle_pent + 144 + 72, angle_pent + 144 + 72 + 72]
+    v = sd.get_vector(start_point=point_zero, angle=angle_fig[0], length=lenght, width=3)
+    v.draw()
+    for i in range(1, 5):
+        v = sd.get_vector(start_point=v.end_point, angle=angle_fig[i], length=lenght, width=3)
+        v.draw()
+
+
+def hexagon(point_zero, angle_hex, lenght):
+    angle_fig = [angle_hex + 0, angle_hex + 60, angle_hex + 120, angle_hex + 180, angle_hex + 240, angle_hex + 300]
+    v = sd.get_vector(start_point=point_zero, angle=angle_fig[0], length=lenght, width=3)
+    v.draw()
+    for i in range(1, 6):
+        v = sd.get_vector(start_point=v.end_point, angle=angle_fig[i], length=lenght, width=3)
+        v.draw()
+
+
 sd.resolution = (1200, 800)
 point_zer_triangle = sd.get_point(300, 300)
 point_zer_kub = sd.get_point(80, 80)
 point_zer_pent = sd.get_point(200, 200)
 point_zer_hex = sd.get_point(400, 400)
 dlinna_vector = 80
-angle = 0
-
-
-# TODO Нужно разместить функции над остальным кодом.
-
-# TODO Вектора рисуются одинаковым способом.
-#  Для перехода к общей функции сделайте рисование векторов в цикле.
-# TODO Угол в 120 градусов для треугольников, 90 для квадратов, и т. д.
-#  можно вычислить. Сделайте такое вычисление перед циклом.
-def trianlge(point_zero, angle_tr, lenght_tri):
-    v1 = sd.get_vector(start_point=point_zero, angle=angle_tr, length=lenght_tri, width=3)
-    v1.draw()
-    angle_tr += 120
-    v2 = sd.get_vector(start_point=v1.end_point, angle=angle_tr, length=lenght_tri, width=3)
-    v2.draw()
-    angle_tr += 120
-    v3 = sd.get_vector(start_point=v2.end_point, angle=angle_tr, length=lenght_tri, width=3)
-    v3.draw()
-
-
-def kub(point_zer, angle_kub, lenght):
-    v1_kub = sd.get_vector(start_point=point_zer, angle=angle_kub, length=lenght, width=3)
-    v1_kub.draw()
-    angle_kub += 90
-    v2_kub = sd.get_vector(start_point=v1_kub.end_point, angle=angle_kub, length=lenght, width=3)
-    v2_kub.draw()
-    angle_kub += 90
-    v3_kub = sd.get_vector(start_point=v2_kub.end_point, angle=angle_kub, length=lenght, width=3)
-    v3_kub.draw()
-    angle_kub += 90
-    v4_kub = sd.get_vector(start_point=v3_kub.end_point, angle=angle_kub, length=lenght, width=3)
-    v4_kub.draw()
-
-
-def pentakl(point_zer, angle_pent, lenght):
-    v1_pentakl = sd.get_vector(start_point=point_zer, angle=angle_pent, length=lenght, width=3)
-    v1_pentakl.draw()
-    angle_pent += 72
-    v2_pentakl = sd.get_vector(start_point=v1_pentakl.end_point, angle=angle_pent, length=lenght, width=3)
-    v2_pentakl.draw()
-    angle_pent += 72
-    v3_pentakl = sd.get_vector(start_point=v2_pentakl.end_point, angle=angle_pent, length=lenght, width=3)
-    v3_pentakl.draw()
-    angle_pent += 72
-    v4_pentakl = sd.get_vector(start_point=v3_pentakl.end_point, angle=angle_pent, length=lenght, width=3)
-    v4_pentakl.draw()
-    angle_pent += 72
-    sd.line(start_point=v4_pentakl.end_point, end_point=v1_pentakl.start_point, width=3)
-
-
-def hexagon(point_zer, angle_hex, lenght):
-    v1_hex = sd.get_vector(start_point=point_zer, angle=angle_hex, length=lenght, width=3)
-    v1_hex.draw()
-    angle_hex += 60
-    v2_hex = sd.get_vector(start_point=v1_hex.end_point, angle=angle_hex, length=lenght, width=3)
-    v2_hex.draw()
-    angle_hex += 60
-    v3_hex = sd.get_vector(start_point=v2_hex.end_point, angle=angle_hex, length=lenght, width=3)
-    v3_hex.draw()
-    angle_hex += 60
-    v4_hex = sd.get_vector(start_point=v3_hex.end_point, angle=angle_hex, length=lenght, width=3)
-    v4_hex.draw()
-    angle_hex += 60
-    v5_hex = sd.get_vector(start_point=v4_hex.end_point, angle=angle_hex, length=lenght, width=3)
-    v5_hex.draw()
-    angle_hex += 60
-    sd.line(start_point=v5_hex.end_point, end_point=v1_hex.start_point, width=3)
-
+angle = 45
 
 trianlge(point_zero=point_zer_triangle, angle_tr=angle, lenght_tri=dlinna_vector)
-kub(point_zer=point_zer_kub, angle_kub=angle, lenght=dlinna_vector)
-pentakl(point_zer=point_zer_pent, angle_pent=angle, lenght=dlinna_vector)
-hexagon(point_zer=point_zer_hex, angle_hex=angle, lenght=dlinna_vector)
+kub(point_zero=point_zer_kub, angle_kub=angle, lenght=dlinna_vector)
+pentakl(point_zero=point_zer_pent, angle_pent=angle, lenght=dlinna_vector)
+hexagon(point_zero=point_zer_hex, angle_hex=angle, lenght=dlinna_vector)
 # Часть 1-бис.
 # Попробуйте прикинуть обьем работы, если нужно будет внести изменения в этот код.
 # Скажем, связывать точки не линиями, а дугами. Или двойными линиями. Или рисовать круги в угловых точках. Или...
