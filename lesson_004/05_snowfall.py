@@ -92,22 +92,18 @@ N = 20
 
 snowflake_data = []
 for j in range(0, 20):
-    snowflake_data.append([sd.random_number(0, 1201) for i in range(0, 2)])
-
-lenght_snowflake_line = [sd.random_number(10, 100) for i in range(0, 20)]
+    snowflake_data.append([sd.random_number(0, 1201), sd.random_number(0, 600), sd.random_number(10, 100)])
 
 while True:
     # sd.clear_screen()
-    k = 0
     sd.start_drawing()
-    for x, y in snowflake_data:
+    for x, y, lenght in snowflake_data:
 
         point = sd.get_point(x, y)
-        sd.snowflake(center=point, length=lenght_snowflake_line[k], color=sd.background_color)
+        sd.snowflake(center=point, length=lenght, color=sd.background_color)
         y -= 10
-        sd.snowflake(center=point, length=lenght_snowflake_line[k], color=sd.COLOR_WHITE)
-        k += 1
-        sd.finish_drawing()
+        sd.snowflake(center=point, length=lenght, color=sd.COLOR_WHITE)
+    sd.finish_drawing()
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
