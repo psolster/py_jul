@@ -90,22 +90,24 @@ N = 20
 #   и добавлять новую снежинку
 # Результат решения см https://youtu.be/XBx0JtxHiLg
 
-
 snowflake_data = []
+for j in range(0, 20):
+    snowflake_data.append([sd.random_number(0, 1201) for i in range(0, 2)])
 
-
-snowflake_data = [[sd.random_number(0, 1201) for i in range(0, 2)] for j in range(0, 20)]
-
-# print(snowflake_data)
 lenght_snowflake_line = [sd.random_number(10, 100) for i in range(0, 20)]
-# print( lenght_snowflake_line)
+
 while True:
     # sd.clear_screen()
+    k = 0
+    sd.start_drawing()
     for x, y in snowflake_data:
 
         point = sd.get_point(x, y)
-        sd.snowflake(center=point, length=lenght_snowflake_line[x])
-        coordin_x[x] -= 10
+        sd.snowflake(center=point, length=lenght_snowflake_line[k], color=sd.background_color)
+        y -= 10
+        sd.snowflake(center=point, length=lenght_snowflake_line[k], color=sd.COLOR_WHITE)
+        k += 1
+        sd.finish_drawing()
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
