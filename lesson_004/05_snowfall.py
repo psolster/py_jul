@@ -33,29 +33,29 @@ N = 20
 #  Пример для словаря, содержащего список параметров снежинки:
 #  for i, (x, y, length) in snowflake_param.items():
 
-coordin_x = {}
-lenght_snowflake_line = {}
-for key_x_coordinat in range(0, 1201, 60):
-    coordin_x[key_x_coordinat] = sd.random_number(300, 600)
-# Пригодятся функции
-# sd.get_point()
-# sd.snowflake()
-# sd.sleep()
-# sd.random_number()
-# sd.user_want_exit()
-for i in range(0, 1201, 60):
-    lenght_snowflake_line[i] = sd.random_number(10, 100)
-while True:
-    sd.clear_screen()
-    for x in coordin_x:
-        y = coordin_x[x]
-        point = sd.get_point(x, y)
-        sd.snowflake(center=point, length=lenght_snowflake_line[x])
-        coordin_x[x] -= 10
-    sd.sleep(0.1)
-    if sd.user_want_exit():
-        break
-sd.pause()
+# coordin_x = {}
+# lenght_snowflake_line = {}
+# for key_x_coordinat in range(0, 1201, 60):
+#     coordin_x[key_x_coordinat] = sd.random_number(300, 600)
+# # Пригодятся функции
+# # sd.get_point()
+# # sd.snowflake()
+# # sd.sleep()
+# # sd.random_number()
+# # sd.user_want_exit()
+# for i in range(0, 1201, 60):
+#     lenght_snowflake_line[i] = sd.random_number(10, 100)
+# while True:
+#     sd.clear_screen()
+#     for x in coordin_x:
+#         y = coordin_x[x]
+#         point = sd.get_point(x, y)
+#         sd.snowflake(center=point, length=lenght_snowflake_line[x])
+#         coordin_x[x] -= 10
+#     sd.sleep(0.1)
+#     if sd.user_want_exit():
+#         break
+# sd.pause()
 
 # Примерный алгоритм отрисовки снежинок
 #   навсегда
@@ -72,11 +72,13 @@ sd.pause()
 #       прервать цикл
 # TODO Переходите ко второй части задания.
 
+
+
 # Часть 2 (делается после зачета первой части)
 #
 # Ускорить отрисовку снегопада
 # - убрать clear_screen() из цикла
-# - в начале рисования всех снежинок вызвать sd.start_drawing()
+# в начале рисования всех снежинок вызвать sd.start_drawing()
 # - на старом месте снежинки отрисовать её же, но цветом sd.background_color
 # - сдвинуть снежинку
 # - отрисовать её цветом sd.COLOR_WHITE на новом месте
@@ -87,3 +89,24 @@ sd.pause()
 # - сделать сугоб внизу экрана - если снежинка долетает до низа, оставлять её там,
 #   и добавлять новую снежинку
 # Результат решения см https://youtu.be/XBx0JtxHiLg
+
+
+snowflake_data = []
+
+
+snowflake_data = [[sd.random_number(0, 1201) for i in range(0, 2)] for j in range(0, 20)]
+
+# print(snowflake_data)
+lenght_snowflake_line = [sd.random_number(10, 100) for i in range(0, 20)]
+# print( lenght_snowflake_line)
+while True:
+    # sd.clear_screen()
+    for x, y in snowflake_data:
+
+        point = sd.get_point(x, y)
+        sd.snowflake(center=point, length=lenght_snowflake_line[x])
+        coordin_x[x] -= 10
+    sd.sleep(0.1)
+    if sd.user_want_exit():
+        break
+sd.pause()

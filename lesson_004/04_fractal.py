@@ -46,13 +46,6 @@ import simple_draw as sd
 # draw_branches(start_point_brench=start_point, angle_brench=angle, lenght_brench=lenght)
 #
 # 2) Сделать draw_branches рекурсивной
-sd.resolution = (1200, 600)
-start_point = sd.get_point(600, 30)
-angle = 90
-lenght = 100
-
-
-# TODO Нужно разместить функцию над остальным кодом.
 def draw_branches(start_point_brench, angle_brench, lenght_brench):
     if lenght_brench < 5:
         return
@@ -76,6 +69,12 @@ def draw_branches(start_point_brench, angle_brench, lenght_brench):
     next_point_2 = v2.end_point
     draw_branches(start_point_brench=next_point_1, angle_brench=next_angle_1, lenght_brench=next_lenght_1)
     draw_branches(start_point_brench=next_point_2, angle_brench=next_angle_2, lenght_brench=next_lenght_2)
+
+
+sd.resolution = (1200, 600)
+start_point = sd.get_point(600, 30)
+angle = 90
+lenght = 100
 
 
 # draw_branches(start_point_brench=start_point, angle_brench=angle, lenght_brench=lenght)
