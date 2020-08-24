@@ -92,7 +92,7 @@ N = 20
 
 snowflake_data = []
 for j in range(0, 20):
-    snowflake_data.append([sd.random_number(0, 1201), sd.random_number(0, 600), sd.random_number(10, 100)])
+    snowflake_data.append([sd.random_number(0, 1201), sd.random_number(450, 600), sd.random_number(10, 100)])
 
 while True:
     # sd.clear_screen()
@@ -102,6 +102,7 @@ while True:
         point = sd.get_point(x, y)
         sd.snowflake(center=point, length=lenght, color=sd.background_color)
         y -= 10
+        point = sd.get_point(x, y)
         sd.snowflake(center=point, length=lenght, color=sd.COLOR_WHITE)
     sd.finish_drawing()
     sd.sleep(0.1)
