@@ -37,12 +37,7 @@ N = 20
 # lenght_snowflake_line = {}
 # for key_x_coordinat in range(0, 1201, 60):
 #     coordin_x[key_x_coordinat] = sd.random_number(300, 600)
-# # Пригодятся функции
-# # sd.get_point()
-# # sd.snowflake()
-# # sd.sleep()
-# # sd.random_number()
-# # sd.user_want_exit()
+#
 # for i in range(0, 1201, 60):
 #     lenght_snowflake_line[i] = sd.random_number(10, 100)
 # while True:
@@ -73,7 +68,6 @@ N = 20
 # TODO Переходите ко второй части задания.
 
 
-
 # Часть 2 (делается после зачета первой части)
 #
 # Ускорить отрисовку снегопада
@@ -91,19 +85,20 @@ N = 20
 # Результат решения см https://youtu.be/XBx0JtxHiLg
 
 snowflake_data = []
-for j in range(0, 20):
+for j in range(0, N):
     snowflake_data.append([sd.random_number(0, 1201), sd.random_number(450, 600), sd.random_number(10, 100)])
 
 while True:
-    # sd.clear_screen()
     sd.start_drawing()
-    for x, y, lenght in snowflake_data:
 
-        point = sd.get_point(x, y)
-        sd.snowflake(center=point, length=lenght, color=sd.background_color)
-        y -= 10
-        point = sd.get_point(x, y)
-        sd.snowflake(center=point, length=lenght, color=sd.COLOR_WHITE)
+    for i, (x, y, lenght) in enumerate(snowflake_data):
+
+        point_background_color = sd.get_point(x, y)
+        sd.snowflake(center=point_background_color, length=lenght, color=sd.background_color)
+        y = y - 10
+        snowflake_data[i][1] = y
+        point_COLOR_WHITE = sd.get_point(x, y)
+        sd.snowflake(center=point_COLOR_WHITE, length=lenght, color=sd.COLOR_WHITE)
     sd.finish_drawing()
     sd.sleep(0.1)
     if sd.user_want_exit():
