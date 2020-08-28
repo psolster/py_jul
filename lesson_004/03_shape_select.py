@@ -10,6 +10,8 @@ import simple_draw as sd
 # Результат решения см lesson_004/results/exercise_03_shape_select.jpg
 
 
+# TODO Обратите внимание на предупреждение среды разработки о том, что внутри функции используются те же имена
+#  переменных, что и вне ее. Здесь это не критично но в других случаях может вызвать ошибки.
 def trianlge(point_zero, angle, lenght_tri, color='5'):
     angle_fig = [angle + 0, angle + 120, angle + 240]
     v = sd.get_vector(start_point=point_zero, angle=angle_fig[0], length=lenght_tri, width=3)
@@ -61,6 +63,8 @@ color_maps = {'1': (255, 0, 0),
               '7': (255, 0, 255)
               }
 
+# TODO Преобразуйте список all_forms в словарь с номерами фигур в ключах и
+#  названиями фигур и ссылками на функции в значениях.
 all_forms = [trianlge, kub, pentakl, hexagon]
 draw_function = {'1': 'Треугольник', '2': 'Квадрат', '3': '5-ти угольник', '4': '6-ти угольник'}
 a = input('''Укажите № желаемой фигуры. Фигуры на выбор:
