@@ -71,8 +71,6 @@ color_maps = {'1': COLOR_RED,
               '7': COLOR_PURPLE
               }
 
-# TODO Преобразуйте список all_forms в словарь с номерами фигур в ключах и
-#  названиями фигур и ссылками на функции в значениях.
 
 draw_function = {'1': trianlge, '2': kub, '3': pentakl, '4': hexagon}
 a = input('''Укажите № желаемой фигуры. Фигуры на выбор:
