@@ -90,13 +90,15 @@ for j in range(0, N):
 
 while True:
     sd.start_drawing()
-
+    # TODO Снегопад должен продолжаться до тех пор пока пользователь его не прервёт.
+    #  Снежинки, достигшие нижней части экрана, нужно перемещать наверх или заменять новые.
     for i, (x, y, lenght) in enumerate(snowflake_data):
 
         point_background_color = sd.get_point(x, y)
         sd.snowflake(center=point_background_color, length=lenght, color=sd.background_color)
         y = y - 10
         snowflake_data[i][1] = y
+        # TODO Названия переменных принято записывать строчными буквами.
         point_COLOR_WHITE = sd.get_point(x, y)
         sd.snowflake(center=point_COLOR_WHITE, length=lenght, color=sd.COLOR_WHITE)
     sd.finish_drawing()
