@@ -22,6 +22,7 @@ COLOR_PURPLE = sd.COLOR_PURPLE
 # Результат решения см lesson_004/results/exercise_02_global_color.jpg
 
 
+# TODO Нужно разместить функции над остальным кодом.
 def trianlge(point_zero, angle_tr, lenght_tri, color):
     angle_fig = [angle_tr + 0, angle_tr + 120, angle_tr + 240]
     v = sd.get_vector(start_point=point_zero, angle=angle_fig[0], length=lenght_tri, width=3)
@@ -66,6 +67,13 @@ point_zer_hex = sd.get_point(400, 400)
 dlinna_vector = 80
 angle = 0
 
+
+# TODO Создайте структуру данных вида:
+#  colors = {'1': ['красный', sd.COLOR_RED], ...}
+#  или так colors = {'1': {'name': 'красный', 'color': sd.COLOR_RED}, ...}
+#  Так будет удобнее добавлять, удалять менять местами цвета, если
+#  возникнет такая необходимость. А использование словаря поможет в выводе сообщений и
+#  обработке пользовательского ввода.
 color_maps = {'1': COLOR_RED,
               '2': COLOR_ORANGE,
               '3': COLOR_YELLOW,

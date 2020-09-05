@@ -105,3 +105,5 @@ draw_branches(start_point_brench=start_point, angle_brench=angle, lenght_brench=
 # sd.random_number()
 
 sd.pause()
+
+# Зачёт!
