@@ -161,3 +161,5 @@ hexagon(point_zero=point_zer_hex, angle_dir=angle, lenght=dlinna_vector)
 
 
 sd.pause()
+
+# Зачёт!
