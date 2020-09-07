@@ -8,18 +8,8 @@ import simple_draw as sd
 
 # Код функций из упр lesson_004/02_global_color.py скопировать сюда
 # Результат решения см lesson_004/results/exercise_03_shape_select.jpg
-COLOR_RED = sd.COLOR_RED
-COLOR_ORANGE = sd.COLOR_ORANGE
-COLOR_YELLOW = sd.COLOR_YELLOW
-COLOR_GREEN = sd.COLOR_GREEN
-COLOR_CYAN = sd.COLOR_CYAN
-COLOR_BLUE = sd.COLOR_BLUE
-COLOR_PURPLE = sd.COLOR_PURPLE
 
-# TODO Обратите внимание на предупреждение среды разработки о том, что внутри функции используются те же имена
-#  переменных, что и вне ее. Здесь это не критично но в других случаях может вызвать ошибки.
 
-# TODO Нужно разместить функции над остальным кодом.
 def trianlge(point_zero, angle, lenght_tri, color='5'):
     angle_fig = [angle + 0, angle + 120, angle + 240]
     v = sd.get_vector(start_point=point_zero, angle=angle_fig[0], length=lenght_tri, width=3)
@@ -54,6 +44,18 @@ def hexagon(point_zero, angle, lenght, color="5"):
     for i in range(1, 6):
         v = sd.get_vector(start_point=v.end_point, angle=angle_fig[i], length=lenght, width=3)
         v.draw(color_maps[color])
+
+
+COLOR_RED = sd.COLOR_RED
+COLOR_ORANGE = sd.COLOR_ORANGE
+COLOR_YELLOW = sd.COLOR_YELLOW
+COLOR_GREEN = sd.COLOR_GREEN
+COLOR_CYAN = sd.COLOR_CYAN
+COLOR_BLUE = sd.COLOR_BLUE
+COLOR_PURPLE = sd.COLOR_PURPLE
+
+# TODO Обратите внимание на предупреждение среды разработки о том, что внутри функции используются те же имена
+#  переменных, что и вне ее. Здесь это не критично но в других случаях может вызвать ошибки.
 
 
 sd.resolution = (600, 600)
