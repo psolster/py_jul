@@ -19,7 +19,7 @@ COLOR_PURPLE = sd.COLOR_PURPLE
 # TODO Обратите внимание на предупреждение среды разработки о том, что внутри функции используются те же имена
 #  переменных, что и вне ее. Здесь это не критично но в других случаях может вызвать ошибки.
 
-
+# TODO Нужно разместить функции над остальным кодом.
 def trianlge(point_zero, angle, lenght_tri, color='5'):
     angle_fig = [angle + 0, angle + 120, angle + 240]
     v = sd.get_vector(start_point=point_zero, angle=angle_fig[0], length=lenght_tri, width=3)
@@ -72,6 +72,8 @@ color_maps = {'1': COLOR_RED,
               }
 
 
+# TODO Жобавьте название фигур в значения словаря draw_function и используйте
+#  этот словарь для вывода сообщений при выборя фигуры.
 draw_function = {'1': trianlge, '2': kub, '3': pentakl, '4': hexagon}
 a = input('''Укажите № желаемой фигуры. Фигуры на выбор:
       1. Трегольник

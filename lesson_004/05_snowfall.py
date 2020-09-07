@@ -81,6 +81,8 @@ while True:
     if sd.user_want_exit():
         break
     elif snowflake_data[i][1] <= 20:
+        # TODO Нужно в основном цикле снегопада проверять высоту каждой снежинки и, если она меньше определённого
+        #  значения, перемещать эту снежику наверх. Т. е. каждая снежинка должна обрабатываться отдельно от других.
         for j in range(0, N):
             snowflake_data.append([sd.random_number(0, 1201), sd.random_number(450, 600), sd.random_number(10, 100)])
 sd.pause()
