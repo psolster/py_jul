@@ -12,17 +12,10 @@ import simple_draw as sd
 # sd.get_point()
 # sd.line()
 # sd.get_vector()
-COLOR_RED = sd.COLOR_RED
-COLOR_ORANGE = sd.COLOR_ORANGE
-COLOR_YELLOW = sd.COLOR_YELLOW
-COLOR_GREEN = sd.COLOR_GREEN
-COLOR_CYAN = sd.COLOR_CYAN
-COLOR_BLUE = sd.COLOR_BLUE
-COLOR_PURPLE = sd.COLOR_PURPLE
+
 # Результат решения см lesson_004/results/exercise_02_global_color.jpg
 
 
-# TODO Нужно разместить функции над остальным кодом.
 def trianlge(point_zero, angle_tr, lenght_tri, color):
     angle_fig = [angle_tr + 0, angle_tr + 120, angle_tr + 240]
     v = sd.get_vector(start_point=point_zero, angle=angle_fig[0], length=lenght_tri, width=3)
@@ -68,36 +61,25 @@ dlinna_vector = 80
 angle = 0
 
 
-# TODO Создайте структуру данных вида:
-#  colors = {'1': ['красный', sd.COLOR_RED], ...}
-#  или так colors = {'1': {'name': 'красный', 'color': sd.COLOR_RED}, ...}
-#  Так будет удобнее добавлять, удалять менять местами цвета, если
-#  возникнет такая необходимость. А использование словаря поможет в выводе сообщений и
-#  обработке пользовательского ввода.
-color_maps = {'1': COLOR_RED,
-              '2': COLOR_ORANGE,
-              '3': COLOR_YELLOW,
-              '4': COLOR_GREEN,
-              '5': COLOR_CYAN,
-              '6': COLOR_BLUE,
-              '7': COLOR_PURPLE
+color_maps = {'1': ['красный', sd.COLOR_RED],
+              '2': ['оранжевый', sd.COLOR_ORANGE],
+              '3': ['желтый', sd.COLOR_YELLOW],
+              '4': ['зеленый', sd.COLOR_GREEN],
+              '5': ['морской', sd.COLOR_CYAN],
+              '6': ['голубой', sd.COLOR_BLUE],
+              '7': ['фиолетовый', sd.COLOR_PURPLE]
               }
 
-a = input('''Укажите № желаемого цвета фигуры. Цвета на выбор:
-      1. Красный
-      2. Оранжевый
-      3. Желтый
-      4. Зеленый
-      5. Голубой
-      6. Синий
-      7. Фиолетовый
-Ваш выбор-> ''')
+for key, value in color_maps.items():
+    print(key, value[0])
+
+a = input('Укажите № желаемого цвета фигуры. Цвета на выбор: Ваш выбор-> ')
 
 if a in color_maps:
-    trianlge(point_zero=point_zer_triangle, angle_tr=angle, lenght_tri=dlinna_vector, color=color_maps[a])
-    kub(point_zero=point_zer_kub, angle_kub=angle, lenght=dlinna_vector, color=color_maps[a])
-    pentakl(point_zero=point_zer_pent, angle_pent=angle, lenght=dlinna_vector, color=color_maps[a])
-    hexagon(point_zero=point_zer_hex, angle_hex=angle, lenght=dlinna_vector, color=color_maps[a])
+    trianlge(point_zero=point_zer_triangle, angle_tr=angle, lenght_tri=dlinna_vector, color=color_maps[a][1])
+    kub(point_zero=point_zer_kub, angle_kub=angle, lenght=dlinna_vector, color=color_maps[a][1])
+    pentakl(point_zero=point_zer_pent, angle_pent=angle, lenght=dlinna_vector, color=color_maps[a][1])
+    hexagon(point_zero=point_zer_hex, angle_hex=angle, lenght=dlinna_vector, color=color_maps[a][1])
 else:
     print('ну не попал в нужный')
     exit()
