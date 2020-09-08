@@ -68,21 +68,22 @@ for j in range(0, N):
 while True:
     sd.start_drawing()
 
-    for i, (x, y, lenght) in enumerate(snowflake_data):
+    for i, (x, y, length) in enumerate(snowflake_data):
 
         point_background_color = sd.get_point(x, y)
-        sd.snowflake(center=point_background_color, length=lenght, color=sd.background_color)
+        sd.snowflake(center=point_background_color, length=length, color=sd.background_color)
         y = y - 10
         snowflake_data[i][1] = y
         point_color_white = sd.get_point(x, y)
-        sd.snowflake(center=point_color_white, length=lenght, color=sd.COLOR_WHITE)
+        sd.snowflake(center=point_color_white, length=length, color=sd.COLOR_WHITE)
+        if snowflake_data[i][1] <= 20:
+            snowflake_data[i][1] = sd.random_number(450, 600)
+            snowflake_data[i][0] = sd.random_number(0, 1201)
     sd.finish_drawing()
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
-    elif snowflake_data[i][1] <= 20:
-        # TODO Нужно в основном цикле снегопада проверять высоту каждой снежинки и, если она меньше определённого
-        #  значения, перемещать эту снежику наверх. Т. е. каждая снежинка должна обрабатываться отдельно от других.
-        for j in range(0, N):
-            snowflake_data.append([sd.random_number(0, 1201), sd.random_number(450, 600), sd.random_number(10, 100)])
+
 sd.pause()
+
+# TODO с покачиванием вроде и так понятно, не хочется на нем время терять
