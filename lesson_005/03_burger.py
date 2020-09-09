@@ -17,4 +17,23 @@
 
 import my_burger
 
-print(my_burger.cutlet(), my_burger.cheese(), my_burger.bun(), my_burger.cucumber())
+my_burger.cutlet()
+my_burger.cheese()
+my_burger.bun()
+my_burger.cucumber()
+my_burger.onion()
+my_burger.mustard()
+
+print('мой бургер:')
+my_burger.bun()
+my_burger.cheese()
+my_burger.cutlet()
+my_burger.cutlet()
+my_burger.cucumber()
+my_burger.mustard()
+
+print('и тут нет ошибки')
+
+
+
+print(' и да, тут нет ошибки')
