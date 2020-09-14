@@ -22,3 +22,4 @@ total_height = (
 print('Общий рост семьи->', total_height)
 
 # Зачёт!
+
