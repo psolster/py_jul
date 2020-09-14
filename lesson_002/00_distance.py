@@ -10,6 +10,7 @@ sites = {
     'Paris': (480, 480),
 }
 
+
 distances = {}
 
 moscow = sites['Moscow']
