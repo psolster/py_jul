@@ -14,6 +14,7 @@ envelop_x, envelop_y = 10, 7
 paper_x, paper_y = 9, 11
 
 
+
 if envelop_x >= paper_x and envelop_y >= paper_y:
     print("Да")
 elif envelop_y >= paper_x or envelop_y >= paper_x:

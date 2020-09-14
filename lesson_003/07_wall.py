@@ -3,6 +3,7 @@
 # (цикл for)
 import simple_draw as sd
 
+
 sd.resolution = (1200, 600)
 x_1 = 0
 y_1 = 0

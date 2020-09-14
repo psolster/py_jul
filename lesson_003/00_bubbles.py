@@ -20,6 +20,7 @@ def buble(central_point, step_radius, color_bubl):
         sd.circle(center_position=central_point, radius=start_radius, color=color_bubl, width=2)
 
 
+
 point = sd.get_point(200, 200)
 buble(central_point=point, step_radius=10, color_bubl=(40, 120, 200))
 

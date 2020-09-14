@@ -28,6 +28,7 @@ shops = {
 
 print(shops)
 
+
 sweets = {
     'печенье': [
         {'shop': 'пятерочка', 'price': 9.99},

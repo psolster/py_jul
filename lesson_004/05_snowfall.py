@@ -11,6 +11,7 @@ sd.resolution = (1200, 600)
 
 N = 20
 
+
 # coordin_x = {}
 # lenght_snowflake_line = {}
 # for key_x_coordinat in range(0, 1201, 60):

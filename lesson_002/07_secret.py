@@ -9,6 +9,7 @@ secret_message = [
     'бсц59мегщ2лятьаьгенедыв9фк9ехб1а',
 ]
 
+
 print(
     secret_message[0][3],
     secret_message[1][9:13],

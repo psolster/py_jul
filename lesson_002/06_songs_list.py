@@ -14,6 +14,7 @@ violator_songs_list = [
     ['Clean', 5.83],
 ]
 
+
 time_3_songs = (
     violator_songs_list[3][1]
     + violator_songs_list[5][1]

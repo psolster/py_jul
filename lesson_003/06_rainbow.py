@@ -13,6 +13,7 @@ y_1 = 50
 x_2 = 350
 y_2 = 450
 
+
 start_point = sd.get_point(x_1, y_1)
 end_point = sd.get_point(x_2, y_2)
 

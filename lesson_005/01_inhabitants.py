@@ -13,3 +13,4 @@ print('В комнате room_2 живут:',  ', '.join(room_2.folks))
 
 
 
+

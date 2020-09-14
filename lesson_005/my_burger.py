@@ -13,6 +13,7 @@ def cucumber():
     return
 
 
+
 def tomato():
     print('разбавим помидорками')
     return
