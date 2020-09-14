@@ -15,6 +15,7 @@ point_2 = (30, 30)
 
 distance_2 = (point_2[0] ** 2 + point_2[1] ** 2) ** 0.5
 
+
 print(radius > distance_2)
 
 # Зачёт!
