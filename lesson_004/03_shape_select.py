@@ -10,7 +10,6 @@ import simple_draw as sd
 # Результат решения см lesson_004/results/exercise_03_shape_select.jpg
 
 
-
 def trianlge(point_zero_fig, angle_figu, lenght_tri_fig, color='5'):
     angle_fig = [angle_figu + 0, angle + 120, angle + 240]
     v = sd.get_vector(start_point=point_zero_fig, angle=angle_fig[0], length=lenght_tri_fig, width=3)
