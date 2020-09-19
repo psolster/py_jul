@@ -13,7 +13,7 @@ def primitivs(point_zero_fig, start_angle_figura, lenght_line, number_of_sides):
     for i in range(1, number_of_sides - 1):
         v = sd.get_vector(start_point=v.end_point, angle=angle_figura[i], length=lenght_line, width=3)
         v.draw()
-    l = sd.line(start_point=v.end_point, end_point=point_zero_fig, width=3)
+    sd.line(start_point=v.end_point, end_point=point_zero_fig, width=3)
 
 
 point_zero = sd.get_point(600, 300)
