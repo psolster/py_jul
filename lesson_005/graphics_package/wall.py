@@ -27,8 +27,8 @@ def wall(start, end):
             start_point_rect = sd.get_point(x_1_brick, y_1_brick)
             end_point_rect = sd.get_point(x_2_brick, y_2_brick)
             sd.rectangle(start_point_rect, end_point_rect, color, 2)
-    sd.line(start_point=start, end_point=(start[0], end[1]))
-    sd.line(start_point=(start[0], end[1]), end_point=(end[0], end[1]))
+        # sd.line(start_point=(x_1, y_1), end_point=(x_1, y_2))
+        # sd.line(start_point=(x_2, y_1), end_point=(x_2, y_2))
 
     sd.pause()
 
