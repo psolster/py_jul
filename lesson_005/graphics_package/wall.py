@@ -37,6 +37,6 @@ def wall(start, end):
     sd.pause()
 
 
-start_wall = (100, 0)
-end_wall = (600, 300)
+start_wall = (0, 0)
+end_wall = (1200, 1200)
 wall(start=start_wall, end=end_wall)
