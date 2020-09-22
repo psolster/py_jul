@@ -27,7 +27,6 @@ def smile(x_centr_smie: int, y_centr_smile: int, color_smile):
     sd.rectangle(right_top_mouth, left_bottom_mouth, color_smile, 1)
 
 
-
 for _ in range(10):
     x = random.randint(100, 1200)
     y = random.randint(100, 600)
