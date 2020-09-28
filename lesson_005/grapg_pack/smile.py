@@ -25,8 +25,9 @@ def smile(coordinat_centr, color_smile):
     sd.rectangle(right_top_mouth, left_bottom_mouth, color_smile, 1)
 
 
-for _ in range(10):
-    coordin = (random.randint(0, 1200), random.randint(0, 600))
-    color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-    smile(coordinat_centr=coordin, color_smile=color)
-sd.pause()
+if __name__ == "__main__":
+    for _ in range(10):
+        coordin = (random.randint(0, 1200), random.randint(0, 600))
+        color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        smile(coordinat_centr=coordin, color_smile=color)
+    sd.pause()

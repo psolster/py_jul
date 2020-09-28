@@ -19,10 +19,12 @@
 # Приправить своей фантазией по вкусу (коты? коровы? люди? трактор? что придумается)
 
 
-from grapg_pack import rainbow
+from lesson_005.grapg_pack import rainbow
+from lesson_005.grapg_pack import tree
 start_point = (30, 30)
 end_point = (300, 300)
 rainbow.rainbow(start_rainbow_point=start_point, end_rainbow_point=end_point)
+# tree.draw_branches(start_point_brench=start_point, angle_brench=30, lenght_brench=100)
 # Усложненное задание (делать по желанию)
 # Анимировать картину.
 # Пусть слева идет снегопад, радуга переливается цветами, смайлик моргает, солнце крутит лучами, етс.

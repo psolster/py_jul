@@ -16,9 +16,10 @@ def primitivs(point_zero_fig, start_angle_figura, lenght_line, number_of_sides):
     sd.line(start_point=v.end_point, end_point=point_zero_fig, width=3)
 
 
-point_zero = sd.get_point(600, 300)
-length = 120
-angle = 30
+if __name__ == "__main__":
+    point_zero = sd.get_point(600, 300)
+    length = 120
+    angle = 30
 
-primitivs(point_zero_fig=point_zero, start_angle_figura=angle, lenght_line=length, number_of_sides=7)
-sd.pause()
+    primitivs(point_zero_fig=point_zero, start_angle_figura=angle, lenght_line=length, number_of_sides=7)
+    sd.pause()

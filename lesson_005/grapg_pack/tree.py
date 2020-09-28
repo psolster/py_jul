@@ -16,12 +16,12 @@ def draw_branches(start_point_brench, angle_brench, lenght_brench):
     draw_branches(start_point_brench=v1.end_point, angle_brench=delta_angle_2, lenght_brench=next_lenght_branches)
 
 
-sd.resolution = (1200, 600)
-start_point = sd.get_point(600, 30)
-angle = 90
-lenght = 100
-
-draw_branches(start_point_brench=start_point, angle_brench=angle, lenght_brench=lenght)
+# sd.resolution = (1200, 600)
+# start_point = sd.get_point(600, 30)
+# angle = 90
+# lenght = 100
+#
+# draw_branches(start_point_brench=start_point, angle_brench=angle, lenght_brench=lenght)
 
 # Пригодятся функции
 # sd.random_number()

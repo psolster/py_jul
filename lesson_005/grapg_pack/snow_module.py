@@ -33,6 +33,7 @@ def snow_module(left_bottom, right_top, lenght_snow_line, number_snowflake):
     sd.pause()
 
 
-left_corner = (200, 200)
-right_top_corner = (1000, 800)
-snow_module(left_bottom=left_corner, right_top=right_top_corner, lenght_snow_line=20, number_snowflake=40)
+if __name__ == "__main__":
+    left_corner = (200, 200)
+    right_top_corner = (1000, 800)
+    snow_module(left_bottom=left_corner, right_top=right_top_corner, lenght_snow_line=20, number_snowflake=40)
