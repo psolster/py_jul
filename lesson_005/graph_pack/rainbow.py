@@ -5,7 +5,7 @@ def rainbow(start_rainbow_point, end_rainbow_point):
     rainbow_colors = (sd.COLOR_RED, sd.COLOR_ORANGE, sd.COLOR_YELLOW, sd.COLOR_GREEN,
                       sd.COLOR_CYAN, sd.COLOR_BLUE, sd.COLOR_PURPLE)
 
-    sd.resolution = (1200, 600)
+    sd.resolution = (600, 600)
 
     start_point = sd.get_point(*start_rainbow_point)
     end_point = sd.get_point(*end_rainbow_point)
