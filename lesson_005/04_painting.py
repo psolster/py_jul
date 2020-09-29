@@ -22,10 +22,14 @@
 from lesson_005.graph_pack import rainbow
 from lesson_005.graph_pack import tree
 import simple_draw as sd
+from lesson_005.house import house
 rainbow.rainbow(start_rainbow_point=(30, 30), end_rainbow_point=(300, 300))
 
-start_point = sd.get_point(600, 30)
+start_point = sd.get_point(1000, 130)
 tree.draw_branches(start_point_branch=start_point, angle_branch=90, length_branch=100)
+center_of_house = (600, 300)
+width_house = 300
+house(center_of_house= center_of_house, width_house=width_house)
 sd.pause()
 # Усложненное задание (делать по желанию)
 # Анимировать картину.
