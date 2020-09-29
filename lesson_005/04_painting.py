@@ -22,10 +22,11 @@
 from lesson_005.graph_pack import rainbow
 from lesson_005.graph_pack import tree
 import simple_draw as sd
-# rainbow.rainbow(start_rainbow_point=(30, 30), end_rainbow_point=(300, 300))
+rainbow.rainbow(start_rainbow_point=(30, 30), end_rainbow_point=(300, 300))
 
 start_point = sd.get_point(600, 30)
-tree.draw_branches(start_point_brench=start_point, angle_brench=30, lenght_brench=100)
+tree.draw_branches(start_point_branch=start_point, angle_branch=90, length_branch=100)
+sd.pause()
 # Усложненное задание (делать по желанию)
 # Анимировать картину.
 # Пусть слева идет снегопад, радуга переливается цветами, смайлик моргает, солнце крутит лучами, етс.
