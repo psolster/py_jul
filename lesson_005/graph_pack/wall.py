@@ -4,7 +4,7 @@ import simple_draw as sd
 
 def wall(start, end):
     color = sd.COLOR_ORANGE
-    sd.resolution = (1200, 800)
+    sd.resolution = (1200, 600)
 
     x_1 = start[0]
     x_2 = end[0]

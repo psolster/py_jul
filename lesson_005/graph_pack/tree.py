@@ -22,11 +22,3 @@ if __name__ == '__main__':
     start_point = sd.get_point(600, 30)
     draw_branches(start_point_branch=start_point, angle_branch=90, length_branch=100)
     sd.pause()
-
-# sd.pause()
-
-
-# if sd.user_want_exit():
-#     return
-# Пригодятся функции
-# sd.random_number()

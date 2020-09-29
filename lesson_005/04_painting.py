@@ -22,14 +22,21 @@
 from lesson_005.graph_pack import rainbow
 from lesson_005.graph_pack import tree
 import simple_draw as sd
-from lesson_005.house import house
-rainbow.rainbow(start_rainbow_point=(30, 30), end_rainbow_point=(300, 300))
+from lesson_005.graph_pack import house
+from lesson_005.graph_pack import smile
+from lesson_005.graph_pack import snow_module
+from lesson_005.graph_pack import prim_graph
 
-start_point = sd.get_point(1000, 130)
-tree.draw_branches(start_point_branch=start_point, angle_branch=90, length_branch=100)
-center_of_house = (600, 300)
-width_house = 300
-house(center_of_house= center_of_house, width_house=width_house)
+rainbow.rainbow(start_rainbow_point=(650, 800), end_rainbow_point=(1200, 400))
+tree.draw_branches(start_point_branch=sd.get_point(1000, 130), angle_branch=90, length_branch=100)
+tree.draw_branches(start_point_branch=sd.get_point(1100, 100), angle_branch=90, length_branch=100)
+tree.draw_branches(start_point_branch=sd.get_point(1050, 180), angle_branch=90, length_branch=100)
+tree.draw_branches(start_point_branch=sd.get_point(900, 90), angle_branch=90, length_branch=100)
+house.house(center_of_house=(600, 300), width_house=300)
+smile.smile(coordinat_centr=(650, 300), color_smile=sd.COLOR_WHITE)
+prim_graph.primitivs(point_zero_fig=(50, 700), start_angle_figura=10, lenght_line=20, number_of_sides=10)
+snow_module.snow_module(left_bottom=(50, 180), right_top=(450, 450), length_snow_line=8, number_snowflake=20)
+
 sd.pause()
 # Усложненное задание (делать по желанию)
 # Анимировать картину.
