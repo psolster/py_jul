@@ -33,3 +33,5 @@ my_burger.cucumber()
 my_burger.mustard()
 
 print('и тут нет ошибки')
+
+# Зачёт!
