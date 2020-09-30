@@ -34,8 +34,8 @@ tree.draw_branches(start_point_branch=sd.get_point(1050, 180), angle_branch=90, 
 tree.draw_branches(start_point_branch=sd.get_point(900, 90), angle_branch=90, length_branch=100)
 house.house(center_of_house=(600, 300), width_house=300)
 smile.smile(coordinat_centr=(650, 300), color_smile=sd.COLOR_WHITE)
-prim_graph.primitivs(point_zero_fig=(200, 500), start_angle_figura=10, lenght_line=20, number_of_sides=18)
-snow_module.snow_module(left_bottom=(50, 180), right_top=(430, 450), length_snow_line=8, number_snowflake=20)
+prim_graph.primitivs(point_zero_fig=(200, 500), start_angle_figura=10, lenght_line=20, number_of_sides=8)
+snow_module.snow_module(left_bottom=(50, 180), right_top=(430, 450), length_snow_line=8, number_snowflake=10)
 
 
 sd.pause()
