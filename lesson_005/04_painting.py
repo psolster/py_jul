@@ -37,7 +37,7 @@ house.house(center_of_house=(600, 300), width_house=300)
 smile.smile(coordinat_centr=(650, 300), color_smile=sd.COLOR_WHITE)
 
 sd.circle(center_position=sd.get_point(200, 500), radius=50, color=sd.COLOR_ORANGE, width=0)
-humans.human(centr_body=(950, 200), color_human=sd.COLOR_WHITE)
+humans.human(center_body=(950, 200), color_human=sd.COLOR_WHITE)
 snow_module.snow_module(left_bottom=(50, 180), right_top=(430, 450), length_snow_line=8, number_snowflake=10)
 
 sd.pause()
