@@ -17,6 +17,8 @@
 
 import my_burger
 
+# TODO Исправьте замечания среды разработки по оформлению кода
+#  в этом модуле и модуле my_burger.
 
 my_burger.cutlet()
 my_burger.cheese()
