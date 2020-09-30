@@ -21,3 +21,5 @@ all_people = (
         r1_ss_h2.folks + r2_ss_h2.folks)
 print('На районе живут:')
 print(', '.join(all_people))
+
+# Зачёт!
