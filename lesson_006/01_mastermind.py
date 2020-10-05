@@ -45,10 +45,10 @@
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
 from mastermind_engine import generate_number, check_number
-
-generate_number()
-answer = input('Введите ваш ответ, 4х значное число->')
-check_number(answer)
+while True:
+    generate_number()
+    answer = input('Введите ваш ответ, 4х значное число->')
+    check_number(answer)
 
 
 
