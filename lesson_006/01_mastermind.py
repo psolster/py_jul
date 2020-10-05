@@ -44,4 +44,10 @@
 # Это пример применения SOLID принципа (см https://goo.gl/GFMoaI) в архитектуре программ.
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
-# TODO здесь ваш код...
+from mastermind_engine import generate_number, check_number
+
+generate_number()
+print(generate_number())
+
+
+
