@@ -45,10 +45,16 @@
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
 from mastermind_engine import generate_number, check_number
-while True:
-    generate_number()
-    answer = input('Введите ваш ответ, 4х значное число->')
-    check_number(answer)
+generate_number()
+
+answer = input('Введите ваш ответ, 4х значное число->')
+check_number(answer)
+# game_over()
+# if game_over:
+#     print('Заного?')
+
+
+
 
 
 
