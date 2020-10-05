@@ -47,7 +47,8 @@
 from mastermind_engine import generate_number, check_number
 
 generate_number()
-print(generate_number())
+answer = input('Введите ваш ответ, 4х значное число->')
+check_number(answer)
 
 
 
