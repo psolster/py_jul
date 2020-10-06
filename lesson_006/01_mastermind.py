@@ -44,14 +44,13 @@
 # Это пример применения SOLID принципа (см https://goo.gl/GFMoaI) в архитектуре программ.
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
-from mastermind_engine import generate_number, check_number
+from mastermind_engine import generate_number, check_number, game_over
 generate_number()
+while game_over():
 
-answer = input('Введите ваш ответ, 4х значное число->')
-check_number(answer)
-# game_over()
-# if game_over:
-#     print('Заного?')
+    answer = input('Введите ваш ответ, 4х значное число->')
+    check_number(answer)
+
 
 
 
