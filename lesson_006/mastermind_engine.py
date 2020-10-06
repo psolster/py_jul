@@ -3,7 +3,7 @@ from random import randint
 _hidden_number = []
 _results = {'bulls': 0, 'cow': 0}
 _quantity_steps = 0
-_result_len_set = None
+_user_answer_set = None
 
 
 def generate_number():
@@ -18,21 +18,22 @@ def generate_number():
 
 
 def check_number(user_answer):
-    global _results, _quantity_steps, _result_len_set
+    global _results, _quantity_steps, _user_answer_set
     _results = {'bulls': 0, 'cow': 0}
     _quantity_steps += 1
+
     user_answer_list = list(user_answer)
     user_answer_set = set(user_answer_list)
     if len(user_answer_set) != 4:
-        _result_len_set = 0
-        return _result_len_set
+        _user_answer_set = len(user_answer_set)
+        return _user_answer_set
 
     for i, symbol in enumerate(user_answer_list):
         if symbol == _hidden_number[i]:
             _results['bulls'] += 1
         elif symbol in _hidden_number:
             _results['cow'] += 1
-    return _results
+    return _results, _result_len_set
     # print('Быки->', _results['bulls'], 'Коровы->', _results['cow'])
 
 
