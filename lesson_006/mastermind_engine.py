@@ -4,6 +4,7 @@ _hidden_number = []
 _results = {'bulls': 0, 'cow': 0}
 _quon_steps = 0
 
+
 def generate_number():
     global _hidden_number
     _hidden_number = []
@@ -12,7 +13,7 @@ def generate_number():
         if j not in _hidden_number:
             _hidden_number.append(str(j))
 
-    return print(_hidden_number)
+    return _hidden_number
 
 
 def check_number(user_answer):

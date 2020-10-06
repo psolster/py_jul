@@ -46,6 +46,7 @@
 
 from mastermind_engine import generate_number, check_number, game_over
 generate_number()
+print('Я загадал число из 4 НЕ повторяющихся цифр. Угадай его :)')
 while game_over():
 
     answer = input('Введите ваш ответ, 4х значное число->')
