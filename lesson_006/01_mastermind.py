@@ -53,8 +53,8 @@ while game_over():
 
     answer = input('Введите ваш ответ, 4х значное число->')
     check_number(answer)
-    if len(_user_answer_set) != 4:
-        print('Цифры повторяются, введите новые')
+    if not check_number(False):
+        print('Цифры повторяются или их не 4. Введите новые')
         answer = input('Введите ваш ответ, 4х значное число->')
         check_number(answer)
     print('Быки->', _results['bulls'], 'Коровы->', _results['cow'])
