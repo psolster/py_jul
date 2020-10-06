@@ -2,7 +2,8 @@ from random import randint
 
 _hidden_number = []
 _results = {'bulls': 0, 'cow': 0}
-_quon_steps = 0
+_quantity_steps = 0
+_result_len_set = None
 
 
 def generate_number():
@@ -17,13 +18,15 @@ def generate_number():
 
 
 def check_number(user_answer):
-    global _results, _quon_steps
+    global _results, _quantity_steps, _result_len_set
     _results = {'bulls': 0, 'cow': 0}
-    _quon_steps += 1
+    _quantity_steps += 1
     user_answer_list = list(user_answer)
-    if len(user_answer) != 4:
-        print('Требуестя 4-х значное число. Повторите ввод')
-        return
+    user_answer_set = set(user_answer_list)
+    if len(user_answer_set) != 4:
+        _result_len_set = 0
+        return _result_len_set
+
     for i, symbol in enumerate(user_answer_list):
         if symbol == _hidden_number[i]:
             _results['bulls'] += 1
@@ -35,7 +38,7 @@ def check_number(user_answer):
 
 def game_over():
     if _results['bulls'] == 4:
-        print('Победа! с ', _quon_steps, 'хода!')
+        print('Победа! с ', _quantity_steps, 'хода!')
         print('Хотите еще партию?')
         return False
     else:
