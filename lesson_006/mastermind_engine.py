@@ -22,14 +22,13 @@ def check_number(user_answer):
     _quantity_steps += 1
 
     if len(list(user_answer)) and len(set(list(user_answer))) != 4:
-        print('ощибка ввода')
-        return
-
-    for i, symbol in enumerate(list(user_answer)):
-        if symbol == _hidden_number[i]:
-            _results['bulls'] += 1
-        elif symbol in _hidden_number:
-            _results['cow'] += 1
+        return False
+    else:
+        for i, symbol in enumerate(list(user_answer)):
+            if symbol == _hidden_number[i]:
+                _results['bulls'] += 1
+            elif symbol in _hidden_number:
+                _results['cow'] += 1
     return _results
     # print('Быки->', _results['bulls'], 'Коровы->', _results['cow'])
 
@@ -41,5 +40,3 @@ def game_over():
         return False
     else:
         return True
-
-

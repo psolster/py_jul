@@ -52,12 +52,15 @@ print('Я загадал число из 4 НЕ повторяющихся ци�
 while game_over():
 
     answer = input('Введите ваш ответ, 4х значное число->')
-    check_number(answer)
-    if not check_number(False):
+    control_check_number = check_number(answer)
+    if control_check_number:
+        print('Быки->', control_check_number['bulls'], 'Коровы->', control_check_number['cow'])
+
+    else:
         print('Цифры повторяются или их не 4. Введите новые')
         answer = input('Введите ваш ответ, 4х значное число->')
-        check_number(answer)
-    print('Быки->', _results['bulls'], 'Коровы->', _results['cow'])
+        control_check_number = check_number(answer)
+
 
 
 
