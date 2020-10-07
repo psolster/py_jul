@@ -21,7 +21,7 @@ def check_number(user_answer):
     _results = {'bulls': 0, 'cow': 0}
     _quantity_steps += 1
 
-    if len(list(user_answer)) and len(set(list(user_answer))) != 4:
+    if len(list(user_answer)) or len(set(list(user_answer))) != 4:
         return False
     else:
         for i, symbol in enumerate(list(user_answer)):
