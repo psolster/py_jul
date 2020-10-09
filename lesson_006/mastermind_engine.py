@@ -21,16 +21,20 @@ def check_number(user_answer):
     _results = {'bulls': 0, 'cow': 0}
     _quantity_steps += 1
 
-    if len(list(user_answer)) or len(set(list(user_answer))) != 4:
-        return False
-    else:
-        for i, symbol in enumerate(list(user_answer)):
-            if symbol == _hidden_number[i]:
-                _results['bulls'] += 1
-            elif symbol in _hidden_number:
-                _results['cow'] += 1
+    if len(list(user_answer)) == 4:
+        if len(set(list(user_answer))) == 4:
+            counting_bulls_cows(user_answer=user_answer)
+        else:
+            return True
+
+
+def counting_bulls_cows(user_answer):
+    for i, symbol in enumerate(list(user_answer)):
+        if symbol == _hidden_number[i]:
+            _results['bulls'] += 1
+        elif symbol in _hidden_number:
+            _results['cow'] += 1
     return _results
-    # print('Быки->', _results['bulls'], 'Коровы->', _results['cow'])
 
 
 def game_over():
