@@ -53,15 +53,8 @@ while game_over():
 
     answer = input('Введите ваш ответ, 4х значное число->')
     control_check_number = check_number(answer)
-    if control_check_number:
+    if not control_check_number:
         print('Цифры повторяются или их не 4. Введите новые')
 
     else:
-        print('Быки->', _results['bulls'], 'Коровы->', _results['cow'])
-
-
-
-
-
-
-
+        print('Быки->', control_check_number['bulls'], 'Коровы->', control_check_number['cow'])
