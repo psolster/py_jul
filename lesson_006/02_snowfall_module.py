@@ -17,8 +17,9 @@ from snowfall import create_snowfalls, dr_snowflake, move_snowflake, get_number_
 # обращаясь ТОЛЬКО к функциям модуля snowfall
 
 # создать_снежинки(N)
+create_snowfalls(numbers_sn=3)
 while True:
-    create_snowfalls(numbers_sn=10)
+
     dr_snowflake(color=sd.COLOR_WHITE)
     move_snowflake()
     get_number_down_snowflakes()

@@ -26,10 +26,13 @@ def move_snowflake():
     global _snowflake_data
 
     for i, (x, y, length) in enumerate(_snowflake_data):
+
+        point_color_background = sd.get_point(x, y)
+        sd.snowflake(center=point_color_background, length=length, color=sd.background_color)
+        _snowflake_data[i][1] = _snowflake_data[i][1] - 10
         y = _snowflake_data[i][1]
         point_color_white = sd.get_point(x, y)
-        sd.snowflake(center=point_color_white, length=length, color=sd.background_color)
-        _snowflake_data[i][1] = _snowflake_data[i][1] - 10
+        sd.snowflake(center=point_color_white, length=length, color=sd.COLOR_WHITE)
 
 
 def get_number_down_snowflakes():
