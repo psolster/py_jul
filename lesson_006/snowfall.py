@@ -37,10 +37,9 @@ def move_snowflake():
 
 def get_number_down_snowflakes():
     global _snowflake_data, _down_snowflakes
-
     for i, (x, y, length) in enumerate(_snowflake_data):
-        if y < 10:
-            _down_snowflakes.append([i, x, y, length])
-    return _down_snowflakes
+        if y < -10:
+            _snowflake_data[i] = [sd.random_number(0, 1201), sd.random_number(450, 600), 10]
+    # return _snowflake_data
 
 
