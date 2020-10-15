@@ -49,6 +49,8 @@ global _results, _user_answer_set
 
 generate_number()
 print('Я загадал число из 4 НЕ повторяющихся цифр. Угадай его :)')
+
+
 while game_over():
 
     answer = input('Введите ваш ответ, 4х значное число->')
