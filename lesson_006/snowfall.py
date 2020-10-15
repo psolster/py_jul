@@ -32,6 +32,7 @@ def move_snowflake():
         _snowflake_data[i][1] = _snowflake_data[i][1] - 10
         y = _snowflake_data[i][1]
         point_color_white = sd.get_point(x, y)
+        # TODO Рисовать снежинки цветом нужно вызывая функцию dr_snowflake.
         sd.snowflake(center=point_color_white, length=length, color=sd.COLOR_WHITE)
 
 
