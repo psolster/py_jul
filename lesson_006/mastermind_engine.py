@@ -1,4 +1,4 @@
-from random import randint
+from random import randint, sample
 
 _hidden_number = []
 _results = {'bulls': 0, 'cow': 0}
@@ -6,25 +6,10 @@ _quantity_steps = 0
 
 
 def generate_number():
-    # TODO Не самый оптимальный способ генерации числа.
-    #  В библиотеке random есть более подходящие функции.
-    #  Например shuffle или sample. С sample можно получить
-    #  сразу всю случайную последовательность одной командой.
-    #  Если хотите избегать 0 на первой позиции,
-    #  то генерировать последовательлность можно в цикле,
-    #  пока не получится последовательность начинающуася не с 0.
-    #  Или можно вместо последовательности в 4 символа сгенерировать 5
-    #  И если на первой позиции 0 сделать срез списка [1:], если не 0 [:4]
-    #  Функция shuffle позволяет перемешать элементы списка,
-    #  который можно сделать как list(range(10)). Останется только проверить
-    #  0 элемент и использовать срез.
+    symbols_for_sample = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
     global _hidden_number
     _hidden_number = []
-    while len(_hidden_number) < 4:
-        j = str(randint(1, 9))
-        if j not in _hidden_number:
-            _hidden_number.append(str(j))
-
+    _hidden_number = sample(symbols_for_sample, 4)
     return _hidden_number
 
 

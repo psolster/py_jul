@@ -61,4 +61,4 @@ while game_over():
     else:
         print('Быки->', control_check_number['bulls'], 'Коровы->', control_check_number['cow'])
 
-# TODO Исправьте замечание в модуле mastermind_engine.
+
