@@ -60,5 +60,3 @@ while game_over():
 
     else:
         print('Быки->', control_check_number['bulls'], 'Коровы->', control_check_number['cow'])
-
-

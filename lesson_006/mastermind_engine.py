@@ -1,4 +1,4 @@
-from random import randint, sample
+from random import sample
 
 _hidden_number = []
 _results = {'bulls': 0, 'cow': 0}
