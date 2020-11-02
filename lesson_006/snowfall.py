@@ -16,33 +16,33 @@ def dr_snowflake(color):
     global _snowflake_data
     sd.start_drawing()
     for i, (x, y, length) in enumerate(_snowflake_data):
-        point_background_color = sd.get_point(x, y)
-        sd.snowflake(center=point_background_color, length=length, color=color)
+        center_point = sd.get_point(x, y)
+        sd.snowflake(center=center_point, length=length, color=color)
     sd.finish_drawing()
     sd.sleep(0.1)
 
 
 def move_snowflake():
     global _snowflake_data
-    for i, (x, y, length) in enumerate(_snowflake_data):
-        point_color_background = sd.get_point(x, y)
-        sd.snowflake(center=point_color_background, length=length, color=sd.background_color)
+    for i in range(0, len(_snowflake_data)):
+        dr_snowflake(color=sd.background_color)
         _snowflake_data[i][1] = _snowflake_data[i][1] - 100
         dr_snowflake(color=sd.COLOR_WHITE)
+    return _snowflake_data
 
 
 def get_number_down_snowflakes():
     global _snowflake_data, _down_snowflakes
-    for i, (x, y, length) in enumerate(_snowflake_data):
-        if y < -10:
-            _down_snowflakes.append(i)
+    for i in range(0, len(_snowflake_data)):
+        if _snowflake_data[i][1] < 300:
+            _down_snowflakes.append(_snowflake_data[i])
 
     return _down_snowflakes
 
 
 def del_down_snowflakes(list_index):
-    global _quon_down_snow
-    for index in list_index:
+    global _quon_down_snow, _down_snowflakes
+    for index in range(0, len(list_index)):
         _quon_down_snow += 1
         _snowflake_data[index] = [0, 0, 0]
     return _quon_down_snow
