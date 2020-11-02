@@ -36,13 +36,13 @@ def get_number_down_snowflakes():
     for i in range(0, len(_snowflake_data)):
         if _snowflake_data[i][1] < 300:
             _down_snowflakes.append(_snowflake_data[i])
-
     return _down_snowflakes
 
 
 def del_down_snowflakes(list_index):
     global _quon_down_snow, _down_snowflakes
-    for index in range(0, len(list_index)):
+    for index, (x, y, length) in enumerate(list_index):
         _quon_down_snow += 1
-        _snowflake_data[index] = [0, 0, 0]
+        center_point = sd.get_point(x, y)
+        sd.snowflake(center=center_point, length=length, color=sd.background_color)
     return _quon_down_snow
