@@ -30,7 +30,6 @@ def dr_snowflake(color):
 # TODO не логично выглядит работа перерисовки снежинок в ф-ии сдвижения снежинок несколько раз исует с задержками
 
 
-
 def move_snowflake():
     global _snowflake_data
     for i in range(0, len(_snowflake_data)):
