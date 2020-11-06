@@ -22,11 +22,10 @@ create_snowfalls(numbers_sn=10)
 while True:
     dr_snowflake(color=sd.COLOR_WHITE)
     move_snowflake()
-    # TODO Рисовать снежинки цветом нужно в этом модуле после вызова функции
-    #  падения снежинок.
+    dr_snowflake(color=sd.COLOR_WHITE)
     number_out_snowflakes = get_number_down_snowflakes()
-    quo_new_snowflakes = del_down_snowflakes(list_index=number_out_snowflakes)
-    create_snowfalls(numbers_sn=quo_new_snowflakes)
+    del_down_snowflakes(list_index=number_out_snowflakes)
+    create_snowfalls(numbers_sn=len(number_out_snowflakes))
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
