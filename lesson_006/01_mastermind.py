@@ -45,11 +45,11 @@
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
 from mastermind_engine import generate_number, check_number, game_over
+
 global _results, _user_answer_set
 
 generate_number()
 print('Я загадал число из 4 НЕ повторяющихся цифр. Угадай его :)')
-
 
 while game_over():
 
@@ -60,5 +60,3 @@ while game_over():
 
     else:
         print('Быки->', control_check_number['bulls'], 'Коровы->', control_check_number['cow'])
-
-# TODO Исправьте замечание в модуле mastermind_engine.
