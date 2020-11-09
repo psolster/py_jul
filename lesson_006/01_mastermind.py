@@ -44,7 +44,7 @@
 # Это пример применения SOLID принципа (см https://goo.gl/GFMoaI) в архитектуре программ.
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
-from mastermind_engine import generate_number, check_number, game_over
+from mastermind_engine import generate_number, check_number, game_over, _quantity_steps, counting_bulls_cows
 
 global _results, _user_answer_set
 
@@ -52,11 +52,13 @@ generate_number()
 print('Я загадал число из 4 НЕ повторяющихся цифр. Угадай его :)')
 
 while game_over():
-
     answer = input('Введите ваш ответ, 4х значное число->')
-    control_check_number = check_number(answer)
-    if not control_check_number:
+    control_number = check_number(answer)
+    if control_number:
+        results_count = counting_bulls_cows(answer)
+        print('Быки->', results_count['bulls'], 'Коровы->', results_count['cow'])
+    else:
         print('Цифры повторяются или их не 4. Введите новые')
 
-    else:
-        print('Быки->', control_check_number['bulls'], 'Коровы->', control_check_number['cow'])
+print('Победа! с ', _quantity_steps, 'хода!')
+print('Хотите еще партию?')

@@ -13,13 +13,10 @@ def generate_number():
     hidden_number_big = sample(symbols_for_sample, 5)
     if hidden_number_big[0] == '0':
         _hidden_number = hidden_number_big[1:]
-        # TODO Возвращать результат можно для обеих веток кода,
-        #  Убрав следующую строку и уменьшив отступ у последней
-        #  строки в функции.
-        return _hidden_number
+
     else:
         _hidden_number = hidden_number_big[:4]
-        return _hidden_number
+    return _hidden_number
 
 
 def check_number(user_answer):
@@ -27,10 +24,8 @@ def check_number(user_answer):
     _quantity_steps += 1
     if len(list(user_answer)) == 4:
         if len(set(list(user_answer))) == 4:
-            # TODO Функцию counting_bulls_cows лучше вызывать
-            #  отдельно из основного модуля.
-            counting_bulls_cows(user_answer=user_answer)
-            return _results
+
+            return True
         else:
             return False
 
@@ -48,10 +43,7 @@ def counting_bulls_cows(user_answer):
 
 def game_over():
     if _results['bulls'] == 4:
-        # TODO По условиям задания запрещено выводить сообщения из этого модуля.
-        #  Перенесите эту функцию в основной модуль.
-        print('Победа! с ', _quantity_steps, 'хода!')
-        print('Хотите еще партию?')
+
         return False
     else:
         return True
