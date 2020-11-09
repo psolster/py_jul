@@ -20,12 +20,17 @@ from snowfall import create_snowfalls, dr_snowflake, move_snowflake, get_number_
 
 create_snowfalls(numbers_sn=10)
 while True:
+    sd.start_drawing()
     dr_snowflake(color=sd.COLOR_WHITE)
+    # sd.finish_drawing()
     move_snowflake()
+    # sd.start_drawing()
     dr_snowflake(color=sd.COLOR_WHITE)
+    sd.finish_drawing()
     number_out_snowflakes = get_number_down_snowflakes()
-    del_down_snowflakes(list_index=number_out_snowflakes)
-    create_snowfalls(numbers_sn=len(number_out_snowflakes))
+    quont_down = del_down_snowflakes(list_index=number_out_snowflakes)
+
+    create_snowfalls(numbers_sn=quont_down)
     sd.sleep(0.1)
     if sd.user_want_exit():
         break

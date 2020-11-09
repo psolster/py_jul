@@ -1,7 +1,7 @@
 import simple_draw as sd
 
 _snowflake_data = []
-_down_snowflakes = []
+# _down_snowflakes = []
 sd.resolution = (1200, 600)
 
 
@@ -25,11 +25,11 @@ def dr_snowflake(color):
     # TODO Перенесите вызовы функций sd.start_drawing() и sd.finish_drawing()
     #  в основной модуль до и после вызовоы функции dr_snowflake.
     #  Это уменьшит мерцание во время анимации.
-    sd.start_drawing()
+    # sd.start_drawing()
     for i, (x, y, length) in enumerate(_snowflake_data):
         center_point = sd.get_point(x, y)
         sd.snowflake(center=center_point, length=length, color=color)
-    sd.finish_drawing()
+    # sd.finish_drawing()
 
 
 def move_snowflake():
@@ -41,7 +41,6 @@ def move_snowflake():
 
 
 def get_number_down_snowflakes():
-    global _down_snowflakes
     #   Нужно обнулить список номеов снежинок, досьтгших дна, иначе трудно использовать функцию создания снежинок,
     # TODO Список упавших снежинок не должен влиять на добавление снежинок
     #  для замены снежинок новыми. Переменная _down_snowflakes не должна
@@ -51,14 +50,15 @@ def get_number_down_snowflakes():
     # предупреждение, что имена внутри функции и снаружи - пересекаются, но это разнык списки же? и пожтому с каждой
     # итерацией кол-во снежинок растес по экспоненте
 
-    _down_snowflakes = []
+    down_snowflakes = []
     for i in range(0, len(_snowflake_data)):
         if _snowflake_data[i][1] < 20:
-            _down_snowflakes.append(i)
-    return _down_snowflakes
+            down_snowflakes.append(i)
+    return down_snowflakes
 
 
 def del_down_snowflakes(list_index):
     for index in list_index:
         center = sd.get_point(_snowflake_data[index][0], _snowflake_data[index][1])
         sd.snowflake(center=center, length=10, color=sd.background_color)
+    return len(list_index)
