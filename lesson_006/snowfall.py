@@ -33,6 +33,8 @@ def get_number_down_snowflakes():
 
 
 def del_down_snowflakes(list_index):
+    # TODO В sort можно передать аргумент reverse=True,
+    #  тогда список будет сразу отсортирован в обратном порядке.
     list_index.sort()
     list_index.reverse()
     for index in list_index:

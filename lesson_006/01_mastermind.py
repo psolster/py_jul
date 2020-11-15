@@ -62,3 +62,5 @@ while game_over():
 
 print('Победа! с ', _quantity_steps, 'хода!')
 print('Хотите еще партию?')
+
+# Зачёт!
