@@ -18,7 +18,7 @@ from snowfall import create_snowfalls, dr_snowflake, move_snowflake, get_number_
 
 # создать_снежинки(N)
 
-create_snowfalls(numbers_sn=20)
+create_snowfalls(numbers_sn=10)
 while True:
     sd.start_drawing()
     dr_snowflake(color=sd.COLOR_WHITE)

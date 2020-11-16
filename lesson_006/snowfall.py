@@ -33,10 +33,8 @@ def get_number_down_snowflakes():
 
 
 def del_down_snowflakes(list_index):
-    # TODO В sort можно передать аргумент reverse=True,
-    #  тогда список будет сразу отсортирован в обратном порядке.
-    list_index.sort()
-    list_index.reverse()
+    list_index.sort(reverse=True)
+
     for index in list_index:
         center = sd.get_point(_snowflake_data[index][0], _snowflake_data[index][1])
         sd.snowflake(center=center, length=10, color=sd.background_color)
