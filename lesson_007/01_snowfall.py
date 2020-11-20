@@ -3,7 +3,7 @@ from random import randint
 
 import simple_draw as sd
 
-_coordinats = []
+# coordinats = []
 sd.resolution = (1200, 600)
 
 
@@ -20,15 +20,17 @@ class Snowflake:
         self.color = 'sd.COLOR_WHITE'
 
     def draw(self):
-        global _coordinats
+        for index, (x, y) in enumerate(flake.coordinats):
 
-        center_point = sd.get_point(self.coordinats[0], self.coordinats[1])
-        sd.snowflake(center=center_point, length=10, color=flake.color)
+            center_point = sd.get_point(x, y)
+            sd.snowflake(center=center_point, length=10, color=flake.color)
 
     def move(self):
-        center_point = sd.get_point(self.coordinats[0], self.coordinats[1])
-        sd.snowflake(center=center_point, length=10, color=sd.background_color)
-        flake.coordinats[1] = flake.coordinats[1] - 10
+        # global _coordinats
+        for index, (x, y) in enumerate(flake.coordinats):
+            center_point = sd.get_point(x, y)
+            sd.snowflake(center=center_point, length=10, color=sd.background_color)
+            flake.coordinats[index][1] = flake.coordinats[index][1] - 10
 
     def clear_previous_picture(self):
         sd.clear_screen()
@@ -38,13 +40,17 @@ class Snowflake:
             return True
 
     def get_flakes(self, count=10):
-        flakes_data = []
+        # global coordinats
         for i in range(0, count):
-            flakes_data.append([sd.random_number(0, 1201), sd.random_number(250, 600)])
-            return flakes_data
+            flake.coordinats.append([sd.random_number(0, 1201), sd.random_number(250, 600)])
+        return flake.coordinats
 
-
-
+    def get_fallen_flakes(self):
+        down_snowflakes = []
+        for i in range(0, len(self.coordinats)):
+            if self.coordinats[i][1] < 20:
+                down_snowflakes.append(i)
+        return down_snowflakes
 
 
 flake = Snowflake()
@@ -64,7 +70,7 @@ flake.color = sd.COLOR_BLUE
 # шаг 2: создать снегопад - список объектов Снежинка в отдельном списке, обработку примерно так:
 flakes = flake.get_flakes(count=10)  # создать список снежинок
 while True:
-    for flake in flakes:
+    for fla in flakes:
         flake.clear_previous_picture()
         flake.move()
         flake.draw()
