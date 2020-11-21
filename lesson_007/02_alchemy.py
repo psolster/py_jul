@@ -20,6 +20,104 @@
 #   print(Fire(), '+', Air(), '=', Fire() + Air())
 
 # TODO здесь ваш код
+class Water:
+    def __init__(self, gift=None):
+        self.content = []
+        if gift:
+            self.content.append(gift)
+
+    def __eq__(self, other):
+        return self.content == other.content
+
+
+class Air:
+    def __init__(self, gift=None):
+        self.content = []
+        if gift:
+            self.content.append(gift)
+
+    def __eq__(self, other):
+        return self.content == other.content
+
+
+class Fire:
+    def __init__(self, gift=None):
+        self.content = []
+        if gift:
+            self.content.append(gift)
+
+    def __eq__(self, other):
+        return self.content == other.content
+
+
+class Earth:
+    def __init__(self, gift=None):
+        self.content = []
+        if gift:
+            self.content.append(gift)
+
+    def __eq__(self, other):
+        return self.content == other.content
+
+
+class Storm:
+    def __init__(self, gift=None):
+        self.content = []
+        if gift:
+            self.content.append(gift)
+
+    def __eq__(self, other):
+        return self.content == other.content
+
+
+class Steam:
+    def __init__(self, gift=None):
+        self.content = []
+        if gift:
+            self.content.append(gift)
+
+    def __eq__(self, other):
+        return self.content == other.content
+
+
+class Mud:
+    def __init__(self, gift=None):
+        self.content = []
+        if gift:
+            self.content.append(gift)
+
+    def __eq__(self, other):
+        return self.content == other.content
+
+
+class Flash:
+    def __init__(self, gift=None):
+        self.content = []
+        if gift:
+            self.content.append(gift)
+
+    def __eq__(self, other):
+        return self.content == other.content
+
+
+class Dust:
+    def __init__(self, gift=None):
+        self.content = []
+        if gift:
+            self.content.append(gift)
+
+    def __eq__(self, other):
+        return self.content == other.content
+
+
+class Lava:
+    def __init__(self, gift=None):
+        self.content = []
+        if gift:
+            self.content.append(gift)
+
+    def __eq__(self, other):
+        return self.content == other.content
 
 # Усложненное задание (делать по желанию)
 # Добавить еще элемент в игру.
