@@ -23,20 +23,13 @@
 
 
 class Water:
-    # def __init__(self, gift=None):
-    #     self.content = []
-    #     if gift:
-    #         self.content.append(gift)
-
-    # def __eq__(self, other):
-    #     return self.content == other.content
 
     def __str__(self):
         return 'Вода'
 
     def __add__(self, other):
-        if other == Air:
-            return Storm
+        if other == 'Air':
+            return Storm(part1=self, part2=other)
         elif other == Fire:
             return 'Пар'
         elif other == Earth:
@@ -46,16 +39,13 @@ class Water:
 
 
 class Air:
-    # def __init__(self, gift=None):
-    #     self.content = []
-    #     if gift:
-    #         self.content.append(gift)
 
-    # def __eq__(self, other):
-    #     return self.content == other.content
+    def __init__(self):
+        self.type = 'Air'
+
 
     def __str__(self):
-        return 'Воздух'
+        return 'Air'
 
     def __add__(self, other):
         if other == Fire:
@@ -108,9 +98,6 @@ class Storm:
     def __init__(self, part1, part2):
         self.part1 = part1
         self.part2 = part2
-
-    # def __eq__(self, other):
-    #     return self.content == other.content
 
     def __str__(self):
         return 'Шторм, состою из' + str(self.part1) + 'и' + str(self.part2)
@@ -221,7 +208,8 @@ class Storm:
 # second = Mud(gift='банан')
 # new = ferst + second
 print(Water(), '+', Air(), '=', Water() + Air())
-
+res = Water() + Air()
+print(res)
 # Усложненное задание (делать по желанию)
 # Добавить еще элемент в игру.
 # Придумать что будет при сложении существующих элементов с новым.
