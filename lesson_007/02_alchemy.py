@@ -36,7 +36,7 @@ class Water:
 
     def __add__(self, other):
         if other == Air:
-            return 'Шторм'
+            return Storm
         elif other == Fire:
             return 'Пар'
         elif other == Earth:
@@ -105,7 +105,7 @@ class Earth:
 
 
 class Storm:
-    def __init__(self, part1, part2 ):
+    def __init__(self, part1, part2):
         self.part1 = part1
         self.part2 = part2
 
@@ -113,7 +113,7 @@ class Storm:
     #     return self.content == other.content
 
     def __str__(self):
-        return 'Шторм'
+        return 'Шторм, состою из' + str(self.part1) + 'и' + str(self.part2)
 
     # def __add__(self, other):
     #     new_obj = Storm()
