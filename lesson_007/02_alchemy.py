@@ -19,8 +19,6 @@
 #   print(Water(), '+', Air(), '=', Water() + Air())
 #   print(Fire(), '+', Air(), '=', Fire() + Air())
 
-# TODO здесь ваш код
-
 
 class Water:
 
@@ -28,12 +26,13 @@ class Water:
         return 'Вода'
 
     def __add__(self, other):
-        if other == 'Air':
+        prov = str(other)
+        if prov == 'Воздух':
             return Storm(part1=self, part2=other)
-        elif other == Fire:
-            return 'Пар'
-        elif other == Earth:
-            return 'Грязь'
+        elif prov == 'Огонь':
+            return Steam(part1=self, part2=other)
+        elif prov == 'Земля':
+            return Mud(part1=self, part2=other)
         else:
             return None
 
@@ -41,11 +40,42 @@ class Water:
 class Air:
 
     def __init__(self):
-        self.type = 'Air'
-
+        self.type = 'Воздух'
 
     def __str__(self):
-        return 'Air'
+        return 'Воздух'
+
+    def __add__(self, other):
+        prov = str(other)
+        if prov == "Огонь":
+            return Flash(part1=self, part2=other)
+        elif prov == "Земля":
+            return Dust(part1=self, part2=other)
+        else:
+            return None
+
+
+class Fire:
+    def __init__(self):
+        self.type = 'Огонь'
+
+    def __str__(self):
+        return 'Огонь'
+
+    def __add__(self, other):
+        prov = str(other)
+        if prov == 'Земля':
+            return Lava(part1=self, part2=other)
+        else:
+            return None
+
+
+class Earth:
+    def __init__(self):
+        self.type = 'Земля'
+
+    def __str__(self):
+        return 'Земля'
 
     def __add__(self, other):
         if other == Fire:
@@ -56,160 +86,66 @@ class Air:
             return None
 
 
-class Fire:
-    def __init__(self, gift=None):
-        self.content = []
-        if gift:
-            self.content.append(gift)
-
-    def __eq__(self, other):
-        return self.content == other.content
-
-    def __str__(self):
-        return 'Fire: ' + ', '.join(self.content)
-
-    def __add__(self, other):
-        new_obj = Fire()
-        new_obj.content.extend(self.content)
-        new_obj.content.extend(other.content)
-        return new_obj
-
-
-class Earth:
-    def __init__(self, gift=None):
-        self.content = []
-        if gift:
-            self.content.append(gift)
-
-    def __eq__(self, other):
-        return self.content == other.content
-
-    def __str__(self):
-        return 'Earth: ' + ', '.join(self.content)
-
-    def __add__(self, other):
-        new_obj = Earth()
-        new_obj.content.extend(self.content)
-        new_obj.content.extend(other.content)
-        return new_obj
-
-
 class Storm:
     def __init__(self, part1, part2):
         self.part1 = part1
         self.part2 = part2
 
     def __str__(self):
-        return 'Шторм, состою из' + str(self.part1) + 'и' + str(self.part2)
-
-    # def __add__(self, other):
-    #     new_obj = Storm()
-    #     new_obj.content.extend(self.content)
-    #     new_obj.content.extend(other.content)
-    #     return new_obj
-#
-#
-# class Steam:
-#     def __init__(self, gift=None):
-#         self.content = []
-#         if gift:
-#             self.content.append(gift)
-#
-#     def __eq__(self, other):
-#         return self.content == other.content
-#
-#     def __str__(self):
-#         return 'Steam: ' + ', '.join(self.content)
-#
-#     def __add__(self, other):
-#         new_obj = Steam()
-#         new_obj.content.extend(self.content)
-#         new_obj.content.extend(other.content)
-#         return new_obj
-#
-#
-# class Mud:
-#     def __init__(self, gift=None):
-#         self.content = []
-#         if gift:
-#             self.content.append(gift)
-#
-#     def __eq__(self, other):
-#         return self.content == other.content
-#
-#     def __str__(self):
-#         return 'Mud: ' + ', '.join(self.content)
-#
-#     def __add__(self, other):
-#         new_obj = Mud()
-#         new_obj.content.extend(self.content)
-#         new_obj.content.extend(other.content)
-#         return new_obj
-#
-#
-# class Flash:
-#     def __init__(self, gift=None):
-#         self.content = []
-#         if gift:
-#             self.content.append(gift)
-#
-#     def __eq__(self, other):
-#         return self.content == other.content
-#
-#     def __str__(self):
-#         return 'Flash: ' + ', '.join(self.content)
-#
-#     def __add__(self, other):
-#         new_obj = Flash()
-#         new_obj.content.extend(self.content)
-#         new_obj.content.extend(other.content)
-#         return new_obj
-#
-#
-# class Dust:
-#     def __init__(self, gift=None):
-#         self.content = []
-#         if gift:
-#             self.content.append(gift)
-#
-#     def __eq__(self, other):
-#         return self.content == other.content
-#
-#     def __str__(self):
-#         return 'Dust: ' + ', '.join(self.content)
-#
-#     def __add__(self, other):
-#         new_obj = Dust()
-#         new_obj.content.extend(self.content)
-#         new_obj.content.extend(other.content)
-#         return new_obj
-#
-#
-# class Lava:
-#     def __init__(self, gift=None):
-#         self.content = []
-#         if gift:
-#             self.content.append(gift)
-#
-#     def __str__(self):
-#         return 'Lava: ' + ', '.join(self.content)
-#
-#     def __eq__(self, other):
-#         return self.content == other.content
-#
-#     def __add__(self, other):
-#         new_obj = Lava()
-#         new_obj.content.extend(self.content)
-#         new_obj.content.extend(other.content)
-#         return new_obj
+        return 'Шторм, состою из ' + str(self.part1) + ' и ' + str(self.part2)
 
 
-# ferst = Water(gift='бутерброд')
-# second = Mud(gift='банан')
-# new = ferst + second
+class Steam:
+    def __init__(self, part1, part2):
+        self.part1 = part1
+        self.part2 = part2
+
+    def __str__(self):
+        return 'Пар, состою из ' + str(self.part1) + ' и ' + str(self.part2)
+
+
+class Mud:
+    def __init__(self, part1, part2):
+        self.part1 = part1
+        self.part2 = part2
+
+    def __str__(self):
+        return 'Грязь, состою из ' + str(self.part1) + ' и ' + str(self.part2)
+
+
+class Flash:
+    def __init__(self, part1, part2):
+        self.part1 = part1
+        self.part2 = part2
+
+    def __str__(self):
+        return 'Молния, состою из ' + str(self.part1) + ' и ' + str(self.part2)
+
+
+class Dust:
+    def __init__(self, part1, part2):
+        self.part1 = part1
+        self.part2 = part2
+
+    def __str__(self):
+        return 'Пыль, состою из ' + str(self.part1) + ' и ' + str(self.part2)
+
+
+class Lava:
+    def __init__(self, part1, part2):
+        self.part1 = part1
+        self.part2 = part2
+
+    def __str__(self):
+        return 'Лава, состою из ' + str(self.part1) + ' и ' + str(self.part2)
+
+
 print(Water(), '+', Air(), '=', Water() + Air())
-res = Water() + Air()
-print(res)
+print(Water(), '+', Fire(), '=', Water() + Fire())
+print(Water(), '+', Earth(), '=', Water() + Earth())
+print(Air(), '+', Earth(), '=', Air() + Earth())
+print(Air(), '+', Fire(), '=', Air() + Fire())
+print(Fire(), '+', Earth(), '=', Fire() + Earth())
 # Усложненное задание (делать по желанию)
 # Добавить еще элемент в игру.
 # Придумать что будет при сложении существующих элементов с новым.
