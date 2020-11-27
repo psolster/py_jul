@@ -29,7 +29,6 @@ from random import randint
 
 from random import randint
 
-
 # Реализуем модель человека.
 # Человек может есть, работать, играть, ходить в магазин.
 # У человека есть степень сытости, немного еды и денег.
@@ -75,10 +74,18 @@ class Man:
         else:
             cprint('{} деньги кончились!'.format(self.name), color='red')
 
+    def shopping_for_cat(self):
+        if self.house.money >= 50:
+            cprint('{} сходил в магазин за едой для кота'.format(self.name), color='magenta')
+            self.house.money -= 50
+            self.house.food += 50
+        else:
+            cprint('{} деньги кончились!'.format(self.name), color='red')
+
     def go_to_the_house(self, house):
         self.house = house
         self.fullness -= 10
-        cprint('{} Вьехал в дом'.format(self.name), color='cyan')
+        cprint('{} Въехал в дом'.format(self.name), color='cyan')
 
     def act(self):
         if self.fullness <= 0:
@@ -98,6 +105,11 @@ class Man:
         else:
             self.watch_MTV()
 
+    def get_cat(self, house):
+        self.house = house
+        self.fullness -= 10
+        cprint('{} подобрал кота'.format(self.name), color='cyan')
+
 
 class House:
 
@@ -107,10 +119,11 @@ class House:
         self.cat_food = 0
         self.cat_plate = None
         self.house = None
+        self.garbage = 0
 
     def __str__(self):
-        return 'В доме еды осталось {}, денег осталось {}'.format(
-            self.food, self.money,
+        return 'В доме еды осталось {}, для кота еды осталось {}, денег осталось {}'.format(
+            self.food, self.cat_food, self.money,
         )
 
 
@@ -139,23 +152,23 @@ class Cat:
         self.house.money += 50
         self.fullness -= 10
 
-    def tear wallpaper(self):
+    def tear_wallpaper(self):
         cprint('{} сходил на работу'.format(self.name), color='blue')
         self.house.money += 50
         self.fullness -= 10
 
+
 citizens = [
     Man(name='Бивис'),
-    Man(name='Батхед'),
-    Man(name='Кенни'),
+
 ]
 
-
 my_sweet_home = House()
+
 for citisen in citizens:
     citisen.go_to_the_house(house=my_sweet_home)
-
-for day in range(1, 366):
+citisen.get_cat(house=my_sweet_home)
+for day in range(1, 3):
     print('================ день {} =================='.format(day))
     for citisen in citizens:
         citisen.act()
