@@ -113,7 +113,7 @@ class House:
 
     def __init__(self):
         self.food = 50
-        self.money = 0
+        self.money = 50
         self.cat_food = 0
         self.cat_plate = None
         self.house = None
