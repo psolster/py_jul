@@ -29,11 +29,7 @@ from random import randint
 
 from random import randint
 
-# Реализуем модель человека.
-# Человек может есть, работать, играть, ходить в магазин.
-# У человека есть степень сытости, немного еды и денег.
-# Если сытость < 0 единиц, человек умирает.
-# Человеку надо прожить 365 дней.
+
 from termcolor import cprint
 
 
@@ -59,7 +55,7 @@ class Man:
 
     def work(self):
         cprint('{} сходил на работу'.format(self.name), color='blue')
-        self.house.money += 50
+        self.house.money += 150
         self.fullness -= 10
 
     def watch_MTV(self):
@@ -78,7 +74,7 @@ class Man:
         if self.house.money >= 50:
             cprint('{} сходил в магазин за едой для кота'.format(self.name), color='magenta')
             self.house.money -= 50
-            self.house.food += 50
+            self.house.cat_food += 50
         else:
             cprint('{} деньги кончились!'.format(self.name), color='red')
 
@@ -96,6 +92,8 @@ class Man:
             self.eat()
         elif self.house.food < 10:
             self.shopping()
+        elif self.house.cat_food < 10:
+            self.shopping_for_cat()
         elif self.house.money < 50:
             self.work()
         elif dice == 1:
@@ -167,7 +165,7 @@ my_sweet_home = House()
 
 for citisen in citizens:
     citisen.go_to_the_house(house=my_sweet_home)
-citisen.get_cat(house=my_sweet_home)
+    citisen.get_cat(house=my_sweet_home)
 for day in range(1, 3):
     print('================ день {} =================='.format(day))
     for citisen in citizens:
