@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from random import randint
-
 # Доработать практическую часть урока lesson_007/python_snippets/08_practice.py
 
 # Необходимо создать класс кота. У кота есть аттрибуты - сытость и дом (в котором он живет).
@@ -29,12 +27,10 @@ from random import randint
 
 from random import randint
 
-
 from termcolor import cprint
 
 
 class Man:
-
     def __init__(self, name):
         self.name = name
         self.fullness = 50
@@ -46,9 +42,9 @@ class Man:
         )
 
     def eat(self):
-        if self.house.food >= 10:
+        if self.house.food >= 0:
             cprint('{} поел'.format(self.name), color='yellow')
-            self.fullness += 10
+            self.fullness += 30
             self.house.food -= 10
         else:
             cprint('{} нет еды'.format(self.name), color='red')
@@ -58,7 +54,7 @@ class Man:
         self.house.money += 150
         self.fullness -= 10
 
-    def watch_MTV(self):
+    def watch_mtv(self):
         cprint('{} смотрел MTV целый день'.format(self.name), color='green')
         self.fullness -= 10
 
@@ -67,6 +63,7 @@ class Man:
             cprint('{} сходил в магазин за едой'.format(self.name), color='magenta')
             self.house.money -= 50
             self.house.food += 50
+            self.fullness -= 10
         else:
             cprint('{} деньги кончились!'.format(self.name), color='red')
 
@@ -75,6 +72,7 @@ class Man:
             cprint('{} сходил в магазин за едой для кота'.format(self.name), color='magenta')
             self.house.money -= 50
             self.house.cat_food += 50
+            self.fullness -= 10
         else:
             cprint('{} деньги кончились!'.format(self.name), color='red')
 
@@ -83,44 +81,47 @@ class Man:
         self.fullness -= 10
         cprint('{} Въехал в дом'.format(self.name), color='cyan')
 
-    def act(self):
-
-        if self.fullness <= 0:
-            cprint('{} умер...'.format(self.name), color='red')
-            return
-        dice = randint(1, 6)
-        if self.fullness < 20:
-            self.eat()
-        elif self.house.food < 10:
-            self.shopping()
-        elif self.house.cat_food < 10:
-            self.shopping_for_cat()
-        elif self.house.money < 50:
-            self.work()
-        elif dice == 1:
-            self.work()
-        elif dice == 2:
-            self.eat()
-        elif dice == 3:
-            self.cleaning()
-        elif dice == 4:
-            self.Сat.cat_act()
-        else:
-            self.watch_MTV()
-
     def get_cat(self, house):
         self.house = house
         self.fullness -= 10
         cprint('{} подобрал кота'.format(self.name), color='cyan')
 
     def cleaning(self):
-        cprint('{} сходил на работу'.format(self.name), color='blue')
-        self.house.garbage -= 10
-        self.fullness -= 5
+        if self.fullness <= 20:
+            self.eat()
+        cprint('{} убрал говно и обои за котом '.format(self.name), color='blue')
+        self.house.garbage -= 100
+        self.fullness -= 20
+
+    def act(self):
+        if self.fullness <= 0:
+            cprint('{} умер...'.format(self.name), color='red')
+            return
+        dice = randint(1, 4)
+        if self.fullness < 20:
+            self.eat()
+        elif self.house.food < 10:
+            self.shopping()
+        elif self.house.cat_food < 20:
+            self.shopping_for_cat()
+        elif self.house.money < 50:
+            self.work()
+        elif self.house.garbage > 300:
+            self.cat.clining_samself()
+            cprint('Грязи стало {}, {} решил убить кота =)'.format(self.house.garbage, self.name,), color='yellow')
+            self.cat.fullness = 0
+
+        elif dice == 1:
+            self.work()
+        elif dice == 2:
+            self.eat()
+        elif dice == 3:
+            self.cleaning()
+        else:
+            self.watch_mtv()
 
 
 class House:
-
     def __init__(self):
         self.food = 50
         self.money = 50
@@ -172,19 +173,23 @@ class Cat:
         self.house.garbage += 5
         self.fullness -= 10
 
+    def clining_samself(self):
+        cprint('{} очень много нагадил! {} заставил его убираться!'.format(self.name, Man.self.name),
+               color='green')
+        self.fullness -= 100
+        self.house.garbage -= 200
+
     def cat_act(self):
         if self.fullness <= 0:
             cprint('{} умер...'.format(self.name), color='red')
             return
         dice = randint(1, 3)
-        if self.fullness < 20:
+        if self.fullness < 10:
             self.eat()
         elif self.house.cat_food < 10:
             self.tear_wallpaper()
-
         elif self.fullness >= 50:
             self.sleep()
-
         elif dice == 1:
             self.eat()
         elif dice == 2:
@@ -193,12 +198,9 @@ class Cat:
             self.sleep()
 
 
-
 citizens = [
     Man(name='Бивис'),
-
 ]
-
 my_sweet_home = House()
 me_cat = Cat()
 for citisen in citizens:
