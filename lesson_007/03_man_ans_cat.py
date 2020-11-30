@@ -141,6 +141,7 @@ class Cat:
         self.name = name
         self.fullness = 10
         self.house = None
+        self.cat_plate = None
 
     def __str__(self):
         return 'Я - {}, сытость {}'.format(
@@ -150,7 +151,9 @@ class Cat:
     def cat_go_to_the_house(self, house):
         self.house = house
         self.fullness -= 5
-        cprint('{} Въехал в дом'.format(self.name), color='cyan')
+        self.cat_plate = house
+        cprint('{} Въехал в дом. У кота появилась тарелка, но в ней {} еды'.format(self.name, self.house.cat_food),
+               color='cyan')
 
     def eat(self):
         if self.house.food >= 10:
@@ -210,6 +213,7 @@ for day in range(1, 365):
     print('--- в конце дня ---')
     for citisen in citizens:
         print(citisen)
+        print(me_cat)
     print(my_sweet_home)
 
 # Создадим двух людей, живущих в одном доме - Бивиса и Батхеда
