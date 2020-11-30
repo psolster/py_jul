@@ -104,7 +104,7 @@ class Man:
         elif dice == 3:
             self.cleaning()
         elif dice == 4:
-            cat.cat_act()
+            self.Сat.cat_act()
         else:
             self.watch_MTV()
 
@@ -115,7 +115,7 @@ class Man:
 
     def cleaning(self):
         cprint('{} сходил на работу'.format(self.name), color='blue')
-        self.house.garbage -= 100
+        self.house.garbage -= 10
         self.fullness -= 5
 
 
@@ -130,8 +130,8 @@ class House:
         self.garbage = 0
 
     def __str__(self):
-        return 'В доме еды осталось {}, для кота еды осталось {}, денег осталось {}'.format(
-            self.food, self.cat_food, self.money,
+        return 'В доме еды осталось {}, для кота еды осталось {}, денег осталось {}, грязи дома {}'.format(
+            self.food, self.cat_food, self.money, self.garbage
         )
 
 
@@ -139,7 +139,7 @@ class Cat:
 
     def __init__(self, name='КОТ'):
         self.name = name
-        self.fullness = 50
+        self.fullness = 10
         self.house = None
 
     def __str__(self):
@@ -147,22 +147,26 @@ class Cat:
             self.name, self.fullness,
         )
 
+    def cat_go_to_the_house(self, house):
+        self.house = house
+        self.fullness -= 5
+        cprint('{} Въехал в дом'.format(self.name), color='cyan')
+
     def eat(self):
         if self.house.food >= 10:
             cprint('{} поел'.format(self.name), color='yellow')
-            self.fullness += 10
+            self.fullness += 20
             self.house.cat_food -= 10
         else:
             cprint('{} нет еды'.format(self.name), color='red')
 
     def sleep(self):
-        cprint('{} сходил на работу'.format(self.name), color='blue')
-        self.house.money += 50
+        cprint('{} завалился спать на диване'.format(self.name), color='blue')
         self.fullness -= 10
 
     def tear_wallpaper(self):
         cprint('{} подрал обои'.format(self.name), color='blue')
-        self.house.garbage += 50
+        self.house.garbage += 5
         self.fullness -= 10
 
     def cat_act(self):
@@ -175,7 +179,7 @@ class Cat:
         elif self.house.cat_food < 10:
             self.tear_wallpaper()
 
-        elif self.fullness > 50:
+        elif self.fullness >= 50:
             self.sleep()
 
         elif dice == 1:
@@ -197,7 +201,8 @@ me_cat = Cat()
 for citisen in citizens:
     citisen.go_to_the_house(house=my_sweet_home)
     citisen.get_cat(house=my_sweet_home)
-for day in range(1, 21):
+    me_cat.cat_go_to_the_house(house=my_sweet_home)
+for day in range(1, 365):
     print('================ день {} =================='.format(day))
     for citisen in citizens:
         citisen.act()
