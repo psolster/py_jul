@@ -61,7 +61,7 @@ class Man:
     def shopping(self):
         if self.house.money >= 50:
             cprint('{} сходил в магазин за едой'.format(self.name), color='magenta')
-            self.house.money -= 50
+            self.house.money -= 300
             self.house.food += 50
             self.fullness -= 10
         else:
@@ -70,7 +70,7 @@ class Man:
     def shopping_for_cat(self):
         if self.house.money >= 50:
             cprint('{} сходил в магазин за едой для кота'.format(self.name), color='magenta')
-            self.house.money -= 50
+            self.house.money -= 100
             self.house.cat_food += 50
             self.fullness -= 10
         else:
@@ -90,7 +90,7 @@ class Man:
         if self.fullness <= 20:
             self.eat()
         cprint('{} убрал говно и обои за котом '.format(self.name), color='blue')
-        self.house.garbage -= 100
+        self.house.garbage -= 5
         self.fullness -= 20
 
     def act(self):
@@ -106,10 +106,6 @@ class Man:
             self.shopping_for_cat()
         elif self.house.money < 50:
             self.work()
-        elif self.house.garbage > 300:
-            self.cat.clining_samself()
-            cprint('Грязи стало {}, {} решил убить кота =)'.format(self.house.garbage, self.name,), color='yellow')
-            self.cat.fullness = 0
 
         elif dice == 1:
             self.work()
@@ -161,6 +157,7 @@ class Cat:
             cprint('{} поел'.format(self.name), color='yellow')
             self.fullness += 20
             self.house.cat_food -= 10
+            self.house.garbage += 2
         else:
             cprint('{} нет еды'.format(self.name), color='red')
 
@@ -173,9 +170,11 @@ class Cat:
         self.house.garbage += 5
         self.fullness -= 10
 
+# TODO вот тут не пойму, как вызвать имя человека?
     def clining_samself(self):
-        cprint('{} очень много нагадил! {} заставил его убираться!'.format(self.name, Man.self.name),
+        cprint('{} очень много нагадил! {} заставил его убираться!'.format(self.name, self.man.name),
                color='green')
+
         self.fullness -= 100
         self.house.garbage -= 200
 
@@ -190,6 +189,10 @@ class Cat:
             self.tear_wallpaper()
         elif self.fullness >= 50:
             self.sleep()
+        elif self.house.garbage > 300:
+            self.clining_samself()
+            cprint('Грязи стало {}, {} решил убить кота =)'.format(self.house.garbage, self.name,), color='yellow')
+            self.fullness = 0
         elif dice == 1:
             self.eat()
         elif dice == 2:
