@@ -26,6 +26,12 @@ class Water:
         return 'Вода'
 
     def __add__(self, other):
+        # TODO Используйте функцию isinstance, которая позволяет
+        #  определить является ли объект экземпляром определённого класса.
+        #  list1 = [1, 2, 3]
+        #  isinstance(list1, list) вернёт True
+        #  isinstance(list1, str) вернёт False
+
         prov = str(other)
         if prov == 'Воздух':
             return Storm(part1=self, part2=other)
