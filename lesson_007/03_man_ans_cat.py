@@ -139,21 +139,23 @@ class Cat:
         self.fullness = 10
         self.house = None
         self.cat_plate = None
+        self.cat_frend = None
 
     def __str__(self):
         return 'Я - {}, сытость {}'.format(
             self.name, self.fullness,
         )
 
-    def cat_go_to_the_house(self, house):
+    def cat_go_to_the_house(self, house, cat_friend):
         self.house = house
         self.fullness -= 5
         self.cat_plate = house
+        self.cat_friend = cat_friend
         cprint('{} Въехал в дом. У кота появилась тарелка, но в ней {} еды'.format(self.name, self.house.cat_food),
                color='cyan')
 
     def eat(self):
-        if self.house.food >= 10:
+        if self.house.cat_food >= 10:
             cprint('{} поел'.format(self.name), color='yellow')
             self.fullness += 20
             self.house.cat_food -= 10
@@ -176,7 +178,7 @@ class Cat:
     #  человека в переменную или сохранять самого человека
     #  аналогично дому.
     def clining_samself(self):
-        cprint('{} очень много нагадил! {} заставил его убираться!'.format(self.name, self.man.name),
+        cprint('{} очень много нагадил! {} заставил его убираться!'.format(self.name, self.cat_friend),
                color='green')
 
         self.fullness -= 100
@@ -195,7 +197,7 @@ class Cat:
             self.sleep()
         elif self.house.garbage > 300:
             self.clining_samself()
-            cprint('Грязи стало {}, {} решил убить кота =)'.format(self.house.garbage, self.name,), color='yellow')
+            cprint('Грязи стало {}, {} решил убить кота =)'.format(self.house.garbage, self.cat_friend), color='yellow')
             self.fullness = 0
         elif dice == 1:
             self.eat()
@@ -213,7 +215,8 @@ me_cat = Cat()
 for citisen in citizens:
     citisen.go_to_the_house(house=my_sweet_home)
     citisen.get_cat(house=my_sweet_home)
-    me_cat.cat_go_to_the_house(house=my_sweet_home)
+    me_cat.cat_go_to_the_house(house=my_sweet_home, cat_friend=citisen)
+
 for day in range(1, 365):
     print('================ день {} =================='.format(day))
     for citisen in citizens:
