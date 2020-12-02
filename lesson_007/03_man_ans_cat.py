@@ -139,7 +139,7 @@ class Cat:
         self.fullness = 10
         self.house = None
         self.cat_plate = None
-        self.cat_frend = None
+        self.cat_friend = None
 
     def __str__(self):
         return 'Я - {}, сытость {}'.format(
@@ -172,11 +172,6 @@ class Cat:
         self.house.garbage += 5
         self.fullness -= 10
 
-    #  вот тут не пойму, как вызвать имя человека?
-    # TODO Если нужно обращаться к имени человека нужно
-    #  при инициализации класса кота или сохранять имя
-    #  человека в переменную или сохранять самого человека
-    #  аналогично дому.
     def clining_samself(self):
         cprint('{} очень много нагадил! {} заставил его убираться!'.format(self.name, self.cat_friend),
                color='green')
