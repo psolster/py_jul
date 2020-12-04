@@ -26,18 +26,12 @@ class Water:
         return 'Вода'
 
     def __add__(self, other):
-        # TODO Используйте функцию isinstance, которая позволяет
-        #  определить является ли объект экземпляром определённого класса.
-        #  list1 = [1, 2, 3]
-        #  isinstance(list1, list) вернёт True
-        #  isinstance(list1, str) вернёт False
 
-        prov = str(other)
-        if prov == 'Воздух':
+        if isinstance(other, Air):
             return Storm(part1=self, part2=other)
-        elif prov == 'Огонь':
+        elif isinstance(other, Fire):
             return Steam(part1=self, part2=other)
-        elif prov == 'Земля':
+        elif isinstance(other, Earth):
             return Mud(part1=self, part2=other)
         else:
             return None
@@ -52,10 +46,10 @@ class Air:
         return 'Воздух'
 
     def __add__(self, other):
-        prov = str(other)
-        if prov == "Огонь":
+
+        if isinstance(other, Fire):
             return Flash(part1=self, part2=other)
-        elif prov == "Земля":
+        elif isinstance(other, Earth):
             return Dust(part1=self, part2=other)
         else:
             return None
@@ -69,8 +63,8 @@ class Fire:
         return 'Огонь'
 
     def __add__(self, other):
-        prov = str(other)
-        if prov == 'Земля':
+
+        if isinstance(other, Earth):
             return Lava(part1=self, part2=other)
         else:
             return None
@@ -84,10 +78,26 @@ class Earth:
         return 'Земля'
 
     def __add__(self, other):
-        if other == Fire:
-            return 'Молния'
-        elif other == Earth:
-            return 'Пыль'
+        if isinstance(other, Fire):
+            return Flash(part1=self, part2=other)
+        elif isinstance(other, Earth):
+            return Dust(part1=self, part2=other)
+        else:
+            return None
+
+
+class Frost:
+    def __init__(self):
+        self.type = 'Мороз'
+
+    def __str__(self):
+        return 'Мороз'
+
+    def __add__(self, other):
+        if isinstance(other, Water):
+            return Ice(part1=self, part2=other)
+        elif isinstance(other, Air):
+            return Snow(part1=self, part2=other)
         else:
             return None
 
@@ -146,6 +156,24 @@ class Lava:
         return 'Лава, состою из ' + str(self.part1) + ' и ' + str(self.part2)
 
 
+class Ice:
+    def __init__(self, part1, part2):
+        self.part1 = part1
+        self.part2 = part2
+
+    def __str__(self):
+        return 'Гололед, состою из ' + str(self.part1) + ' и ' + str(self.part2)
+
+
+class Snow:
+    def __init__(self, part1, part2):
+        self.part1 = part1
+        self.part2 = part2
+
+    def __str__(self):
+        return 'Снег, состою из ' + str(self.part1) + ' и ' + str(self.part2)
+
+
 print(Water(), '+', Air(), '=', Water() + Air())
 print(Water(), '+', Fire(), '=', Water() + Fire())
 print(Water(), '+', Earth(), '=', Water() + Earth())
@@ -155,3 +183,5 @@ print(Fire(), '+', Earth(), '=', Fire() + Earth())
 # Усложненное задание (делать по желанию)
 # Добавить еще элемент в игру.
 # Придумать что будет при сложении существующих элементов с новым.
+print(Frost(), '+', Water(), '=', Frost() + Water())
+print(Frost(), '+', Air(), '=', Frost() + Air())
