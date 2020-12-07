@@ -185,3 +185,5 @@ print(Fire(), '+', Earth(), '=', Fire() + Earth())
 # Придумать что будет при сложении существующих элементов с новым.
 print(Frost(), '+', Water(), '=', Frost() + Water())
 print(Frost(), '+', Air(), '=', Frost() + Air())
+
+# Зачёт!
