@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-from random import randint
 
 import simple_draw as sd
 
-# coordinats = []
 sd.resolution = (1200, 600)
 
 
@@ -12,7 +10,6 @@ sd.resolution = (1200, 600)
 #  - отработку изменений координат
 #  - отрисовку
 
-
 class Snowflake:
 
     def __init__(self):
@@ -20,55 +17,55 @@ class Snowflake:
         self.color = 'sd.COLOR_WHITE'
 
     def draw(self):
-        for index, (x, y) in enumerate(flake.coordinats):
-            center_point = sd.get_point(x, y)
-            sd.snowflake(center=center_point, length=10, color=flake.color)
+        center_point = sd.get_point(flake.coordinats[0], flake.coordinats[1])
+        sd.snowflake(center=center_point, length=10, color=sd.COLOR_WHITE)
 
     def move(self):
-        for index in range(0, len(flake.coordinats)):
-            flake.coordinats[index][1] = flake.coordinats[index][1] - 10
+        flake.coordinats[1] = flake.coordinats[1] - 10
 
     def clear_previous_picture(self):
-        for index, (x, y) in enumerate(flake.coordinats):
-            center_point = sd.get_point(x, y)
-            sd.snowflake(center=center_point, length=10, color=sd.background_color)
+        center_point = sd.get_point(flake.coordinats[0], flake.coordinats[1])
+        sd.snowflake(center=center_point, length=10, color=sd.background_color)
 
     def can_fall(self):
         if flake.coordinats[1] > 20:
             return True
 
-    def get_flakes(self, count=10):
-
-        for i in range(0, count):
-            flake.coordinats.append([sd.random_number(0, 1201), sd.random_number(250, 600)])
+    def get_flakes(self):
+        flake.coordinats = []
+        flake.coordinats.append(sd.random_number(0, 1201))
+        flake.coordinats.append(sd.random_number(250, 600))
         return flake.coordinats
+
+
+class Snowfall:
+
+    def __init__(self):
+        self.all_flakes_coord = []
+
+    def snowfall_data(self, counter):
+        for _ in range(0, counter):
+            self.all_flakes_coord.append(flake.get_flakes())
 
     def get_fallen_flakes(self):
         down_snowflakes = []
-        for i in range(0, len(flake.coordinats)):
-            if flake.coordinats[i][1] < 20:
+        for i in range(0, len(self.all_flakes_coord)):
+            if self.all_flakes_coord[i][1] < 20:
                 down_snowflakes.append(i)
         return down_snowflakes
 
-    def append_flakes(self, count):
-        count.sort(reverse=True)
-        for j in count:
-            center_point = sd.get_point(flake.coordinats[j][0], flake.coordinats[j][1])
+    def append_flakes(self, counts):
+        counts.sort(reverse=True)
+        for j in counts:
+            center_point = sd.get_point(self.all_flakes_coord[j][0], self.all_flakes_coord[j][1])
             sd.snowflake(center=center_point, length=10, color=sd.background_color)
-            flake.coordinats.pop(j)
-            flake.coordinats.append([sd.random_number(0, 1201), sd.random_number(250, 600)])
+            flakes.all_flakes_coord.pop(j)
+            flakes.all_flakes_coord.append([sd.random_number(0, 1201), sd.random_number(250, 600)])
 
 
-# TODO Коасс снежинки должен реализовывать поведение одной снежинки: рисование
-#  цветом и фоном, перемещение, упала ли снежинка. Класс снежинки не должен
-#  содержать методов создания, добавления нескольких снежинок и подсчёт упавших.
-#  Для организации снегоапда нужно или сделать отдельный класс или перенести
-#  функции из класса в модуль.
-
-
-flake = Snowflake()
-flake.color = sd.COLOR_BLUE
-
+# flake = Snowflake()
+# flake.color = sd.COLOR_WHITE
+# flake.get_flakes()
 # while True:
 #     flake.clear_previous_picture()
 #     flake.move()
@@ -78,18 +75,24 @@ flake.color = sd.COLOR_BLUE
 #     sd.sleep(0.1)
 #     if sd.user_want_exit():
 #         break
+#
+# sd.pause()
 
-# шаг 2: создать снегопад - список объектов Снежинка в отдельном списке, обработку примерно так:
-flakes = flake.get_flakes(count=5)  # создать список снежинок
+flake = Snowflake()
+flakes = Snowfall()
+count = 5
+flakes.snowfall_data(counter=count)
 while True:
-    for _ in range(0, len(flakes)):
+    for index, (x, y) in enumerate(flakes.all_flakes_coord):
+        flake.coordinats = [x, y]
         flake.clear_previous_picture()
         flake.move()
+        flakes.all_flakes_coord[index] = flake.coordinats
         flake.draw()
-        fallen_flakes = flake.get_fallen_flakes()  # подчитать сколько снежинок уже упало
-        if fallen_flakes:
-            flake.append_flakes(count=fallen_flakes)  # добавить еще сверху
-        sd.sleep(0.05)
-        if sd.user_want_exit():
+        fallen = flakes.get_fallen_flakes()
+        flakes.append_flakes(counts=fallen)
+        if not flake.can_fall():
             break
-sd.pause()
+        sd.sleep(0.02)
+    if sd.user_want_exit():
+        break
