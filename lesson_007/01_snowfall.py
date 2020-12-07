@@ -13,10 +13,16 @@ sd.resolution = (1200, 600)
 class Snowflake:
 
     def __init__(self):
+        # TODO Координаты не должны быть пусты. Их нужно или генерировать
+        #  автоматически или получать при инициализации класса.
+        #  Хранить координаты можно как в списке, так и в двух разных
+        #  переменных.
         self.coordinats = []
         self.color = 'sd.COLOR_WHITE'
 
     def draw(self):
+        # TODO В методах класса снежинки нужно обращаться к свойствам (переменным экземпляра)
+        #  класса. В данном случае к координатам, используя переменную self.
         center_point = sd.get_point(flake.coordinats[0], flake.coordinats[1])
         sd.snowflake(center=center_point, length=10, color=sd.COLOR_WHITE)
 
@@ -28,9 +34,11 @@ class Snowflake:
         sd.snowflake(center=center_point, length=10, color=sd.background_color)
 
     def can_fall(self):
+        # TODO Можно сразу возвращать результат логической операции, без дополнительной проверки.
         if flake.coordinats[1] > 20:
             return True
 
+    # TODO Метод get_flakes должен быть в классе снегопада.
     def get_flakes(self):
         flake.coordinats = []
         flake.coordinats.append(sd.random_number(0, 1201))
@@ -54,6 +62,8 @@ class Snowfall:
                 down_snowflakes.append(i)
         return down_snowflakes
 
+    # TODO Для создания и добавления снежинок можно использовать один и тот же метод.
+    #  Список с координатами снежинок очищается в методе __init__. Этого должно быть достаточно.
     def append_flakes(self, counts):
         counts.sort(reverse=True)
         for j in counts:
