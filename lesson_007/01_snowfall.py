@@ -13,11 +13,9 @@ sd.resolution = (1200, 600)
 class Snowflake:
 
     def __init__(self):
-        # TODO Координаты не должны быть пусты. Их нужно или генерировать
-        #  автоматически или получать при инициализации класса.
-        #  Хранить координаты можно как в списке, так и в двух разных
-        #  переменных.
         self.coordinats = []
+        self.coordinats.append(sd.random_number(0, 1201))
+        self.coordinats.append(sd.random_number(0, 601))
         self.color = sd.COLOR_WHITE
 
     def draw(self):
@@ -40,10 +38,6 @@ class Snowfall:
     def __init__(self):
         self.all_flakes_coord = []
 
-    def snowfall_data(self, counter):
-        # for _ in range(0, counter):
-        self.all_flakes_coord.append(self.append_flakes(counts=counter))
-
     def get_fallen_flakes(self):
         down_snowflakes = []
         for i in range(0, len(self.all_flakes_coord)):
@@ -51,14 +45,11 @@ class Snowfall:
                 down_snowflakes.append(i)
         return down_snowflakes
 
-    # TODO Для создания и добавления снежинок можно использовать один и тот же метод.
-    #  Список с координатами снежинок очищается в методе __init__. Этого должно быть достаточно.
     def append_flakes(self, counts):
-        if not flake.coordinats:
+        if isinstance(counts, int) and len(self.all_flakes_coord) == 0:
             for _ in range(0, counts):
-                flake.coordinats.append([(sd.random_number(0, 1201)), (sd.random_number(0, 1201))])
-
-            return flake.coordinats
+                self.all_flakes_coord.append([(sd.random_number(0, 1201)), (sd.random_number(0, 1201))])
+            return self.all_flakes_coord
         else:
             counts.sort(reverse=True)
             for j in counts:
@@ -67,16 +58,11 @@ class Snowfall:
                 self.all_flakes_coord.pop(j)
                 self.all_flakes_coord.append([sd.random_number(0, 1201), sd.random_number(250, 600)])
 
-    # def get_flakes(self):
-    #     flake.coordinats = []
-    #     flake.coordinats.append(sd.random_number(0, 1201))
-    #     flake.coordinats.append(sd.random_number(250, 600))
-    #     return flake.coordinats
 
-
+# Задача 1
 # flake = Snowflake()
-
-# flake.get_flakes()
+#
+# # flake.get_flakes()
 # while True:
 #     flake.clear_previous_picture()
 #     flake.move()
@@ -89,10 +75,13 @@ class Snowfall:
 #
 # sd.pause()
 
+
+# Задача 2
+
 flake = Snowflake()
 flakes = Snowfall()
 count = 5
-flakes.snowfall_data(counter=count)
+flakes.append_flakes(counts=count)
 while True:
     for index, (x, y) in enumerate(flakes.all_flakes_coord):
         flake.coordinats = [x, y]
