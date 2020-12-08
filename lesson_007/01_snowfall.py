@@ -18,32 +18,21 @@ class Snowflake:
         #  Хранить координаты можно как в списке, так и в двух разных
         #  переменных.
         self.coordinats = []
-        self.color = 'sd.COLOR_WHITE'
+        self.color = sd.COLOR_WHITE
 
     def draw(self):
-        # TODO В методах класса снежинки нужно обращаться к свойствам (переменным экземпляра)
-        #  класса. В данном случае к координатам, используя переменную self.
-        center_point = sd.get_point(flake.coordinats[0], flake.coordinats[1])
-        sd.snowflake(center=center_point, length=10, color=sd.COLOR_WHITE)
+        center_point = sd.get_point(self.coordinats[0], self.coordinats[1])
+        sd.snowflake(center=center_point, length=10, color=self.color)
 
     def move(self):
-        flake.coordinats[1] = flake.coordinats[1] - 10
+        self.coordinats[1] = self.coordinats[1] - 10
 
     def clear_previous_picture(self):
-        center_point = sd.get_point(flake.coordinats[0], flake.coordinats[1])
+        center_point = sd.get_point(self.coordinats[0], self.coordinats[1])
         sd.snowflake(center=center_point, length=10, color=sd.background_color)
 
     def can_fall(self):
-        # TODO Можно сразу возвращать результат логической операции, без дополнительной проверки.
-        if flake.coordinats[1] > 20:
-            return True
-
-    # TODO Метод get_flakes должен быть в классе снегопада.
-    def get_flakes(self):
-        flake.coordinats = []
-        flake.coordinats.append(sd.random_number(0, 1201))
-        flake.coordinats.append(sd.random_number(250, 600))
-        return flake.coordinats
+        return self.coordinats[1] > 20
 
 
 class Snowfall:
@@ -52,8 +41,8 @@ class Snowfall:
         self.all_flakes_coord = []
 
     def snowfall_data(self, counter):
-        for _ in range(0, counter):
-            self.all_flakes_coord.append(flake.get_flakes())
+        # for _ in range(0, counter):
+        self.all_flakes_coord.append(self.append_flakes(counts=counter))
 
     def get_fallen_flakes(self):
         down_snowflakes = []
@@ -65,16 +54,28 @@ class Snowfall:
     # TODO Для создания и добавления снежинок можно использовать один и тот же метод.
     #  Список с координатами снежинок очищается в методе __init__. Этого должно быть достаточно.
     def append_flakes(self, counts):
-        counts.sort(reverse=True)
-        for j in counts:
-            center_point = sd.get_point(self.all_flakes_coord[j][0], self.all_flakes_coord[j][1])
-            sd.snowflake(center=center_point, length=10, color=sd.background_color)
-            flakes.all_flakes_coord.pop(j)
-            flakes.all_flakes_coord.append([sd.random_number(0, 1201), sd.random_number(250, 600)])
+        if not flake.coordinats:
+            for _ in range(0, counts):
+                flake.coordinats.append([(sd.random_number(0, 1201)), (sd.random_number(0, 1201))])
+
+            return flake.coordinats
+        else:
+            counts.sort(reverse=True)
+            for j in counts:
+                center_point = sd.get_point(self.all_flakes_coord[j][0], self.all_flakes_coord[j][1])
+                sd.snowflake(center=center_point, length=10, color=sd.background_color)
+                self.all_flakes_coord.pop(j)
+                self.all_flakes_coord.append([sd.random_number(0, 1201), sd.random_number(250, 600)])
+
+    # def get_flakes(self):
+    #     flake.coordinats = []
+    #     flake.coordinats.append(sd.random_number(0, 1201))
+    #     flake.coordinats.append(sd.random_number(250, 600))
+    #     return flake.coordinats
 
 
 # flake = Snowflake()
-# flake.color = sd.COLOR_WHITE
+
 # flake.get_flakes()
 # while True:
 #     flake.clear_previous_picture()
