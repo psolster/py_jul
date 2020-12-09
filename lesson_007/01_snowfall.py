@@ -36,6 +36,8 @@ class Snowflake:
 class Snowfall:
 
     def __init__(self):
+        # TODO В снегопаде нужно создавать не список координат, а список
+        #  снежинок. При добавлении снежинки её начальные координаты создаются автоматически.
         self.all_flakes_coord = []
 
     def get_fallen_flakes(self):
@@ -46,6 +48,8 @@ class Snowfall:
         return down_snowflakes
 
     def append_flakes(self, counts):
+        # TODO Для добавления снежинок нужно counts раз создать объект типа Snowflake
+        #  и добавить его в список.
         if isinstance(counts, int) and len(self.all_flakes_coord) == 0:
             for _ in range(0, counts):
                 self.all_flakes_coord.append([(sd.random_number(0, 1201)), (sd.random_number(0, 1201))])
@@ -83,7 +87,37 @@ flakes = Snowfall()
 count = 5
 flakes.append_flakes(counts=count)
 while True:
+    # TODO Учитывая наличие класса снегопада стоит максимально скрыть
+    #  механизм работы снегопада в классе Snowfall.
+    #  Для этого цикл по списку снежинок должен быть в одном из методов
+    #  класса Snowfall. В результате код снегопада должен быть примерно как основной
+    #  цикл в снегопаде шестого модля:
+    #  while True:
+    #      flakes.draw(...)
+    #      flakes.move()
+    #      flakes.draw(...)
+    #      flakes.get_fallen()
+    #      flakes.append...
+    #      ...
+    #  Вся логика должна быть реалищована в методах класса снегопада.
+    #  Можно даже пойти ещё немного дальше и сделать метод, в котором будут
+    #  вызываться остальные методы и основной цикл станет ещё проще:
+    #  while True:
+    #      flakes.step()
+    #      sd.sleep(...)
+    #      if sd.user_want_exit():
+    #         break
+    #  Тогда в методе step можно сделать один цикл по списку снежинок:
+    #  for flake in self.flakes:
+    #      flake.draw()
+    #      flake.move()
+    #      flake.draw()
+    #      if not flake.can_fall:
+    #           ...
     for index, (x, y) in enumerate(flakes.all_flakes_coord):
+        # TODO Не нужно менять координаты отдельных снежинок внешним кодом.
+        #  После создания каждая снежинка должна быть отдельным независимым
+        #  объектом и управляться вызовами методов.
         flake.coordinats = [x, y]
         flake.clear_previous_picture()
         flake.move()
