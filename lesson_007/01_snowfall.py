@@ -40,6 +40,9 @@ class Snowfall:
         #  снежинок. При добавлении снежинки её начальные координаты создаются автоматически.
         self.all_flakes_coord = []
 
+
+
+
     def get_fallen_flakes(self):
         down_snowflakes = []
         for i in range(0, len(self.all_flakes_coord)):
