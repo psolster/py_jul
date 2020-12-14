@@ -45,13 +45,37 @@ from random import randint
 class House:
 
     def __init__(self):
-        pass
+        self.money = 100
+        self.food = 50
+        self.garbage = 0
+        self.house = None
+
+    def __str__(self):
+        return 'В доме еды осталось {},  денег осталось {}, грязи дома {}'.format(
+            self.food,  self.money, self.garbage
+        )
 
 
-class Husband:
+class Man:
+    satiety = 30
+    degree_of_happiness = 100
 
-    def __init__(self):
-        pass
+    def __init__(self, name):
+        self.name = name
+        # self.fuel = 0
+
+    def __str__(self):
+        return '{} сытость {}, степень счастья {}'.format(self.name, self.satiety, self.degree_of_happiness)
+
+
+class Husband(Man):
+    def __init__(self, name):
+        super().__init__(name=name)
+        # self.body_space = body_space
+        # self.cargo = 0
+        # self.velocity = 100
+        # self.place = None
+        # self.distance_to_target = 0
 
     def __str__(self):
         return super().__str__()
@@ -60,13 +84,22 @@ class Husband:
         pass
 
     def eat(self):
-        pass
+        if self.house.food >= 0:
+            cprint('{} поел'.format(self.name), color='yellow')
+            self.satiety += 30
+            self.house.food -= 10
+        else:
+            cprint('{} нет еды'.format(self.name), color='red')
 
     def work(self):
-        pass
+        cprint('{} сходил на работу'.format(self.name), color='blue')
+        self.house.money += 150
+        self.satiety -= 10
 
     def gaming(self):
-        pass
+        cprint('{} гамал в WoT весь день'.format(self.name), color='green')
+        self.satiety -= 10
+        self.degree_of_happiness += 20
 
 
 class Wife:
