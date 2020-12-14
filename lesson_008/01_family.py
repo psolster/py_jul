@@ -51,6 +51,9 @@ class House:
         self.garbage = 0
         self.house = None
         self.coat = 0
+        self.all_money = 100
+        self.all_food = 50
+
 
     def __str__(self):
         return 'В доме еды осталось {},  денег осталось {}, грязи дома {}'.format(
@@ -64,7 +67,6 @@ class Man:
 
     def __init__(self, name):
         self.name = name
-        # self.fuel = 0
 
     def __str__(self):
         return '{} сытость {}, степень счастья {}'.format(self.name, self.satiety, self.degree_of_happiness)
@@ -74,24 +76,21 @@ class Husband(Man):
     def __init__(self, name):
         super().__init__(name=name)
 
-        # self.body_space = body_space
-        # self.cargo = 0
-        # self.velocity = 100
-        # self.place = None
-        # self.distance_to_target = 0
-
     def __str__(self):
         return super().__str__()
 
     def go_to_the_house(self, house):
+
         self.house = house
         self.satiety -= 10
         cprint('{} Въехал в дом'.format(self.name), color='cyan')
 
-
     def act(self):
         if self.satiety <= 0:
-            cprint('{} умер...'.format(self.name), color='red')
+            cprint('{} умер...от голода'.format(self.name), color='red')
+            return
+        if self.degree_of_happiness < 10:
+            cprint('{} умер...от депрессии'.format(self.name), color='red')
             return
         dice = randint(1, 3)
         if self.satiety < 20:
@@ -127,6 +126,7 @@ class Husband(Man):
         cprint('{} сходил на работу'.format(self.name), color='blue')
         self.house.money += 150
         self.satiety -= 10
+        self.house.all_money += 150
 
     def gaming(self):
         cprint('{} гамал в WoT весь день'.format(self.name), color='green')
@@ -147,11 +147,15 @@ class Wife(Man):
         self.house = house
         self.satiety -= 10
         self.wife_for = has_name
+        self.degree_of_happiness += 10
         cprint('{} Въехала в дом'.format(self.name), color='green')
 
     def act(self):
         if self.satiety <= 0:
             cprint('{} умерла...'.format(self.name), color='red')
+            return
+        if self.degree_of_happiness < 10:
+            cprint('{} умерла...от депрессии'.format(self.name), color='red')
             return
         dice = randint(1, 4)
         if self.satiety < 20:
@@ -189,10 +193,12 @@ class Wife(Man):
     def shopping(self):
         if self.house.money >= 50:
             cprint('{} сходила в магазин за едой'.format(self.name), color='magenta')
-            var_shop = randint(10, self.house.money)
+            var_shop = randint(10, 50)
             self.house.money -= var_shop
             self.house.food += var_shop
             self.satiety -= 10
+            self.house.all_food += var_shop
+            self.degree_of_happiness += 5
         else:
             cprint('{} деньги кончились!'.format(self.name), color='red')
 
@@ -205,7 +211,7 @@ class Wife(Man):
             self.satiety -= 10
             self.degree_of_happiness += 60
         else:
-            self.degree_of_happiness -= 20
+            self.degree_of_happiness -= 5
             cprint('{} не смогла выпросить шубу! Уровень счастья упал и стал {}'
                    .format(self.name, self.degree_of_happiness), color='white')
 
@@ -213,9 +219,10 @@ class Wife(Man):
         if self.satiety <= 20:
             self.eat()
         cprint('{} убрала мусор '.format(self.name), color='blue')
-        var_clin = randint(2, 19)
+        var_clin = randint(2, 100)
         self.house.garbage -= var_clin
-        self.satiety -= var_clin
+        self.satiety -= var_clin//10
+        self.degree_of_happiness += 5
 
 
 home = House()
@@ -229,10 +236,15 @@ for day in range(365):
     serge.act()
     masha.act()
     home.garbage += 5
+    if home.garbage > 100:
+        serge.degree_of_happiness -= 5
+        masha.degree_of_happiness -= 5
     cprint(serge, color='cyan')
     cprint(masha, color='cyan')
     cprint(home, color='cyan')
-
+print('денег всего было заработано ', home.all_money)
+print('еды куплено ', home.all_food)
+print('шуб куплено ', home.coat)
 
 # TODO после реализации первой части - отдать на проверку учителю
 
