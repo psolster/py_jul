@@ -162,6 +162,9 @@ class Wife(Man):
         if self.degree_of_happiness < 10:
             cprint('{} умерла...от депрессии'.format(self.name), color='red')
             return
+        if self.house.garbage > 150:
+            cprint('Генеральнейшая уборка! Говном зарали =)', color='red')
+            self.clean_house_general()
         dice = randint(1, 4)
         if self.satiety < 10:
             self.eat()
@@ -195,7 +198,7 @@ class Wife(Man):
             self.satiety += var
             self.house.food -= var
         else:
-            cprint('Поела, что было в доме =)', color='yellow')
+            cprint('{} поела, что было в доме =)'.format(self.name), color='yellow')
             self.satiety += self.house.food
             self.house.food -= self.house.food
 
@@ -212,7 +215,7 @@ class Wife(Man):
             self.house.all_food += var_shop
             self.degree_of_happiness += 5
         else:
-            cprint('{} деньги кончились!'.format(self.name), color='red')
+            cprint('{} деньги кончились! Нужно работать {}'.format(self.name, self.wife_for), color='red')
             Husband(serge).work()
 
     def buy_fur_coat(self):
@@ -225,8 +228,18 @@ class Wife(Man):
             self.degree_of_happiness += 60
         else:
             self.degree_of_happiness -= 5
-            cprint('{} не смогла выпросить шубу! Уровень счастья упал и стал {}'
+            cprint('{} не смогла выпросить шубу! Уровень счастья упал и стал {}, пошла заедать горе.'
                    .format(self.name, self.degree_of_happiness), color='white')
+            self.eat()
+
+    def clean_house_general(self):
+        if self.satiety <= 50:
+            self.eat()
+        cprint('{} генерально убрала мусор '.format(self.name), color='white')
+
+        self.house.garbage -= 150
+        self.satiety -= 45
+        self.degree_of_happiness += 5
 
     def clean_house(self):
         if self.satiety <= 20:
@@ -252,6 +265,10 @@ for day in range(365):
     if home.garbage > 100:
         serge.degree_of_happiness -= 5
         masha.degree_of_happiness -= 5
+    if home.garbage < 00:
+        serge.degree_of_happiness += 5
+        masha.degree_of_happiness += 5
+        home.garbage = 0
     cprint(serge, color='cyan')
     cprint(masha, color='cyan')
     cprint(home, color='cyan')
