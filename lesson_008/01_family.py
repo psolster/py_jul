@@ -138,12 +138,41 @@ class Wife(Man):
     def __str__(self):
         return super().__str__()
 
+    def go_to_the_house(self, house):
+        self.house = house
+        self.satiety -= 10
+        cprint('{} Въехала в дом'.format(self.name), color='green')
+
     def act(self):
-        pass
+        if self.satiety <= 0:
+            cprint('{} умерла...'.format(self.name), color='red')
+            return
+        dice = randint(1, 4)
+        if self.satiety < 20:
+            self.eat()
+        elif self.house.food < 10:
+            self.degree_of_happiness -= 5
+            cprint('Придется бегом бежать в магаз за едой, {} расстроилась, уровень счасья упал и стал {}'
+                   .format(self.name, self.degree_of_happiness), color='blue')
+            self.shopping()
+            self.satiety -= 10
+
+        elif self.house.money < 50:
+            cprint('Деньги в тумбочке резко тают, {} огорчается, нарычала на мужа. Уровень счастья упал на 5 пунктов'
+                    'и стал {}'.format(self.name, self.degree_of_happiness), color='blue')
+
+        elif dice == 1:
+            self.shopping()
+        elif dice == 2:
+            self.clean_house()
+        elif dice == 3:
+            self.buy_fur_coat()
+        else:
+            self.eat()
 
     def eat(self):
         if self.house.food >= 0:
-            cprint('{} поел'.format(self.name), color='yellow')
+            cprint('{} поела'.format(self.name), color='yellow')
             var = randint(0, 30)
             self.satiety += var
             self.house.food -= var
@@ -151,8 +180,9 @@ class Wife(Man):
     def shopping(self):
         if self.house.money >= 50:
             cprint('{} сходила в магазин за едой'.format(self.name), color='magenta')
-            self.house.money -= 300
-            self.house.food += 50
+            var_shop = randint(10, self.house.money)
+            self.house.money -= var_shop
+            self.house.food += var_shop
             self.satiety -= 10
         else:
             cprint('{} деньги кончились!'.format(self.name), color='red')
@@ -164,16 +194,17 @@ class Wife(Man):
         if self.satiety <= 20:
             self.eat()
         cprint('{} убрала мусор '.format(self.name), color='blue')
-        self.house.garbage -= 5
-        self.satiety -= 20
+        var_clin = randint(2, 30)
+        self.house.garbage -= var_clin
+        self.satiety -= var_clin
 
 
 home = House()
 serge = Husband(name='Сережа')
 masha = Wife(name='Маша')
 serge.go_to_the_house(house=home)
-
-for day in range(5):
+masha.go_to_the_house(house=home)
+for day in range(15):
 
     cprint('================== День {} =================='.format(day), color='red')
     serge.act()
