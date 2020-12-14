@@ -263,8 +263,8 @@ for day in range(365):
     masha.act()
     home.garbage += 5
     if home.garbage > 100:
-        serge.degree_of_happiness -= 5
-        masha.degree_of_happiness -= 5
+        serge.degree_of_happiness -= 10
+        masha.degree_of_happiness -= 10
     if home.garbage < 00:
         serge.degree_of_happiness += 5
         masha.degree_of_happiness += 5
@@ -277,7 +277,6 @@ print('еды куплено ', home.all_food)
 print('шуб куплено ', home.coat)
 
 
-# TODO после реализации первой части - отдать на проверку учителю
 
 ######################################################## Часть вторая
 #
