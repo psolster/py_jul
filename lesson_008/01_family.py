@@ -4,7 +4,7 @@ from termcolor import cprint
 from random import randint
 
 
-# ####################################################### Часть первая
+######################################################## Часть первая
 #
 # Создать модель жизни небольшой семьи.
 #
@@ -64,26 +64,28 @@ class Man:
     satiety = 30
     degree_of_happiness = 100
 
-    def __init__(self, name):
+    def __init__(self, name, house):
         self.name = name
+        self.house = house
 
     def __str__(self):
         return '{} сытость {}, степень счастья {}'.format(self.name, self.satiety, self.degree_of_happiness)
 
+    def go_to_the_house(self, house, name):
+
+        self.house = house
+        self.name = name
+
 
 class Husband(Man):
-    # TODO Вы не меняете поведение родительского метода __init__
-    #  не нужно его переопределять.
-    def __init__(self, name):
-        super().__init__(name=name)
 
-    # TODO Вы не меняете поведение родительского метода,
-    #  не нужно его переопределять.
-    def __str__(self):
-        return super().__str__()
+    # # TODO Вы не меняете поведение родительского метода __init__
+    # #  не нужно его переопределять.
+    def __init__(self, name):
+        super().__init__(name=name, house=home)
+        self.death_message = 'умер'
 
     def go_to_the_house(self, house):
-
         self.house = house
         self.satiety -= 10
         cprint('{} Въехал в дом'.format(self.name), color='cyan')
@@ -96,11 +98,10 @@ class Husband(Man):
     #  - Реализовать в дочернем классе собственный метод act и вызвать в нём
     #  родительский через функцию super. В python_snippets есть примеры
     #  как это сделать.
-    #  Сообщения умер/умерла проще всего хранить в переменных класса.
-    #  и подставлять в сообщения '{} {}...от голода'.format(self.name, self.death_message)
+
     def act(self):
         if self.satiety <= 0:
-            cprint('{} умер...от голода'.format(self.name), color='red')
+            cprint('{} {}...от голода'.format(self.name, self.death_message), color='red')
             return
         if self.degree_of_happiness < 10:
             cprint('{} умер...от депрессии'.format(self.name), color='red')
@@ -109,8 +110,6 @@ class Husband(Man):
         if self.satiety < 20:
             self.eat()
         elif self.house.food < 10:
-            # TODO Не нужно из методов класса мужа обращаться к методам класса жены,
-            #  это повышает их связность.
             self.degree_of_happiness -= 5
             cprint('Придется пнуть жену, жрать нечего, {} расстроился, уровень счасья упал и стал {}'
                    .format(self.name, self.degree_of_happiness), color='blue')
@@ -158,26 +157,21 @@ class Husband(Man):
 class Wife(Man):
 
     def __init__(self, name):
-        super().__init__(name=name)
+        super().__init__(name=name, house=home)
         self.wife_for = None
 
-    # TODO Вы не меняете поведение родительского метода,
-    #  не нужно его переопределять.
-    def __str__(self):
-        return super().__str__()
-
-    def go_to_the_house(self, house, has_name):
-        # TODO Свойства (переменные экземпляра класса) нужно объявлять
-        #  в методе __init__. В данном случае в общем классе Man.
-        self.house = house
         self.satiety -= 10
-        self.wife_for = has_name
+        self.death_message = 'умерла'
+
         self.degree_of_happiness += 10
         cprint('{} Въехала в дом'.format(self.name), color='green')
 
+
+
+
     def act(self):
         if self.satiety <= 0:
-            cprint('{} умерла...от голода '.format(self.name), color='red')
+            cprint('{} {}...от голода'.format(self.name, self.death_message), color='red')
             return
         if self.degree_of_happiness < 10:
             cprint('{} умерла...от депрессии'.format(self.name), color='red')
@@ -264,6 +258,15 @@ class Wife(Man):
     def clean_house(self):
         if self.satiety <= 20:
             self.eat()
+        cprint('{} генерально убрала мусор '.format(self.name), color='white')
+
+        self.house.garbage -= 150
+        self.satiety -= 45
+        self.degree_of_happiness += 5
+
+    def clean_house(self):
+        if self.satiety <= 20:
+            self.eat()
         cprint('{} убрала мусор '.format(self.name), color='blue')
         var_clin = randint(2, 100)
         self.house.garbage -= var_clin
@@ -275,16 +278,16 @@ home = House()
 serge = Husband(name='Сережа')
 masha = Wife(name='Маша')
 serge.go_to_the_house(house=home)
-masha.go_to_the_house(house=home, has_name=serge)
-for day in range(365):
+masha.go_to_the_house(house=home)
+for day in range(3):
 
     cprint('================== День {} =================='.format(day), color='red')
     serge.act()
     masha.act()
     home.garbage += 5
     if home.garbage > 100:
-        serge.degree_of_happiness -= 10
-        masha.degree_of_happiness -= 10
+        serge.degree_of_happiness -= 5
+        masha.degree_of_happiness -= 5
     if home.garbage < 00:
         serge.degree_of_happiness += 5
         masha.degree_of_happiness += 5
@@ -297,7 +300,8 @@ print('еды куплено ', home.all_food)
 print('шуб куплено ', home.coat)
 
 
-# ####################################################### Часть вторая
+
+######################################################## Часть вторая
 #
 # После подтверждения учителем первой части надо
 # отщепить ветку develop и в ней начать добавлять котов в модель семьи
@@ -340,7 +344,7 @@ class Cat:
         pass
 
 
-# ####################################################### Часть вторая бис
+######################################################## Часть вторая бис
 #
 # После реализации первой части надо в ветке мастер продолжить работу над семьей - добавить ребенка
 #
@@ -371,7 +375,7 @@ class Child:
 # TODO после реализации второй части - отдать на проверку учителем две ветки
 
 
-# ####################################################### Часть третья
+######################################################## Часть третья
 #
 # после подтверждения учителем второй части (обоих веток)
 # влить в мастер все коммиты из ветки develop и разрешить все конфликты
