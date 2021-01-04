@@ -255,14 +255,7 @@ class Wife(Man):
         self.satiety -= 45
         self.degree_of_happiness += 5
 
-    def clean_house(self):
-        if self.satiety <= 20:
-            self.eat()
-        cprint('{} генерально убрала мусор '.format(self.name), color='white')
 
-        self.house.garbage -= 150
-        self.satiety -= 45
-        self.degree_of_happiness += 5
 
     def clean_house(self):
         if self.satiety <= 20:
