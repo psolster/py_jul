@@ -52,6 +52,9 @@ class Man:
         self.satiety -= 10
         self.house.all_money += 150
 
+    # TODO Методы, присущие только мужу и жене нужно перенести в соответствующие
+    #  классы. В классе человека нужно оставить только те метода, которые должны
+    #  быть общими для всех людей.
     def gaming(self):
         cprint('{} гамал в WoT весь день'.format(self.name), color='green')
         self.satiety -= 10
@@ -116,6 +119,10 @@ class Husband(Man):
 
     def act(self):
 
+        # TODO Начальная часть метода act должна быть реализована в общем классе
+        #  Husband, а в классе act мужа и жены нужно вызывать super.act, проверять
+        #  возвращаемый им результат и принимать решение выполнять действия в
+        #  методе act мужа и жены или нет.
         if self.satiety <= 0:
             cprint('{} {}...от голода'.format(self.name, self.death_message), color='red')
             return
@@ -135,6 +142,8 @@ class Husband(Man):
                        .format(masha.name, masha.satiety, masha.satisfaction), color='red')
 
             else:
+                # TODO Не нужно в классе мужа вызывать методы класса жены.
+                #  Жена должна сама определять когда идти в мазазин.
                 # masha.eat()
                 masha.shopping()
         elif self.house.money < 50:
@@ -159,6 +168,8 @@ class Wife(Man):
         self.eat_message = 'поела'
 
     def act(self):
+        # TODO Первые две проверки нужно выполнять в методе act родительского
+        #  класса Human.
         if self.satiety <= 0:
             cprint('{} {}...от голода'.format(self.name, self.death_message), color='red')
             return
