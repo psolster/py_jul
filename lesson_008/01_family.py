@@ -24,7 +24,7 @@ class House:
 class Man:
 
     def __init__(self, name, house):
-        self.satiety = 30
+        self.satiety = 10
         self.satisfaction = 100
         self.house = house
         self.name = name
@@ -46,19 +46,66 @@ class Man:
         else:
             cprint('{} нет еды'.format(self.name), color='red')
 
+    def act(self):
+
+        if self.satiety <= 0:
+            cprint('{} {}...от голода'.format(self.name, self.death_message), color='red')
+            return True
+        elif self.satisfaction < 10:
+            cprint('{} {}...от депрессии'.format(self.name, self.death_message), color='red')
+            return True
+
+        if self.satiety < 20:
+            self.eat()
+        elif self.house.food < 10:
+            self.satisfaction -= 5
+            cprint('Придется посетить магазин, жрать нечего, {} расстроился, уровень счасья упал и стал {}'
+                   .format(self.name, self.satisfaction), color='blue')
+
+
+class Husband(Man):
+
+    def __init__(self, name):
+
+        super().__init__(name=name, house=home)
+        self.death_message = 'умер'
+        self.go_to_the_house_message = 'въехал'
+        self.eat_message = 'поел'
+
     def work(self):
         cprint('{} сходил на работу'.format(self.name), color='blue')
         self.house.money += 150
         self.satiety -= 10
         self.house.all_money += 150
 
-    # TODO Методы, присущие только мужу и жене нужно перенести в соответствующие
-    #  классы. В классе человека нужно оставить только те метода, которые должны
-    #  быть общими для всех людей.
     def gaming(self):
         cprint('{} гамал в WoT весь день'.format(self.name), color='green')
         self.satiety -= 10
         self.satisfaction += 20
+
+    def act(self):
+        dice = randint(1, 3)
+        if super().act():
+            cprint('Для {} игра окончена, не сраслось=)'.format(self.name), color='red')
+            quit()
+
+        elif dice == 1:
+            self.work()
+        elif dice == 2:
+            self.eat()
+        elif dice == 3:
+            self.gaming()
+        else:
+            self.gaming()
+
+
+class Wife(Man):
+    def __init__(self, name):
+        super().__init__(name=name, house=home)
+
+        self.death_message = 'умерла'
+        self.go_to_the_house_message = 'въехала'
+        self.eat_message = 'поела'
 
     def shopping(self):
         if self.house.money >= 50:
@@ -87,11 +134,11 @@ class Man:
             self.satisfaction -= 5
             cprint('{} не смогла выпросить шубу! Уровень счастья упал и стал {}, пошла заедать горе.'
                    .format(self.name, self.satisfaction), color='white')
-            self.eat()
+            super().eat()
 
     def clean_house_general(self):
         if self.satiety <= 50:
-            self.eat()
+            super().eat()
         cprint('{} генерально убрала мусор '.format(self.name), color='white')
 
         self.house.garbage -= 150
@@ -100,99 +147,24 @@ class Man:
 
     def clean_house(self):
         if self.satiety <= 20:
-            self.eat()
+            super().eat()
         cprint('{} убрала мусор '.format(self.name), color='blue')
         var_clin = randint(2, 100)
         self.house.garbage -= var_clin
         self.satiety -= var_clin // 10
         self.satisfaction += 5
 
-
-class Husband(Man):
-
-    def __init__(self, name):
-
-        super().__init__(name=name, house=home)
-        self.death_message = 'умер'
-        self.go_to_the_house_message = 'въехал'
-        self.eat_message = 'поел'
-
     def act(self):
-
-        # TODO Начальная часть метода act должна быть реализована в общем классе
-        #  Husband, а в классе act мужа и жены нужно вызывать super.act, проверять
-        #  возвращаемый им результат и принимать решение выполнять действия в
-        #  методе act мужа и жены или нет.
-        if self.satiety <= 0:
-            cprint('{} {}...от голода'.format(self.name, self.death_message), color='red')
-            return
-        if self.satisfaction < 10:
-            cprint('{} умер...от депрессии'.format(self.name), color='red')
-            return
-        dice = randint(1, 3)
-        if self.satiety < 20:
-            self.eat()
-        elif self.house.food < 10:
-            self.satisfaction -= 5
-            cprint('Придется пнуть жену, жрать нечего, {} расстроился, уровень счасья упал и стал {}'
-                   .format(self.name, self.satisfaction), color='blue')
-
-            if masha.satiety <= 0 or masha.satisfaction < 10:
-                cprint('{} уже ничего не может, у нее сытость {} и счастье {}'
-                       .format(masha.name, masha.satiety, masha.satisfaction), color='red')
-
-            else:
-                # TODO Не нужно в классе мужа вызывать методы класса жены.
-                #  Жена должна сама определять когда идти в мазазин.
-                # masha.eat()
-                masha.shopping()
-        elif self.house.money < 50:
-            self.work()
-
-        elif dice == 1:
-            self.work()
-        elif dice == 2:
-            self.eat()
-        elif dice == 3:
-            self.gaming()
-        else:
-            self.gaming()
-
-
-class Wife(Man):
-    def __init__(self, name):
-        super().__init__(name=name, house=home)
-
-        self.death_message = 'умерла'
-        self.go_to_the_house_message = 'въехала'
-        self.eat_message = 'поела'
-
-    def act(self):
-        # TODO Первые две проверки нужно выполнять в методе act родительского
-        #  класса Human.
-        if self.satiety <= 0:
-            cprint('{} {}...от голода'.format(self.name, self.death_message), color='red')
-            return
-        if self.satisfaction < 10:
-            cprint('{} умерла...от депрессии'.format(self.name), color='red')
-            return
-        if self.house.garbage > 150:
-            cprint('Генеральнейшая уборка! Говном завалились =)', color='red')
-            self.clean_house_general()
-            return
         dice = randint(1, 4)
-        if self.satiety < 10:
-            self.eat()
+        if super().act():
+            cprint('Для {} игра окончена, не сраслось=)'.format(self.name), color='green')
+            quit()
+
         elif self.house.food < 20:
             self.satisfaction -= 2
             cprint('Придется бегом бежать в магаз за едой, {} расстроилась, уровень счасья упал и стал {}'
                    .format(self.name, self.satisfaction), color='blue')
             self.shopping()
-
-        elif self.house.money < 50:
-            self.satisfaction += 5
-            cprint('Деньги в тумбочке резко тают, {} огорчается, нарычала на мужа. Уровень счастья подрос на 5 пунктов'
-                   'и стал {}'.format(self.name, self.satisfaction), color='blue')
 
         elif dice == 1:
             self.shopping()
@@ -220,7 +192,7 @@ for day in range(365):
     if home.garbage > 100:
         serge.satisfaction -= 5
         masha.satisfaction -= 5
-    if home.garbage < 0:
+    else:
         serge.satisfaction += 5
         masha.satisfaction += 5
         home.garbage = 0
