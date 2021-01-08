@@ -67,6 +67,8 @@ class Man:
         self.house = house
         self.name = name
 
+    # TODO Переменные go_to_the_house_message, eat_message и death_message нужно объявить в классе
+    #  Man со значениями по умолчанию.
     def __str__(self):
         return '{} сытость {}, степень счастья {}'.format(self.name, self.satiety, self.satisfaction)
 
