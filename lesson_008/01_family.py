@@ -66,21 +66,31 @@ class Man:
         self.satisfaction = 100
         self.house = house
         self.name = name
+        self.go_to_the_house_message_h = 'въехал'
+        self.go_to_the_house_message_w = 'въехала'
+        self.death_message_h = 'умер'
+        self.eat_message_h = 'поел'
+        self.death_message_w = 'умерла'
+        self.eat_message_w = 'поела'
 
-    # TODO Переменные go_to_the_house_message, eat_message и death_message нужно объявить в классе
-    #  Man со значениями по умолчанию.
     def __str__(self):
         return '{} сытость {}, степень счастья {}'.format(self.name, self.satiety, self.satisfaction)
 
     def go_to_the_house(self, house, name):
         self.house = house
         self.name = name
-        cprint('{} {}  в дом'.format(self.name, self.go_to_the_house_message), color='cyan')
+        if self.name == serge.name:
+            cprint('{} {}  в дом'.format(self.name, self.go_to_the_house_message_h), color='cyan')
+        else:
+            cprint('{} {}  в дом'.format(self.name, self.go_to_the_house_message_w), color='cyan')
 
     def eat(self):
         var = randint(10, 30)
         if self.house.food >= var:
-            cprint('{} {} {} еды'.format(self.name, self.eat_message, var), color='yellow')
+            if self.name == serge.name:
+                cprint('{} {} {} еды'.format(self.name, self.eat_message_h, var), color='yellow')
+            else:
+                cprint('{} {} {} еды'.format(self.name, self.eat_message_w, var), color='yellow')
             self.satiety += var
             self.house.food -= var
         else:
@@ -89,10 +99,16 @@ class Man:
     def act(self):
 
         if self.satiety <= 0:
-            cprint('{} {}...от голода'.format(self.name, self.death_message), color='red')
+            if self.name == serge.name:
+                cprint('{} {}...от голода'.format(self.name, self.death_message_h), color='red')
+            else:
+                cprint('{} {}...от голода'.format(self.name, self.death_message_w), color='red')
             return True
         elif self.satisfaction < 10:
-            cprint('{} {}...от депрессии'.format(self.name, self.death_message), color='red')
+            if self.name == serge.name:
+                cprint('{} {}...от депрессии'.format(self.name, self.death_message_h), color='red')
+            else:
+                cprint('{} {}...от депрессии'.format(self.name, self.death_message_w), color='red')
             return True
 
         if self.satiety < 20:
@@ -106,11 +122,7 @@ class Man:
 class Husband(Man):
 
     def __init__(self, name):
-
         super().__init__(name=name, house=home)
-        self.death_message = 'умер'
-        self.go_to_the_house_message = 'въехал'
-        self.eat_message = 'поел'
 
     def work(self):
         cprint('{} сходил на работу'.format(self.name), color='blue')
@@ -142,10 +154,6 @@ class Husband(Man):
 class Wife(Man):
     def __init__(self, name):
         super().__init__(name=name, house=home)
-
-        self.death_message = 'умерла'
-        self.go_to_the_house_message = 'въехала'
-        self.eat_message = 'поела'
 
     def shopping(self):
         if self.house.money >= 50:
