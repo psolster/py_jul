@@ -46,7 +46,7 @@ class House:
         self.money = 100
         self.food = 50
         self.garbage = 0
-
+        self.food_cat = 5
         self.coat = 0
         self.all_money = 0
         self.all_food = 0
@@ -95,6 +95,11 @@ class Man:
             self.house.food -= var
         else:
             cprint('{} нет еды'.format(self.name), color='red')
+
+    def game_with_cat(self):
+        self.satiety -= 5
+        self.satisfaction += 10
+        cprint('Игра с киской сделала счастливей {} '.format(self.name), color='cyan')
 
     def act(self):
 
@@ -202,6 +207,16 @@ class Wife(Man):
         self.satiety -= var_clin // 10
         self.satisfaction += 5
 
+    def shopping_for_cat(self):
+        if self.house.money >= 50 and self.house.food_cat < 10:
+            cprint('{} сходила в магазин за едой для кота'.format(self.name), color='green')
+            self.house.food_cat += 10
+            self.house.money -= 10
+            self.satiety -= 10
+
+        else:
+            cprint('деньги кончились! Нужно работать', color='red')
+
     def act(self):
         dice = randint(1, 4)
         if super().act():
@@ -213,6 +228,10 @@ class Wife(Man):
             cprint('Придется бегом бежать в магаз за едой, {} расстроилась, уровень счасья упал и стал {}'
                    .format(self.name, self.satisfaction), color='blue')
             self.shopping()
+        elif self.house.food_cat < 10:
+            cprint('Котик голодает, это п....хо, {} расстроилась, уровень счасья упал и стал {}'
+                   .format(self.name, self.satisfaction), color='blue')
+            self.shopping_for_cat()
 
         elif dice == 1:
             self.shopping()
@@ -223,19 +242,70 @@ class Wife(Man):
         elif dice == 4:
             self.eat()
         else:
-            self.eat()
+            self.shopping_for_cat()
+
+
+class Cat(Man):
+
+    def __init__(self, name):
+        super().__init__(name=name, house=home)
+        # self.satiety = 30
+        # self.name = name
+
+    def tear_wallpaper(self):
+        self.satisfaction += 5
+        self.satiety -= 10
+        cprint('{} решила подрать обои! Уровень счастья стал {}, но уровень голода {}'.format(self.name,
+                                                                                              self.satisfaction,
+                                                                                              self.satiety),
+               color='blue')
+
+    def act(self):
+        dice = randint(1, 3)
+        if super().act():
+            cprint('Для {} игра окончена, не сраслось=)'.format(self.name), color='green')
+            quit()
+
+        elif self.house.food_cat < 10:
+            self.satisfaction -= 2
+            cprint('Жратвы нет", {} расстроилась, уровень счасья упал и стал {}. Пошла вредить людям'
+                   .format(self.name, self.satisfaction), color='blue')
+            self.tear_wallpaper()
+        elif self.house.food_cat < 10:
+            cprint('Котик голодает, это п....хо, {} расстроилась, уровень счасья упал и стал {}'
+                   .format(self.name, self.satisfaction), color='blue')
+            super().eat()
+
+        elif dice == 1:
+            super().eat()
+        elif dice == 2:
+            self.tear_wallpaper()
+        elif dice == 3:
+            self.sleep()
+
+    def eat(self):
+        pass
+
+    def sleep(self):
+        pass
+
+    def soil(self):
+        pass
 
 
 home = House()
 serge = Husband(name='Сережа')
 masha = Wife(name='Маша')
+murka = Cat(name='Мурка')
 serge.go_to_the_house(house=home, name=serge.name)
 masha.go_to_the_house(house=home, name=masha.name)
-for day in range(365):
+murka.go_to_the_house(house=home, name=murka.name)
+for day in range(3):
 
     cprint('================== День {} =================='.format(day), color='red')
     serge.act()
     masha.act()
+    murka.act()
     home.garbage += 5
     if home.garbage > 100:
         serge.satisfaction -= 5
@@ -246,6 +316,7 @@ for day in range(365):
         home.garbage = 0
     cprint(serge, color='cyan')
     cprint(masha, color='cyan')
+    cprint(murka, color='cyan')
     cprint(home, color='cyan')
 print('денег всего было заработано ', home.all_money)
 print('еды куплено ', home.all_food)
@@ -275,22 +346,6 @@ print('шуб куплено ', home.coat)
 # Степень сытости не должна падать ниже 0, иначе кот умрет от голода.
 #
 # Если кот дерет обои, то грязи становится больше на 5 пунктов
-class Cat:
-
-    def __init__(self):
-        pass
-
-    def act(self):
-        pass
-
-    def eat(self):
-        pass
-
-    def sleep(self):
-        pass
-
-    def soil(self):
-        pass
 
 
 # ####################################################### Часть вторая бис
