@@ -46,14 +46,15 @@ class House:
         self.money = 100
         self.food = 50
         self.garbage = 0
-        self.food_cat = 5
+        self.food_cat = 30
         self.coat = 0
         self.all_money = 0
         self.all_food = 0
 
     def __str__(self):
-        return 'В доме еды {}, денег в тумбочке осталось {}, мусор {}'.format(
+        return 'В доме еды {}, для кота еды {}, денег в тумбочке осталось {}, мусор {}'.format(
             self.food,
+            self.food_cat,
             self.money,
             self.garbage
         )
@@ -99,7 +100,7 @@ class Man:
     def game_with_cat(self):
         self.satiety -= 5
         self.satisfaction += 10
-        cprint('Игра с киской сделала счастливей {} '.format(self.name), color='cyan')
+        cprint('Игра с киской сделала счастливей, уровень счатья {} '.format(self.name), color='cyan')
 
     def act(self):
 
@@ -118,7 +119,7 @@ class Man:
 
         if self.satiety < 20:
             self.eat()
-        elif self.house.food < 10:
+        elif self.house.food < 10 or self.house.food_cat < 10:
             self.satisfaction -= 5
             cprint('Придется посетить магазин, жрать нечего, {} расстроился, уровень счасья упал и стал {}'
                    .format(self.name, self.satisfaction), color='blue')
@@ -153,7 +154,7 @@ class Husband(Man):
         elif dice == 3:
             self.gaming()
         else:
-            self.gaming()
+            self.game_with_cat()
 
 
 class Wife(Man):
@@ -218,7 +219,7 @@ class Wife(Man):
             cprint('деньги кончились! Нужно работать', color='red')
 
     def act(self):
-        dice = randint(1, 4)
+        dice = randint(1, 5)
         if super().act():
             cprint('Для {} игра окончена, не сраслось=)'.format(self.name), color='green')
             quit()
@@ -241,6 +242,8 @@ class Wife(Man):
             self.buy_fur_coat()
         elif dice == 4:
             self.eat()
+        elif dice == 5:
+            self.game_with_cat()
         else:
             self.shopping_for_cat()
 
@@ -249,12 +252,14 @@ class Cat(Man):
 
     def __init__(self, name):
         super().__init__(name=name, house=home)
-        # self.satiety = 30
-        # self.name = name
+        self.satiety = 30
+        self.satisfaction = 50
+        self.name = name
 
     def tear_wallpaper(self):
         self.satisfaction += 5
         self.satiety -= 10
+        self.house.garbage += 5
         cprint('{} решила подрать обои! Уровень счастья стал {}, но уровень голода {}'.format(self.name,
                                                                                               self.satisfaction,
                                                                                               self.satiety),
@@ -271,10 +276,7 @@ class Cat(Man):
             cprint('Жратвы нет", {} расстроилась, уровень счасья упал и стал {}. Пошла вредить людям'
                    .format(self.name, self.satisfaction), color='blue')
             self.tear_wallpaper()
-        elif self.house.food_cat < 10:
-            cprint('Котик голодает, это п....хо, {} расстроилась, уровень счасья упал и стал {}'
-                   .format(self.name, self.satisfaction), color='blue')
-            super().eat()
+
 
         elif dice == 1:
             super().eat()
@@ -284,13 +286,16 @@ class Cat(Man):
             self.sleep()
 
     def eat(self):
-        pass
+        var = randint(1, 10)
+        cprint('{} съела {} еды, сытость стала {}'.format(self.name, var, self.satiety), color='yellow')
+        self.satiety += var*2
+        self.house.food_cat -= var
 
     def sleep(self):
-        pass
-
-    def soil(self):
-        pass
+        self.satisfaction += 10
+        self.satiety -= 5
+        cprint('{} поспала уровень счастья {}, сытость стала {}'.format(self.name, self.satisfaction, self.satiety),
+               color='green')
 
 
 home = House()
