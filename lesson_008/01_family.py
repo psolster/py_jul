@@ -229,9 +229,13 @@ class Wife(Man):
 class Child(Man):
 
     def __init__(self, name):
+        # TODO Вы не меняете поведение родительского метода __init__
+        #  не нужно его переопределять.
         super().__init__(name=name, house=home)
 
     def __str__(self):
+        # TODO Вы не меняете поведение родительского метода,
+        #  не нужно его переопределять.
         return super().__str__()
 
     def act(self):
