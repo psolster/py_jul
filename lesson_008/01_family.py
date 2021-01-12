@@ -100,7 +100,7 @@ class Man:
     def game_with_cat(self):
         self.satiety -= 5
         self.satisfaction += 10
-        cprint('Игра с киской сделала счастливей, уровень счатья {} '.format(self.name), color='cyan')
+        cprint('Игра с киской сделала счастливей, уровень счатья {} '.format(self.satisfaction), color='cyan')
 
     def act(self):
 
@@ -142,15 +142,15 @@ class Husband(Man):
         self.satisfaction += 20
 
     def act(self):
-        dice = randint(1, 3)
+        dice = randint(1, 4)
         if super().act():
-            cprint('Для {} игра окончена, не сраслось=)'.format(self.name), color='red')
+            cprint(' {} выбывает из игры, не сраслось=)'.format(self.name), color='green')
             quit()
 
         elif dice == 1:
             self.work()
         elif dice == 2:
-            self.eat()
+            super().eat()
         elif dice == 3:
             self.gaming()
         else:
@@ -164,7 +164,7 @@ class Wife(Man):
     def shopping(self):
         if self.house.money >= 50:
             if self.satiety <= 20:
-                self.eat()
+                super().eat()
             cprint('{} сходила в магазин за едой'.format(self.name), color='magenta')
             var_shop = randint(20, 50)
             cprint('{} купила еды на {} единиц'.format(self.name, var_shop), color='magenta')
@@ -219,9 +219,9 @@ class Wife(Man):
             cprint('деньги кончились! Нужно работать', color='red')
 
     def act(self):
-        dice = randint(1, 5)
+        dice = randint(1, 6)
         if super().act():
-            cprint('Для {} игра окончена, не сраслось=)'.format(self.name), color='green')
+            cprint(' {} выбывает из игры, не сраслось=)'.format(self.name), color='green')
             quit()
 
         elif self.house.food < 20:
@@ -241,7 +241,7 @@ class Wife(Man):
         elif dice == 3:
             self.buy_fur_coat()
         elif dice == 4:
-            self.eat()
+            super().eat()
         elif dice == 5:
             self.game_with_cat()
         else:
@@ -268,7 +268,7 @@ class Cat(Man):
     def act(self):
         dice = randint(1, 3)
         if super().act():
-            cprint('Для {} игра окончена, не сраслось=)'.format(self.name), color='green')
+            cprint(' {} выбывает из игры, не сраслось=)'.format(self.name), color='green')
             quit()
 
         elif self.house.food_cat < 10:
@@ -277,9 +277,8 @@ class Cat(Man):
                    .format(self.name, self.satisfaction), color='blue')
             self.tear_wallpaper()
 
-
         elif dice == 1:
-            super().eat()
+            self.eat()
         elif dice == 2:
             self.tear_wallpaper()
         elif dice == 3:
@@ -288,7 +287,7 @@ class Cat(Man):
     def eat(self):
         var = randint(1, 10)
         cprint('{} съела {} еды, сытость стала {}'.format(self.name, var, self.satiety), color='yellow')
-        self.satiety += var*2
+        self.satiety += var * 2
         self.house.food_cat -= var
 
     def sleep(self):
@@ -305,7 +304,7 @@ murka = Cat(name='Мурка')
 serge.go_to_the_house(house=home, name=serge.name)
 masha.go_to_the_house(house=home, name=masha.name)
 murka.go_to_the_house(house=home, name=murka.name)
-for day in range(3):
+for day in range(1, 365):
 
     cprint('================== День {} =================='.format(day), color='red')
     serge.act()
@@ -315,9 +314,11 @@ for day in range(3):
     if home.garbage > 100:
         serge.satisfaction -= 5
         masha.satisfaction -= 5
+        murka.satisfaction += 5
     else:
         serge.satisfaction += 5
         masha.satisfaction += 5
+        murka.satisfaction -= 5
         home.garbage = 0
     cprint(serge, color='cyan')
     cprint(masha, color='cyan')
