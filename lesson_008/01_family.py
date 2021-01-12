@@ -226,16 +226,56 @@ class Wife(Man):
             self.eat()
 
 
+class Child(Man):
+
+    def __init__(self, name):
+        super().__init__(name=name, house=home)
+
+    def __str__(self):
+        return super().__str__()
+
+    def act(self):
+        dice = randint(1, 2)
+        if super().act():
+            cprint('Для {} игра окончена, не сраслось=)'.format(self.name), color='green')
+            quit()
+
+        elif dice == 1:
+            self.eat()
+        elif dice == 2:
+            self.sleep()
+
+    def eat(self):
+        var = randint(1, 10)
+        if self.house.food >= var:
+            if self.name == serge.name:
+                cprint('{} {} {} еды'.format(self.name, self.eat_message_h, var), color='yellow')
+            else:
+                cprint('{} {} {} еды'.format(self.name, self.eat_message_w, var), color='yellow')
+            self.satiety += var
+            self.house.food -= var
+        else:
+            cprint('{} нет еды'.format(self.name), color='red')
+
+    def sleep(self):
+        self.satiety -= 10
+        cprint('{} поспал и не много проголодался. Уровень сытости стал {}'.format(self.name, self.satiety),
+               color='white')
+
+
 home = House()
 serge = Husband(name='Сережа')
 masha = Wife(name='Маша')
+boriska = Child(name='Борюська')
 serge.go_to_the_house(house=home, name=serge.name)
 masha.go_to_the_house(house=home, name=masha.name)
-for day in range(365):
+boriska.go_to_the_house(house=home, name=boriska.name)
+for day in range(50):
 
     cprint('================== День {} =================='.format(day), color='red')
     serge.act()
     masha.act()
+    boriska.act()
     home.garbage += 5
     if home.garbage > 100:
         serge.satisfaction -= 5
@@ -247,6 +287,7 @@ for day in range(365):
     cprint(serge, color='cyan')
     cprint(masha, color='cyan')
     cprint(home, color='cyan')
+    cprint(boriska, color='cyan')
 print('денег всего было заработано ', home.all_money)
 print('еды куплено ', home.all_food)
 print('шуб куплено ', home.coat)
@@ -304,22 +345,6 @@ class Cat:
 # отличия от взрослых - кушает максимум 10 единиц еды,
 # степень счастья  - не меняется, всегда ==100 ;)
 
-class Child:
-
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        return super().__str__()
-
-    def act(self):
-        pass
-
-    def eat(self):
-        pass
-
-    def sleep(self):
-        pass
 
 #  после реализации второй части - отдать на проверку учителем две ветки
 
