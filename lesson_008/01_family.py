@@ -346,11 +346,9 @@ boriska = Child(name='Борюська')
 serge.go_to_the_house(house=home, name=serge.name)
 masha.go_to_the_house(house=home, name=masha.name)
 boriska.go_to_the_house(house=home, name=boriska.name)
-
-
 murka.go_to_the_house(house=home, name=murka.name)
-for day in range(1, 365):
 
+for day in range(1, 365):
     cprint('================== День {} =================='.format(day), color='red')
     serge.act()
     masha.act()
@@ -375,7 +373,6 @@ print('денег всего было заработано ', home.all_money)
 print('еды куплено ', home.all_food)
 print('шуб куплено ', home.coat)
 
-
 # ####################################################### Часть вторая
 #
 # После подтверждения учителем первой части надо
@@ -399,23 +396,6 @@ print('шуб куплено ', home.coat)
 # Степень сытости не должна падать ниже 0, иначе кот умрет от голода.
 #
 # Если кот дерет обои, то грязи становится больше на 5 пунктов
-class Cat:
-
-    def __init__(self):
-        pass
-
-    def act(self):
-        pass
-
-    def eat(self):
-        pass
-
-    def sleep(self):
-        pass
-
-    def soil(self):
-        pass
-
 
 # ####################################################### Часть вторая бис
 #
@@ -428,26 +408,8 @@ class Cat:
 # отличия от взрослых - кушает максимум 10 единиц еды,
 # степень счастья  - не меняется, всегда ==100 ;)
 
-class Child:
-
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        return super().__str__()
-
-    def act(self):
-        pass
-
-    def eat(self):
-        pass
-
-    def sleep(self):
-        pass
 
 #  после реализации второй части - отдать на проверку учителем две ветки
-
-# TODO Переходите ко второй части задания.
 
 
 # ####################################################### Часть третья
