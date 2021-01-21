@@ -26,7 +26,7 @@
 #   и https://gitlab.skillbox.ru/vadim_shзыщдandrinov/python_base_snippets/snippets/4
 
 import operator
-
+from pprint import pprint
 
 alpha_count = {}
 
@@ -43,9 +43,14 @@ with open(file_name, 'r', encoding='cp1251') as file:
 
 sorted_list = sorted(alpha_count.items(), key=operator.itemgetter(1), reverse=True)
 sorted_alpha_count = {k: v for k, v in sorted_list}
-
-print(sorted_alpha_count)
-
+print('+---------------+')
+print('|{mes1:^7}|{mes2:^7}|'.format(mes1='Буква', mes2='Кол-во'))
+print('+---------------+')
+for letter, count in sorted_alpha_count.items():
+    print('|{letter:^6} | {count:6d}|'.format(letter=letter, count=count))
+print('+---------------+')
+print('|{mes1:^7}|{mes2:^7}|'.format(mes1='Итого', mes2=sum(sorted_alpha_count.values())))
+print('+---------------+')
 
 # После зачета первого этапа нужно сделать упорядочивание статистики
 #  - по частоте по возрастанию
