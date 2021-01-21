@@ -23,9 +23,29 @@
 # Требования к коду: он должен быть готовым к расширению функциональности - делать сразу на классах.
 # Для этого пригодится шаблон проектирование "Шаблонный метод"
 #   см https://refactoring.guru/ru/design-patterns/template-method
-#   и https://gitlab.skillbox.ru/vadim_shandrinov/python_base_snippets/snippets/4
+#   и https://gitlab.skillbox.ru/vadim_shзыщдandrinov/python_base_snippets/snippets/4
 
-# TODO здесь ваш код
+import operator
+
+
+alpha_count = {}
+
+for cod in range(1040, 1104):
+    alpha_count[chr(cod)] = 0
+file_name = 'voyna-i-mir.txt'
+
+with open(file_name, 'r', encoding='cp1251') as file:
+    for line in file:
+        for char in line:
+            if char in alpha_count.keys():
+
+                alpha_count[char] += 1
+
+sorted_list = sorted(alpha_count.items(), key=operator.itemgetter(1), reverse=True)
+sorted_alpha_count = {k: v for k, v in sorted_list}
+
+print(sorted_alpha_count)
+
 
 # После зачета первого этапа нужно сделать упорядочивание статистики
 #  - по частоте по возрастанию

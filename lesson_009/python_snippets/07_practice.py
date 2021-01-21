@@ -27,7 +27,7 @@ class Chatterer:
         if self.file_name.endswith('.zip'):
             self.unzip()
         self.sequence = ' ' * self.analize_count
-        with open(self.file_name, 'r', encoding='cp1251') as file:
+        with open(self.file_name, 'r', encoding='utf8') as file:
             for line in file:
                 self._collect_for_line(line=line[:-1])
 
@@ -54,7 +54,7 @@ class Chatterer:
                 self.stat_for_generate[sequence].sort(reverse=True)
 
     def chat(self, N, out_file_name=None):
-        N = 1000
+        N = 10000
         printed = 0
         if out_file_name is not None:
             file = open(out_file_name, 'w', encoding='utf8')
@@ -92,7 +92,7 @@ class Chatterer:
         return char
 
 
-chatterer = Chatterer(file_name='voyna-i-mir.txt.zip')
+chatterer = Chatterer(file_name='strugackie.txt')
 chatterer.collect()
 chatterer.prepare()
-chatterer.chat(N=10000, out_file_name='out.txt')
+chatterer.chat(N=1000, out_file_name='out_str.txt')
