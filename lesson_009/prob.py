@@ -4,7 +4,7 @@ from pprint import pprint
 alpha_count = {}
 
 
-class Count_Symbol:
+class CountSymbol:
     def __init__(self, filename):
         self.filename = filename
         self.count_lines = 0
@@ -24,8 +24,8 @@ class Count_Symbol:
         self.count_lines = sum(1 for _ in ff)
         ff.close()
 
-    def get_data(self, filemame):
-        file = open(filemame, 'r', encoding='cp1251')
+    def get_data(self, filename):
+        file = open(filename, 'r', encoding='cp1251')
         file.seek(self.position_on_files)
         data = file.readline()
         self.position_on_files = file.tell()
@@ -53,7 +53,6 @@ class Count_Symbol:
 
     def sorter(self, revers=False):
         sorted_list = sorted(alpha_count.items(), key=operator.itemgetter(1), reverse=revers)
-
         return {k: v for k, v in sorted_list}
 
     def print_rezults(self, norm_voc):
@@ -68,30 +67,24 @@ class Count_Symbol:
 
 
 file_name = 'voyna-i-mir.txt'
-
-start = Count_Symbol(file_name)
+start = CountSymbol(file_name)
 start.step_by_step()
 res = start.sorter(revers=True)
 start.print_rezults(res)
 
+# import operator
+# from pprint import pprint
+# alpha_count = {}
+# file_name = 'voyna-i-mir.txt'
+# for cod in range(1040, 1104):
+#     alpha_count[chr(cod)] = 0
+# alpha_count['Ё'] = 0
+# alpha_count['ё'] = 0
 # with open(file_name, 'r', encoding='cp1251') as file:
 #     for line in file:
 #         for char in line:
-#             if 1040 <= ord(char) <= 1103:
-#                 if char in alpha_count.keys():
-#                     alpha_count[char] += 1
-#                 else:
-#                     alpha_count[char] = 1
-#             elif ord(char) == 1025:
-#                 if char in alpha_count.keys():
-#                     alpha_count[char] += 1
-#                 else:
-#                     alpha_count[char] = 1
-#             elif ord(char) == 1105:
-#                 if char in alpha_count.keys():
-#                     alpha_count[char] += 1
-#                 else:
-#                     alpha_count[char] = 1
+#             if char in alpha_count.keys():
+#                 alpha_count[char] += 1
 # sorted_list = sorted(alpha_count.items(), key=operator.itemgetter(1), reverse=True)
 # sorted_alpha_count = {k: v for k, v in sorted_list}
 # print('+---------------+')
