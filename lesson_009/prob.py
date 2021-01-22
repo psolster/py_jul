@@ -9,12 +9,15 @@ class Count_Symbol:
         self.filename = filename
         self.count_lines = 0
         self.position_on_files = 0
+        self.sorted_alpha_count = {}
 
     def step_by_step(self):
         self.lenght_file()
         while self.count_lines != 0:
             symb_line = self.get_data(self.filename)
             self.count_symb_in_line(symb_line)
+        self.sorted_alpha_count = self.sorter()
+        self.print_rezults(self.sorted_alpha_count)
 
     def lenght_file(self):
         ff = open(self.filename, 'r', encoding='cp1251')
@@ -48,13 +51,29 @@ class Count_Symbol:
                 else:
                     alpha_count[char] = 1
 
+    def sorter(self, revers=False):
+        sorted_list = sorted(alpha_count.items(), key=operator.itemgetter(1), reverse=revers)
+
+        return {k: v for k, v in sorted_list}
+
+    def print_rezults(self, norm_voc):
+        print('+---------------+')
+        print('|{mes1:^7}|{mes2:^7}|'.format(mes1='Буква', mes2='Кол-во'))
+        print('+---------------+')
+        for letter, count in norm_voc.items():
+            print('|{letter:^6} | {count:6d}|'.format(letter=letter, count=count))
+        print('+---------------+')
+        print('|{mes1:^7}|{mes2:^7}|'.format(mes1='Итого', mes2=sum(norm_voc.values())))
+        print('+---------------+')
+
 
 file_name = 'voyna-i-mir.txt'
 
 start = Count_Symbol(file_name)
 start.step_by_step()
-pprint(alpha_count)
-print(sum(alpha_count.values()))
+res = start.sorter(revers=True)
+start.print_rezults(res)
+
 # with open(file_name, 'r', encoding='cp1251') as file:
 #     for line in file:
 #         for char in line:
