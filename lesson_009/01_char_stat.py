@@ -94,7 +94,7 @@ class CountSymbol:
 file_name = 'voyna-i-mir.txt'
 start = CountSymbol(file_name)
 start.step_by_step()
-res = start.sorter(revers=True)
+res = start.sorter(revers=True) # без аргумента - будет сортировка по возрастанию
 start.print_rezults(res)
 
 # После зачета первого этапа нужно сделать упорядочивание статистики
