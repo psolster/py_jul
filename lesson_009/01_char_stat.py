@@ -26,6 +26,9 @@
 #   и https://gitlab.skillbox.ru/vadim_shзыщдandrinov/python_base_snippets/snippets/4
 import operator
 
+# TODO Не нужно использовать словарь в глобальной области видимости. Это сделает невозможным
+#  использовать несколько экземпляров CountSymbol на разных текстах в болле сложной программе.
+#  Словарь для данных нужно создать в самом классе. В нём же можно хранить и отсортированные данные.
 alpha_count = {}
 
 
@@ -60,6 +63,10 @@ class CountSymbol:
 
     def count_symb_in_line(self, data):
         for char in data:
+            # TODO Чтобы проверить является ли символ буквой лучше использовать
+            #  метод isalpha строковых объектов. Это позволит убрать повторяющиеся проверки.
+            #  Чтобы не делать проверку наличия ключа: if char in alpha_count.keys()
+            #  нужно заменить простой словарь alpha_count на collections.defaultdict.
             if 1040 <= ord(char) <= 1103:
                 if char in alpha_count.keys():
                     alpha_count[char] += 1
@@ -78,6 +85,8 @@ class CountSymbol:
 
     def sorter(self, revers=False):
         sorted_list = sorted(alpha_count.items(), key=operator.itemgetter(1), reverse=revers)
+        # TODO Можно не собирать словарь через цикл, а использовать функцию dict, заменив
+        #  self.sorted_alpha_count = dict(sorted(...))
         return {k: v for k, v in sorted_list}
 
     def print_rezults(self, norm_voc):
@@ -97,6 +106,9 @@ start.step_by_step()
 res = start.sorter(revers=True) # без аргумента - будет сортировка по возрастанию
 start.print_rezults(res)
 
+# TODO После исправления замечаний переходите ко второй части задания.
+#  Постарайтесь сделать разные способы упорядояить статистику в виде
+#  отдельных классов и не дублировать код.
 # После зачета первого этапа нужно сделать упорядочивание статистики
 #  - по частоте по возрастанию
 #  - по алфавиту по возрастанию
