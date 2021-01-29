@@ -75,6 +75,7 @@ class CountSymbol:
         print('+---------------+')
         print('|{mes1:^7}|{mes2:^7}|'.format(mes1='Буква', mes2='Кол-во'))
         print('+---------------+')
+
         for letter, count in norm_voc.items():
             print('|{letter:^6} | {count:6d}|'.format(letter=letter, count=count))
         print('+---------------+')
