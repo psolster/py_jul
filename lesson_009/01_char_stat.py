@@ -34,15 +34,14 @@ class CountSymbol:
         self.filename = filename
         self.count_lines = 0
         self.position_on_files = 0
-        self.sorted_alpha_count = {}
-        self.alpha_count = {}
+        self.count_dict = defaultdict(int)
 
     def step_by_step(self):
         self.lenght_file()
         while self.count_lines != 0:
             symb_line = self.get_data(self.filename)
             self.count_symb_in_line(symb_line)
-        self.sorted_alpha_count = self.sorter()
+        self.count_dict = self.sorter()
 
     def lenght_file(self):
         ff = open(self.filename, 'r', encoding='cp1251')
@@ -61,18 +60,13 @@ class CountSymbol:
     def count_symb_in_line(self, data):
         for char in data:
             if char.isalpha():
-                count_dict = defaultdict(int)
-                for char in data:
-                    count_dict[char] += 1
-
-
-            # # TODO Чтобы проверить является ли символ буквой лучше использовать
-            # #  метод isalpha строковых объектов. Это позволит убрать повторяющиеся проверки.
-            # #  Чтобы не делать проверку наличия ключа: if char in alpha_count.keys()
-            # #  нужно заменить простой словарь alpha_count на collections.defaultdict.
+                self.count_dict[char] += 1
+            elif char == '/n':
+                self.count_lines -= 1
+                return
 
     def sorter(self, revers=False):
-        sorted_list = sorted(self.alpha_count.items(), key=operator.itemgetter(1), reverse=revers)
+        sorted_list = sorted(self.count_dict.items(), key=operator.itemgetter(1), reverse=revers)
         # TODO Можно не собирать словарь через цикл, а использовать функцию dict, заменив
         #  self.sorted_alpha_count = dict(sorted(...))
         return {k: v for k, v in sorted_list}
