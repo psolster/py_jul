@@ -25,19 +25,17 @@
 #   см https://refactoring.guru/ru/design-patterns/template-method
 #   и https://gitlab.skillbox.ru/vadim_shзыщдandrinov/python_base_snippets/snippets/4
 import operator
-
-# TODO Не нужно использовать словарь в глобальной области видимости. Это сделает невозможным
-#  использовать несколько экземпляров CountSymbol на разных текстах в болле сложной программе.
-#  Словарь для данных нужно создать в самом классе. В нём же можно хранить и отсортированные данные.
-alpha_count = {}
+from collections import defaultdict
 
 
 class CountSymbol:
+
     def __init__(self, filename):
         self.filename = filename
         self.count_lines = 0
         self.position_on_files = 0
         self.sorted_alpha_count = {}
+        self.alpha_count = {}
 
     def step_by_step(self):
         self.lenght_file()
@@ -45,7 +43,6 @@ class CountSymbol:
             symb_line = self.get_data(self.filename)
             self.count_symb_in_line(symb_line)
         self.sorted_alpha_count = self.sorter()
-        self.print_rezults(self.sorted_alpha_count)
 
     def lenght_file(self):
         ff = open(self.filename, 'r', encoding='cp1251')
@@ -63,28 +60,18 @@ class CountSymbol:
 
     def count_symb_in_line(self, data):
         for char in data:
-            # TODO Чтобы проверить является ли символ буквой лучше использовать
-            #  метод isalpha строковых объектов. Это позволит убрать повторяющиеся проверки.
-            #  Чтобы не делать проверку наличия ключа: if char in alpha_count.keys()
-            #  нужно заменить простой словарь alpha_count на collections.defaultdict.
-            if 1040 <= ord(char) <= 1103:
-                if char in alpha_count.keys():
-                    alpha_count[char] += 1
-                else:
-                    alpha_count[char] = 1
-            elif ord(char) == 1025:
-                if char in alpha_count.keys():
-                    alpha_count[char] += 1
-                else:
-                    alpha_count[char] = 1
-            elif ord(char) == 1105:
-                if char in alpha_count.keys():
-                    alpha_count[char] += 1
-                else:
-                    alpha_count[char] = 1
+            if char.isalpha():
+                count_dict = defaultdict(int)
+                for char in data:
+                    count_dict[char] += 1
+
+            # # TODO Чтобы проверить является ли символ буквой лучше использовать
+            # #  метод isalpha строковых объектов. Это позволит убрать повторяющиеся проверки.
+            # #  Чтобы не делать проверку наличия ключа: if char in alpha_count.keys()
+            # #  нужно заменить простой словарь alpha_count на collections.defaultdict.
 
     def sorter(self, revers=False):
-        sorted_list = sorted(alpha_count.items(), key=operator.itemgetter(1), reverse=revers)
+        sorted_list = sorted(self.alpha_count.items(), key=operator.itemgetter(1), reverse=revers)
         # TODO Можно не собирать словарь через цикл, а использовать функцию dict, заменив
         #  self.sorted_alpha_count = dict(sorted(...))
         return {k: v for k, v in sorted_list}
@@ -103,7 +90,7 @@ class CountSymbol:
 file_name = 'voyna-i-mir.txt'
 start = CountSymbol(file_name)
 start.step_by_step()
-res = start.sorter(revers=True) # без аргумента - будет сортировка по возрастанию
+res = start.sorter(revers=True)  # без аргумента - будет сортировка по возрастанию
 start.print_rezults(res)
 
 # TODO После исправления замечаний переходите ко второй части задания.
