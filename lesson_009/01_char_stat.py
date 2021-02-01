@@ -25,7 +25,7 @@
 #   см https://refactoring.guru/ru/design-patterns/template-method
 #   и https://gitlab.skillbox.ru/vadim_shзыщдandrinov/python_base_snippets/snippets/4
 import operator
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 
 
 class CountSymbol:
@@ -65,11 +65,10 @@ class CountSymbol:
                 self.count_lines -= 1
                 return
 
-    def sorter(self, revers=False):
-        sorted_list = sorted(self.count_dict.items(), key=operator.itemgetter(1), reverse=revers)
-        # TODO Можно не собирать словарь через цикл, а использовать функцию dict, заменив
-        #  self.sorted_alpha_count = dict(sorted(...))
-        return {k: v for k, v in sorted_list}
+    def sorter(self):
+        sorted_list = dict(sorted(self.count_dict.items(), key=operator.itemgetter(1), reverse=True))
+
+        return sorted_list
 
     def print_rezults(self, norm_voc):
         print('+---------------+')
@@ -83,11 +82,34 @@ class CountSymbol:
         print('+---------------+')
 
 
+class CountSymbolNumUp(CountSymbol):
+    def sorter(self):
+        sorted_list = dict(sorted(self.count_dict.items(), key=operator.itemgetter(1), reverse=False))
+        return sorted_list
+
+
+class CountSymbolAlfUp(CountSymbol):
+    def sorter(self):
+        OrderedDict(sorted(self.count_dict.items(), key=operator.itemgetter(0)))
+        return self.count_dict
+
+
 file_name = 'voyna-i-mir.txt'
+
 start = CountSymbol(file_name)
 start.step_by_step()
-res = start.sorter(revers=True)  # без аргумента - будет сортировка по возрастанию
+res = start.sorter()
 start.print_rezults(res)
+
+start = CountSymbolNumUp(file_name)
+start.step_by_step()
+res2 = start.sorter()
+start.print_rezults(res2)
+
+start = CountSymbolAlfUp(file_name)
+start.step_by_step()
+res3 = start.sorter()
+start.print_rezults(res3)
 
 # TODO После исправления замечаний переходите ко второй части задания.
 #  Постарайтесь сделать разные способы упорядояить статистику в виде
