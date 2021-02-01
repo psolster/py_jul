@@ -90,8 +90,14 @@ class CountSymbolNumUp(CountSymbol):
 
 class CountSymbolAlfUp(CountSymbol):
     def sorter(self):
-        OrderedDict(sorted(self.count_dict.items(), key=operator.itemgetter(0)))
-        return self.count_dict
+        sorted_list = dict(sorted(self.count_dict.items(), key=operator.itemgetter(0)))
+        return sorted_list
+
+
+class CountSymbolAlfDown(CountSymbol):
+    def sorter(self):
+        sorted_list = dict(sorted(self.count_dict.items(), key=operator.itemgetter(0), reverse=True))
+        return sorted_list
 
 
 file_name = 'voyna-i-mir.txt'
@@ -111,9 +117,12 @@ start.step_by_step()
 res3 = start.sorter()
 start.print_rezults(res3)
 
-# TODO После исправления замечаний переходите ко второй части задания.
-#  Постарайтесь сделать разные способы упорядояить статистику в виде
-#  отдельных классов и не дублировать код.
+start = CountSymbolAlfDown(file_name)
+start.step_by_step()
+res4 = start.sorter()
+start.print_rezults(res4)
+
+
 # После зачета первого этапа нужно сделать упорядочивание статистики
 #  - по частоте по возрастанию
 #  - по алфавиту по возрастанию
