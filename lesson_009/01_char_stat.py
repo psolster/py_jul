@@ -25,7 +25,7 @@
 #   см https://refactoring.guru/ru/design-patterns/template-method
 #   и https://gitlab.skillbox.ru/vadim_shзыщдandrinov/python_base_snippets/snippets/4
 import operator
-from collections import defaultdict, OrderedDict
+from collections import defaultdict
 
 
 class CountSymbol:
