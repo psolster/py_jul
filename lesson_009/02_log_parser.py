@@ -24,60 +24,66 @@
 #   и https://gitlab.skillbox.ru/vadim_shandrinov/python_base_snippets/snippets/4
 
 import operator
+
 from collections import defaultdict
 
-# position_on_files = 0
-global count_lines
-from collections import defaultdict
 
-def len_files(file_name):
-    file_name = file_name
-    ff = open(file_name, 'r', encoding='cp1251')
-    count_lines = sum(1 for _ in ff)
-    ff.close()
-    return count_lines
+class LogParser:
 
+    def __init__(self, filename):
+        self.filename = filename
+        self.count_lines = 0
+        self.position_on_files = 0
 
-def list_number_lines_w_nok(file_name, count_lines):
-    voc_time_nok = defaultdict(int)
-    position_on_files = 0
-    nok_count = 0
-    while count_lines != 0:
-        ff = open(file_name, 'r', encoding='cp1251')
-        ff.seek(position_on_files)
-        data = ff.readline()
-        position_on_files = ff.tell()
+        self.voc_time_nok = defaultdict(int)
 
-        if data[29:] == 'NOK\n':
-            time = data[1:17]
-            voc_time_nok[time] += 1
+        self.nok_count = 0
 
-            nok_count += 1
+    def len_files(self):
 
-        count_lines -= 1
-
+        ff = open(self.filename, 'r', encoding='cp1251')
+        self.count_lines = sum(1 for _ in ff)
         ff.close()
-    return voc_time_nok
+        return self.count_lines
 
+    def list_number_lines_w_nok(self):
 
-def data_print(data):
-    for key, count in data.items():
-        print(key, count)
+        while self.count_lines != 0:
+            ff = open(self.filename, 'r', encoding='cp1251')
+            ff.seek(self.position_on_files)
+            data = ff.readline()
+            self.position_on_files = ff.tell()
 
-def print_to_file(data):
-    ff = open('pars_log.txt', 'w', encoding='cp1251')
-    for key, count in data.items():
-        data = key + ' ' + str(count) + '\n'
-        ff.writelines(data)
-    ff.close()
+            if data[29:] == 'NOK\n':
+                time = data[1:17]
+                self.voc_time_nok[time] += 1
+
+                self.nok_count += 1
+
+            self.count_lines -= 1
+
+            ff.close()
+        return self.voc_time_nok
+
+    def data_print(self, data):
+        for key, count in data.items():
+            print(key, count)
+
+    def print_to_file(self, data):
+        ff = open('pars_log.txt', 'w', encoding='cp1251')
+        for key, count in data.items():
+            data = key + ':-)  ' + str(count) + '\n'
+            ff.writelines(data)
+        ff.close()
 
 
 file_names = 'events.txt'
-count_lines = 0
-res = len_files(file_name=file_names)
-res2 = list_number_lines_w_nok(file_name=file_names, count_lines=res)
-data_print(data=res2)
-print_to_file(res2)
+work = LogParser(file_names)
+
+res = work.len_files()
+res2 = work.list_number_lines_w_nok()
+work.data_print(data=res2)
+work.print_to_file(res2)
 
 # После зачета первого этапа нужно сделать группировку событий
 #  - по часам
