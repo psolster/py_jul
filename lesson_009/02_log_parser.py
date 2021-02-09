@@ -34,34 +34,32 @@ class LogParser:
         self.filename = filename
         self.count_lines = 0
         self.position_on_files = 0
-
         self.voc_time_nok = defaultdict(int)
-
         self.nok_count = 0
 
-    def len_files(self):
+    def how_to_work(self):
+        self.len_files()
+        data = self.list_number_lines_w_nok()
+        self.data_print(data)
+        self.print_to_file(data)
 
+    def len_files(self):
         ff = open(self.filename, 'r', encoding='cp1251')
         self.count_lines = sum(1 for _ in ff)
         ff.close()
         return self.count_lines
 
     def list_number_lines_w_nok(self):
-
         while self.count_lines != 0:
             ff = open(self.filename, 'r', encoding='cp1251')
             ff.seek(self.position_on_files)
             data = ff.readline()
             self.position_on_files = ff.tell()
-
             if data[29:] == 'NOK\n':
                 time = data[1:17]
                 self.voc_time_nok[time] += 1
-
                 self.nok_count += 1
-
             self.count_lines -= 1
-
             ff.close()
         return self.voc_time_nok
 
@@ -79,11 +77,7 @@ class LogParser:
 
 file_names = 'events.txt'
 work = LogParser(file_names)
-
-res = work.len_files()
-res2 = work.list_number_lines_w_nok()
-work.data_print(data=res2)
-work.print_to_file(res2)
+work.how_to_work()
 
 # После зачета первого этапа нужно сделать группировку событий
 #  - по часам
