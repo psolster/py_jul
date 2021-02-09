@@ -57,14 +57,27 @@ def list_number_lines_w_nok(file_name, count_lines):
         count_lines -= 1
 
         ff.close()
-    return nok_count, voc_time_nok
+    return voc_time_nok
+
+
+def data_print(data):
+    for key, count in data.items():
+        print(key, count)
+
+def print_to_file(data):
+    ff = open('pars_log.txt', 'w', encoding='cp1251')
+    for key, count in data.items():
+        data = key + ' ' + str(count) + '\n'
+        ff.writelines(data)
+    ff.close()
 
 
 file_names = 'events.txt'
 count_lines = 0
 res = len_files(file_name=file_names)
 res2 = list_number_lines_w_nok(file_name=file_names, count_lines=res)
-print(res, res2)
+data_print(data=res2)
+print_to_file(res2)
 
 # После зачета первого этапа нужно сделать группировку событий
 #  - по часам
