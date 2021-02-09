@@ -23,7 +23,6 @@
 #   см https://refactoring.guru/ru/design-patterns/template-method
 #   и https://gitlab.skillbox.ru/vadim_shandrinov/python_base_snippets/snippets/4
 
-import operator
 
 from collections import defaultdict
 
@@ -56,7 +55,7 @@ class LogParser:
             data = ff.readline()
             self.position_on_files = ff.tell()
             if data[29:] == 'NOK\n':
-                time = data[1:17]
+                time = data[0:17]+']'
                 self.voc_time_nok[time] += 1
                 self.nok_count += 1
             self.count_lines -= 1
@@ -70,14 +69,73 @@ class LogParser:
     def print_to_file(self, data):
         ff = open('pars_log.txt', 'w', encoding='cp1251')
         for key, count in data.items():
-            data = key + ':-)  ' + str(count) + '\n'
+            data = key + ':->  ' + str(count) + '\n'
             ff.writelines(data)
         ff.close()
+
+
+class LogParserHours(LogParser):
+    def list_number_lines_w_nok(self):
+        while self.count_lines != 0:
+            ff = open(self.filename, 'r', encoding='cp1251')
+            ff.seek(self.position_on_files)
+            data = ff.readline()
+            self.position_on_files = ff.tell()
+            if data[29:] == 'NOK\n':
+                time = data[0:11]+']'+' '+'['+data[12:14]+']'
+                self.voc_time_nok[time] += 1
+                self.nok_count += 1
+            self.count_lines -= 1
+            ff.close()
+        return self.voc_time_nok
+
+
+class LogParserMonth  (LogParser):
+    def list_number_lines_w_nok(self):
+        while self.count_lines != 0:
+            ff = open(self.filename, 'r', encoding='cp1251')
+            ff.seek(self.position_on_files)
+            data = ff.readline()
+            self.position_on_files = ff.tell()
+            if data[29:] == 'NOK\n':
+                time = data[0:5]+'-'+data[6:8]+']'
+                self.voc_time_nok[time] += 1
+                self.nok_count += 1
+            self.count_lines -= 1
+            ff.close()
+        return self.voc_time_nok
+
+
+class LogParserYear (LogParser):
+    def list_number_lines_w_nok(self):
+        while self.count_lines != 0:
+            ff = open(self.filename, 'r', encoding='cp1251')
+            ff.seek(self.position_on_files)
+            data = ff.readline()
+            self.position_on_files = ff.tell()
+            if data[29:] == 'NOK\n':
+                time = data[0:5]+']'
+                self.voc_time_nok[time] += 1
+                self.nok_count += 1
+            self.count_lines -= 1
+            ff.close()
+        return self.voc_time_nok
 
 
 file_names = 'events.txt'
 work = LogParser(file_names)
 work.how_to_work()
+
+work2 = LogParserHours(file_names)
+work2.how_to_work()
+
+work3 = LogParserMonth(file_names)
+work3.how_to_work()
+
+work4 = LogParserYear(file_names)
+work4.how_to_work()
+
+
 
 # После зачета первого этапа нужно сделать группировку событий
 #  - по часам
