@@ -67,7 +67,7 @@ class LogParser:
             print(key, count)
 
     def print_to_file(self, data):
-        ff = open('pars_log.txt', 'w', encoding='cp1251')
+        ff = open('pars_log.txt', 'a', encoding='utf8')
         for key, count in data.items():
             data = key + ':->  ' + str(count) + '\n'
             ff.writelines(data)
