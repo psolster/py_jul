@@ -43,13 +43,13 @@ import shutil
 from collections import defaultdict
 voc_name_files_in_dir = defaultdict(str)
 path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons\\"
+target_path = "icons_by_year"
 os.path.normpath(path)
 list_of_filename = []
-if not os.path.isdir("icons_by_year"):
-     os.mkdir("icons_by_year")
+
 for dirpath, dirnames, filenames in os.walk(path):
     current_file = os.path.join(str(dirpath), str(filenames))
-    # print(current_file)
+
     for filename in filenames:
 
         list_of_filename.append(filename)
@@ -62,14 +62,26 @@ for path, names_list in voc_name_files_in_dir.items():
         for name_file in names_list:
             fulL_names = curent_path + '\\'+name_file
             mtime = os.path.getmtime(fulL_names)
-            print(time.ctime(mtime))
 
-for key, list in voc_name_files_in_dir.items():
-    print(key, ': ', list)
+            date_str = time.ctime(mtime)
+            added = date_str[20:24]+'\\'+date_str[4:7]+'\\'
+            path_for_copy_this_file = target_path + '\\'+added
+
+            if not os.path.isdir(path_for_copy_this_file):
+                os.makedirs(path_for_copy_this_file)
+                shutil.copy2(curent_path+'\\'+name_file, path_for_copy_this_file)
+            else:
+                shutil.copy2(curent_path+'\\'+name_file, path_for_copy_this_file)
 
 
 
-# real_path = os.getcwd()
+# составить путь к файлу из данных времени модификации
+# for key, list in voc_name_files_in_dir.items():
+#     print(key, ': ', list)
+
+
+
+# # real_path = os.getcwd()
 # mtime = os.path.getmtime(real_path)
 # print(time.ctime(mtime))
 
