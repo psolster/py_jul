@@ -55,7 +55,7 @@ class LogParser:
             data = ff.readline()
             self.position_on_files = ff.tell()
             if data[29:] == 'NOK\n':
-                time = data[0:17]+']'
+                time = data[0:17] + ']'
                 self.voc_time_nok[time] += 1
                 self.nok_count += 1
             self.count_lines -= 1
@@ -82,7 +82,7 @@ class LogParserHours(LogParser):
             data = ff.readline()
             self.position_on_files = ff.tell()
             if data[29:] == 'NOK\n':
-                time = data[0:11]+']'+' '+'['+data[12:14]+']'
+                time = data[0:11] + ']' + ' ' + '[' + data[12:14] + ']'
                 self.voc_time_nok[time] += 1
                 self.nok_count += 1
             self.count_lines -= 1
@@ -90,7 +90,7 @@ class LogParserHours(LogParser):
         return self.voc_time_nok
 
 
-class LogParserMonth  (LogParser):
+class LogParserMonth(LogParser):
     def list_number_lines_w_nok(self):
         while self.count_lines != 0:
             ff = open(self.filename, 'r', encoding='cp1251')
@@ -98,7 +98,7 @@ class LogParserMonth  (LogParser):
             data = ff.readline()
             self.position_on_files = ff.tell()
             if data[29:] == 'NOK\n':
-                time = data[0:5]+'-'+data[6:8]+']'
+                time = data[0:5] + '-' + data[6:8] + ']'
                 self.voc_time_nok[time] += 1
                 self.nok_count += 1
             self.count_lines -= 1
@@ -106,7 +106,7 @@ class LogParserMonth  (LogParser):
         return self.voc_time_nok
 
 
-class LogParserYear (LogParser):
+class LogParserYear(LogParser):
     def list_number_lines_w_nok(self):
         while self.count_lines != 0:
             ff = open(self.filename, 'r', encoding='cp1251')
@@ -114,7 +114,7 @@ class LogParserYear (LogParser):
             data = ff.readline()
             self.position_on_files = ff.tell()
             if data[29:] == 'NOK\n':
-                time = data[0:5]+']'
+                time = data[0:5] + ']'
                 self.voc_time_nok[time] += 1
                 self.nok_count += 1
             self.count_lines -= 1
@@ -134,8 +134,6 @@ work3.how_to_work()
 
 work4 = LogParserYear(file_names)
 work4.how_to_work()
-
-
 
 # После зачета первого этапа нужно сделать группировку событий
 #  - по часам

@@ -40,7 +40,38 @@ import shutil
 #   см https://refactoring.guru/ru/design-patterns/template-method
 #   и https://gitlab.skillbox.ru/vadim_shandrinov/python_base_snippets/snippets/4
 
-# TODO здесь ваш код
+from collections import defaultdict
+voc_name_files_in_dir = defaultdict(str)
+path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons\\"
+os.path.normpath(path)
+list_of_filename = []
+if not os.path.isdir("icons_by_year"):
+     os.mkdir("icons_by_year")
+for dirpath, dirnames, filenames in os.walk(path):
+    current_file = os.path.join(str(dirpath), str(filenames))
+    # print(current_file)
+    for filename in filenames:
+
+        list_of_filename.append(filename)
+    voc_name_files_in_dir[str(dirpath)] = list_of_filename
+    list_of_filename = []
+
+for path, names_list in voc_name_files_in_dir.items():
+    curent_path = path
+    if len(names_list) != 0:
+        for name_file in names_list:
+            fulL_names = curent_path + '\\'+name_file
+            mtime = os.path.getmtime(fulL_names)
+            print(time.ctime(mtime))
+
+for key, list in voc_name_files_in_dir.items():
+    print(key, ': ', list)
+
+
+
+# real_path = os.getcwd()
+# mtime = os.path.getmtime(real_path)
+# print(time.ctime(mtime))
 
 # Усложненное задание (делать по желанию)
 # Нужно обрабатывать zip-файл, содержащий фотографии, без предварительного извлечения файлов в папку.
