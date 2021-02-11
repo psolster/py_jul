@@ -40,45 +40,51 @@ import shutil
 #   см https://refactoring.guru/ru/design-patterns/template-method
 #   и https://gitlab.skillbox.ru/vadim_shandrinov/python_base_snippets/snippets/4
 
+
 from collections import defaultdict
-voc_name_files_in_dir = defaultdict(str)
-path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons\\"
+
+
+class SortFilesToPath:
+
+    def __init__(self, path, target_path):
+        self.voc_name_files_in_dir = defaultdict(str)
+        self.path = path
+        self.target_path = target_path
+        self.list_of_filename = []
+        os.path.normpath(path)
+
+
+
+    for dirpath, dirnames, filenames in os.walk(path):
+        current_file = os.path.join(str(dirpath), str(filenames))
+
+        for filename in filenames:
+            list_of_filename.append(filename)
+        voc_name_files_in_dir[str(dirpath)] = list_of_filename
+        list_of_filename = []
+
+    for path, names_list in voc_name_files_in_dir.items():
+        curent_path = path
+        if len(names_list) != 0:
+            for name_file in names_list:
+                fulL_names = curent_path + '\\' + name_file
+                mtime = os.path.getmtime(fulL_names)
+                date_str = time.ctime(mtime)
+                added = date_str[20:24] + '\\' + date_str[4:7] + '\\'
+                path_for_copy_this_file = target_path + '\\' + added
+                if not os.path.isdir(path_for_copy_this_file):
+                    os.makedirs(path_for_copy_this_file)
+                    shutil.copy2(curent_path + '\\' + name_file, path_for_copy_this_file)
+                else:
+                    shutil.copy2(curent_path + '\\' + name_file, path_for_copy_this_file)
+
+
+path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons"
 target_path = "icons_by_year"
-os.path.normpath(path)
-list_of_filename = []
-
-for dirpath, dirnames, filenames in os.walk(path):
-    current_file = os.path.join(str(dirpath), str(filenames))
-
-    for filename in filenames:
-
-        list_of_filename.append(filename)
-    voc_name_files_in_dir[str(dirpath)] = list_of_filename
-    list_of_filename = []
-
-for path, names_list in voc_name_files_in_dir.items():
-    curent_path = path
-    if len(names_list) != 0:
-        for name_file in names_list:
-            fulL_names = curent_path + '\\'+name_file
-            mtime = os.path.getmtime(fulL_names)
-
-            date_str = time.ctime(mtime)
-            added = date_str[20:24]+'\\'+date_str[4:7]+'\\'
-            path_for_copy_this_file = target_path + '\\'+added
-
-            if not os.path.isdir(path_for_copy_this_file):
-                os.makedirs(path_for_copy_this_file)
-                shutil.copy2(curent_path+'\\'+name_file, path_for_copy_this_file)
-            else:
-                shutil.copy2(curent_path+'\\'+name_file, path_for_copy_this_file)
-
-
 
 # составить путь к файлу из данных времени модификации
 # for key, list in voc_name_files_in_dir.items():
 #     print(key, ': ', list)
-
 
 
 # # real_path = os.getcwd()
