@@ -44,52 +44,51 @@ import shutil
 from collections import defaultdict
 
 
-class SortFilesToPath:
+class SortFilesInFolder:
 
     def __init__(self, path, target_path):
         self.voc_name_files_in_dir = defaultdict(str)
+        self.voc_new_path = defaultdict(str)
         self.path = path
         self.target_path = target_path
         self.list_of_filename = []
-        os.path.normpath(path)
+        os.path.normpath(self.path)
+        # self.curent_path
 
+    def work_plane(self):
+        list_names = self.list_file_name()
+        self.create_new_path_and_copy(list_names)
 
+    def list_file_name(self):
+        for dirpath, dirnames, filenames in os.walk(self.path):
+            for filename in filenames:
+                self.list_of_filename.append(filename)
+            self.voc_name_files_in_dir[str(dirpath)] = self.list_of_filename
+            self.list_of_filename = []
+        return self.voc_name_files_in_dir
 
-    for dirpath, dirnames, filenames in os.walk(path):
-        current_file = os.path.join(str(dirpath), str(filenames))
+    def create_new_path_and_copy(self, enter_data):
+        for path, names_list in enter_data.items():
+            curent_path = path
+            if len(names_list) != 0:
+                for name_file in names_list:
+                    fulL_names = curent_path + '\\' + name_file
+                    mtime = os.path.getmtime(fulL_names)
+                    date_str = time.ctime(mtime)
+                    added = date_str[20:24] + '\\' + date_str[4:7] + '\\'
+                    path_for_copy_this_file = target_path + '\\' + added
 
-        for filename in filenames:
-            list_of_filename.append(filename)
-        voc_name_files_in_dir[str(dirpath)] = list_of_filename
-        list_of_filename = []
-
-    for path, names_list in voc_name_files_in_dir.items():
-        curent_path = path
-        if len(names_list) != 0:
-            for name_file in names_list:
-                fulL_names = curent_path + '\\' + name_file
-                mtime = os.path.getmtime(fulL_names)
-                date_str = time.ctime(mtime)
-                added = date_str[20:24] + '\\' + date_str[4:7] + '\\'
-                path_for_copy_this_file = target_path + '\\' + added
-                if not os.path.isdir(path_for_copy_this_file):
-                    os.makedirs(path_for_copy_this_file)
-                    shutil.copy2(curent_path + '\\' + name_file, path_for_copy_this_file)
-                else:
-                    shutil.copy2(curent_path + '\\' + name_file, path_for_copy_this_file)
+                    if not os.path.isdir(path_for_copy_this_file):
+                        os.makedirs(path_for_copy_this_file)
+                        shutil.copy2(path + '\\' + name_file, path_for_copy_this_file)
+                    else:
+                        shutil.copy2(path + '\\' + name_file, path_for_copy_this_file)
 
 
 path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons"
-target_path = "icons_by_year"
-
-# составить путь к файлу из данных времени модификации
-# for key, list in voc_name_files_in_dir.items():
-#     print(key, ': ', list)
-
-
-# # real_path = os.getcwd()
-# mtime = os.path.getmtime(real_path)
-# print(time.ctime(mtime))
+target_path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons_by_year"
+sort = SortFilesInFolder(path=path, target_path=target_path)
+sort.work_plane()
 
 # Усложненное задание (делать по желанию)
 # Нужно обрабатывать zip-файл, содержащий фотографии, без предварительного извлечения файлов в папку.
