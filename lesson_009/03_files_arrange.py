@@ -72,6 +72,8 @@ class SortFilesInFolder:
             curent_path = path
             if len(names_list) != 0:
                 for name_file in names_list:
+                    # TODO Для объединения частей пути нужно использовать os.path.join
+                    #  или возможности библиотеки pathlib.
                     fulL_names = curent_path + '\\' + name_file
                     mtime = os.path.getmtime(fulL_names)
                     date_str = time.ctime(mtime)
@@ -85,6 +87,11 @@ class SortFilesInFolder:
                         shutil.copy2(path + '\\' + name_file, path_for_copy_this_file)
 
 
+# TODO Используйте os.path или pathlib для формирования
+#  корректных путей к файлам. Это позволит корректно работать
+#  в разных операционных системах без редактирования кода.
+#  Текущая реализация подразумевает, что у всех пользоввателей должен
+#  быть установлен windows и запускать скрпт.
 path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons"
 target_path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons_by_year"
 sort = SortFilesInFolder(path=path, target_path=target_path)
