@@ -66,11 +66,11 @@ def filling_check(file):
                         raise ValueError
                     except ValueError as exc:
                         print(f'Поймано исключение {exc}')
-            else:
-                fgood = open('C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_good.log', 'w',
-                             encoding='utf8')
-                fgood.write(line)
-                fgood.close()
+                else:
+                    fgood = open('C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_good.log',
+                                 'a+', encoding='utf8')
+                    fgood.write(line+'\n')
+                    fgood.close()
 
 
 name_file = 'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations.txt'
