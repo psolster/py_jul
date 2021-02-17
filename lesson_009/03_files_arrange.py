@@ -82,9 +82,9 @@ class SortFilesInFolder:
                     else:
                         shutil.copy2(os.path.join(path + '\\', name_file), path_for_copy_this_file)
 
-path = "C:\\Users\\Solo\\PycharmProjects\\python_base\\lesson_009"
+path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009"
 path = os.path.normpath(path)
-target_path = "C:\\Users\\Solo\\PycharmProjects\\python_base\\lesson_009\\icons_by_year"
+target_path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons_by_year"
 target_path = os.path.normpath(target_path)
 sort = SortFilesInFolder(path=path, target_path=target_path)
 sort.work_plane()
