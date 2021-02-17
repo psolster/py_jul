@@ -37,16 +37,9 @@ class LogParser:
         self.nok_count = 0
 
     def how_to_work(self):
-        self.len_files()
         data = self.list_number_lines_w_nok()
         self.data_print(data)
         self.print_to_file(data)
-
-    def len_files(self):
-        ff = open(self.filename, 'r', encoding='cp1251')
-        self.count_lines = sum(1 for _ in ff)
-        ff.close()
-        return self.count_lines
 
     def list_number_lines_w_nok(self):
         # TODO Пересчитывать количество строк в файле не нужно. Лучше сделать
@@ -62,17 +55,12 @@ class LogParser:
         #  для сравнения.
         #  Реализация других способов группировки будут отличаться границами среза.
         #  для каждого из вариантов.
-        while self.count_lines != 0:
-            ff = open(self.filename, 'r', encoding='cp1251')
-            ff.seek(self.position_on_files)
-            data = ff.readline()
-            self.position_on_files = ff.tell()
-            if data[29:] == 'NOK\n':
-                time = data[0:17] + ']'
-                self.voc_time_nok[time] += 1
-                self.nok_count += 1
-            self.count_lines -= 1
-            ff.close()
+        with open(self.filename, 'r', encoding='cp1251') as ff:
+            for n, line in enumerate(ff, 1):
+                data = line
+                if data[29:] == 'NOK\n':
+                    time = data[0:17] + ']'
+                    self.voc_time_nok[time] += 1
         return self.voc_time_nok
 
     def data_print(self, data):
@@ -89,18 +77,26 @@ class LogParser:
 
 class LogParserHours(LogParser):
     def list_number_lines_w_nok(self):
-        while self.count_lines != 0:
-            ff = open(self.filename, 'r', encoding='cp1251')
-            ff.seek(self.position_on_files)
-            data = ff.readline()
-            self.position_on_files = ff.tell()
-            if data[29:] == 'NOK\n':
-                time = data[0:11] + ']' + ' ' + '[' + data[12:14] + ']'
-                self.voc_time_nok[time] += 1
-                self.nok_count += 1
-            self.count_lines -= 1
-            ff.close()
+        with open(self.filename, 'r', encoding='cp1251') as ff:
+            for n, line in enumerate(ff, 1):
+                data = line
+                if data[29:] == 'NOK\n':
+                    time = data[0:11] + ']' + ' ' + '[' + data[12:14] + ']'
+                    self.voc_time_nok[time] += 1
         return self.voc_time_nok
+
+        # while self.count_lines != 0:
+        #     ff = open(self.filename, 'r', encoding='cp1251')
+        #     ff.seek(self.position_on_files)
+        #     data = ff.readline()
+        #     self.position_on_files = ff.tell()
+        #     if data[29:] == 'NOK\n':
+        #
+        #         self.voc_time_nok[time] += 1
+        #         self.nok_count += 1
+        #     self.count_lines -= 1
+        #     ff.close()
+        # return self.voc_time_nok
 
 
 class LogParserMonth(LogParser):
