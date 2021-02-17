@@ -120,5 +120,5 @@ while ENLIGHTENMENT_CARMA_LEVEL >= total:
     res = one_day()
     total += res
     day += 1
-print(total, day)
+print(f'карму накомпил {total} за {day} дней')
 # https://goo.gl/JnsDqu
