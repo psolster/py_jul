@@ -21,6 +21,8 @@
 # - поле емейл НЕ содержит @ и .(точку): NotEmailError (кастомное исключение)
 # - поле возраст НЕ является числом от 10 до 99: ValueError
 # Вызов метода обернуть в try-except.
+import os
+
 
 class NotNameError(Exception):
 
@@ -54,21 +56,23 @@ def filling_check(file):
                         raise NotNameError
                     except NotNameError as exc:
                         print(f'Поймано исключение {exc}')
-                elif e_male not '@' and '.':
+                elif '@' and '.' not in e_male:
                     try:
                         raise NotEmailError
                     except NotEmailError as exc:
                         print(f'Поймано исключение {exc}')
-                elif 10<int(age)<99:
+                elif 10 > int(age) > 99:
                     try:
                         raise ValueError
                     except ValueError as exc:
                         print(f'Поймано исключение {exc}')
             else:
-                fgood = open('registrations_good.log', 'w', encoding='utf8')
+                fgood = open('C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_good.log', 'w',
+                             encoding='utf8')
                 fgood.write(line)
                 fgood.close()
 
 
-name_file = 'registrations.txt'
+name_file = 'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations.txt'
+name_file = os.path.normpath(name_file)
 filling_check(name_file)
