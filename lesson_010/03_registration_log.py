@@ -22,4 +22,53 @@
 # - поле возраст НЕ является числом от 10 до 99: ValueError
 # Вызов метода обернуть в try-except.
 
-# TODO здесь ваш код
+class NotNameError(Exception):
+
+    def __init__(self):
+        self.message = 'Ошибка в указании имени'
+
+    def __str__(self):
+        return self.message
+
+
+class NotEmailError(Exception):
+
+    def __init__(self):
+        self.message = 'Ошибка при вводе e-mail'
+
+    def __str__(self):
+        return self.message
+
+
+def filling_check(file):
+    with open(file, 'r', encoding='utf8') as ff:
+        for line in ff:
+            line = line[:-1]
+            try:
+                name, e_male, age = line.split(' ')
+            except ValueError as ve1:
+                print(f'ошибка не соответствия содержания строки {ve1}')
+            if len(name) or len(e_male) or len(age) != 0:
+                if not name.isalpha():
+                    try:
+                        raise NotNameError
+                    except NotNameError as exc:
+                        print(f'Поймано исключение {exc}')
+                elif e_male not '@' and '.':
+                    try:
+                        raise NotEmailError
+                    except NotEmailError as exc:
+                        print(f'Поймано исключение {exc}')
+                elif 10<int(age)<99:
+                    try:
+                        raise ValueError
+                    except ValueError as exc:
+                        print(f'Поймано исключение {exc}')
+            else:
+                fgood = open('registrations_good.log', 'w', encoding='utf8')
+                fgood.write(line)
+                fgood.close()
+
+
+name_file = 'registrations.txt'
+filling_check(name_file)
