@@ -56,16 +56,31 @@ def filling_check(file):
                         raise NotNameError
                     except NotNameError as exc:
                         print(f'Поймано исключение {exc}')
+                        f_no_good = open(
+                            'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_bad.log',
+                            'a+', encoding='utf8')
+                        f_no_good.write(line + str({exc})+'\n')
+                        fgood.close()
                 elif '@' and '.' not in e_male:
                     try:
                         raise NotEmailError
                     except NotEmailError as exc:
                         print(f'Поймано исключение {exc}')
+                        f_no_good = open(
+                            'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_bad.log',
+                            'a+', encoding='utf8')
+                        f_no_good.write(line + str({exc}) + '\n')
+                        fgood.close()
                 elif 10 > int(age) > 99:
                     try:
                         raise ValueError
                     except ValueError as exc:
                         print(f'Поймано исключение {exc}')
+                        f_no_good = open(
+                            'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_bad.log',
+                            'a+', encoding='utf8')
+                        f_no_good.write(line + srt({exc}) + '\n')
+                        fgood.close()
                 else:
                     fgood = open('C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_good.log',
                                  'a+', encoding='utf8')
