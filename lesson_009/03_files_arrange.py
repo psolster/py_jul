@@ -53,7 +53,6 @@ class SortFilesInFolder:
         self.target_path = target_path
         self.list_of_filename = []
         os.path.normpath(self.path)
-        # self.curent_path
 
     def work_plane(self):
         list_names = self.list_file_name()
@@ -72,28 +71,21 @@ class SortFilesInFolder:
             curent_path = path
             if len(names_list) != 0:
                 for name_file in names_list:
-                    # TODO Для объединения частей пути нужно использовать os.path.join
-                    #  или возможности библиотеки pathlib.
-                    fulL_names = curent_path + '\\' + name_file
+                    fulL_names = os.path.join(curent_path + '\\', name_file)
                     mtime = os.path.getmtime(fulL_names)
                     date_str = time.ctime(mtime)
                     added = date_str[20:24] + '\\' + date_str[4:7] + '\\'
-                    path_for_copy_this_file = target_path + '\\' + added
-
+                    path_for_copy_this_file = os.path.join(target_path + '\\', added)
                     if not os.path.isdir(path_for_copy_this_file):
                         os.makedirs(path_for_copy_this_file)
-                        shutil.copy2(path + '\\' + name_file, path_for_copy_this_file)
+                        shutil.copy2(os.path.join(path + '\\', name_file), path_for_copy_this_file)
                     else:
-                        shutil.copy2(path + '\\' + name_file, path_for_copy_this_file)
+                        shutil.copy2(os.path.join(path + '\\', name_file), path_for_copy_this_file)
 
-
-# TODO Используйте os.path или pathlib для формирования
-#  корректных путей к файлам. Это позволит корректно работать
-#  в разных операционных системах без редактирования кода.
-#  Текущая реализация подразумевает, что у всех пользоввателей должен
-#  быть установлен windows и запускать скрпт.
-path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons"
-target_path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons_by_year"
+path = "C:\\Users\\Solo\\PycharmProjects\\python_base\\lesson_009"
+path = os.path.normpath(path)
+target_path = "C:\\Users\\Solo\\PycharmProjects\\python_base\\lesson_009\\icons_by_year"
+target_path = os.path.normpath(target_path)
 sort = SortFilesInFolder(path=path, target_path=target_path)
 sort.work_plane()
 
