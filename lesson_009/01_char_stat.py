@@ -29,6 +29,8 @@ from collections import defaultdict
 
 
 class CountSymbol:
+    index_operator = 0
+    mode_sort = True
 
     def __init__(self, filename):
         self.filename = filename
@@ -66,7 +68,8 @@ class CountSymbol:
                 return
 
     def sorter(self):
-        sorted_list = dict(sorted(self.count_dict.items(), key=operator.itemgetter(1), reverse=True))
+        sorted_list = dict(sorted(self.count_dict.items(), key=operator.itemgetter(self.index_operator),
+                                  reverse=self.mode_sort))
 
         return sorted_list
 
@@ -83,34 +86,20 @@ class CountSymbol:
 
 
 class CountSymbolNumUp(CountSymbol):
-    def sorter(self):
-        sorted_list = dict(sorted(self.count_dict.items(), key=operator.itemgetter(1), reverse=False))
-        return sorted_list
+    index_operator = 1
+    mode_sort = False
 
 
 class CountSymbolAlfUp(CountSymbol):
-    def sorter(self):
-        sorted_list = dict(sorted(self.count_dict.items(), key=operator.itemgetter(0)))
-        return sorted_list
+    index_operator = 1
+    mode_sort = False
 
 
 class CountSymbolAlfDown(CountSymbol):
-    def sorter(self):
-        sorted_list = dict(sorted(self.count_dict.items(), key=operator.itemgetter(0), reverse=True))
-        return sorted_list
+    index_operator = 0
+    mode_sort = True
 
 
-# TODO  Задание получилось хорошо. Давайте сделаем одну небольшую оптимизацию.
-#  Методы сортировки у всех классов сортировки отличаются
-#  только двумя параметрами:
-#  - индекс в operator.itemgetter 0 или 1
-#  - порядок сортировки reverse True или False.
-#  Можно сделать эти параметры переменными класса и использовать
-#  их внутри функции сортировки, а саму функцию сортировки перенести в общий класс.
-#  Тогда в классах наследниках достаточно будет менять только
-#  две переменные для реализации всех типов сортировки.
-
-# TODO Пример с демонстрацией отличия переменных класса от переменных экземпляра:
 #
 #  class MainClass:
 #     variable1 = 0  # Это переменная класса
