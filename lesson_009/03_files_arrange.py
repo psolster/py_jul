@@ -71,22 +71,21 @@ class SortFilesInFolder:
             curent_path = path
             if len(names_list) != 0:
                 for name_file in names_list:
-                    # TODO Добавлять \\ к пути не нужно. os.path.join добавит разделитель,
-                    #  подходящий к ОС, в которой запускается программа.
-                    #  Нужно убрать '\\' здесь и ниже.
-                    fulL_names = os.path.join(curent_path + '\\', name_file)
+                    fulL_names = os.path.join(curent_path, name_file)
                     mtime = os.path.getmtime(fulL_names)
                     date_str = time.ctime(mtime)
                     added = date_str[20:24] + '\\' + date_str[4:7] + '\\'
-                    path_for_copy_this_file = os.path.join(target_path + '\\', added)
+                    path_for_copy_this_file = os.path.join(target_path, added)
                     if not os.path.isdir(path_for_copy_this_file):
                         os.makedirs(path_for_copy_this_file)
-                        shutil.copy2(os.path.join(path + '\\', name_file), path_for_copy_this_file)
+                        shutil.copy2(os.path.join(path, name_file), path_for_copy_this_file)
                     else:
-                        shutil.copy2(os.path.join(path + '\\', name_file), path_for_copy_this_file)
+                        shutil.copy2(os.path.join(path, name_file), path_for_copy_this_file)
+
 
 # TODO Для корректной работы задания достаточно будет указать пити вида icons и icons_by_year.
-path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009"
+# Тут не много не понял замечания...нужно как то изменить вид исходных путей?
+path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons"
 path = os.path.normpath(path)
 target_path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons_by_year"
 target_path = os.path.normpath(target_path)

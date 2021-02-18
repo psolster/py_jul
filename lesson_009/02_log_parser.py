@@ -81,6 +81,7 @@ class LogParserMonth(LogParser):
                 data = line
                 if data[29:] == 'NOK\n':
                     time = data[0:5] + '-' + data[6:8] + ']'
+                    # time = data[0:5] + ']'
                     self.voc_time_nok[time] += 1
         return self.voc_time_nok
 
