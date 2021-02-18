@@ -48,6 +48,7 @@ def filling_check(file):
             line = line[:-1]
             try:
                 name, e_male, age = line.split(' ')
+                age = int(age)
             except ValueError as ve1:
                 print(f'ошибка не соответствия содержания строки {ve1}')
             if len(name) or len(e_male) or len(age) != 0:
@@ -59,7 +60,7 @@ def filling_check(file):
                         f_no_good = open(
                             'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_bad.log',
                             'a+', encoding='utf8')
-                        f_no_good.write(line + str({exc})+'\n')
+                        f_no_good.write(line + ' '+str({exc})+' нет имени \n')
                         fgood.close()
                 elif '@' and '.' not in e_male:
                     try:
@@ -69,18 +70,18 @@ def filling_check(file):
                         f_no_good = open(
                             'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_bad.log',
                             'a+', encoding='utf8')
-                        f_no_good.write(line + str({exc}) + '\n')
+                        f_no_good.write(line + ' '+str({exc}) + ' нет e-mail\n')
                         fgood.close()
-                elif 10 > int(age) > 99:
+                elif not 10 < age < 99:
                     try:
                         raise ValueError
                     except ValueError as exc:
-                        print(f'Поймано исключение {exc}')
+                        print(f'Поймано исключение {exc}, возраст не соответствует')
                         f_no_good = open(
                             'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_bad.log',
                             'a+', encoding='utf8')
-                        f_no_good.write(line + srt({exc}) + '\n')
-                        fgood.close()
+                        f_no_good.write(line + ' '+str({exc}) + ' возраст не соответствует \n')
+                        f_no_good.close()
                 else:
                     fgood = open('C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_good.log',
                                  'a+', encoding='utf8')
