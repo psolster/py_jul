@@ -71,6 +71,9 @@ class SortFilesInFolder:
             curent_path = path
             if len(names_list) != 0:
                 for name_file in names_list:
+                    # TODO Добавлять \\ к пути не нужно. os.path.join добавит разделитель,
+                    #  подходящий к ОС, в которой запускается программа.
+                    #  Нужно убрать '\\' здесь и ниже.
                     fulL_names = os.path.join(curent_path + '\\', name_file)
                     mtime = os.path.getmtime(fulL_names)
                     date_str = time.ctime(mtime)
@@ -82,6 +85,7 @@ class SortFilesInFolder:
                     else:
                         shutil.copy2(os.path.join(path + '\\', name_file), path_for_copy_this_file)
 
+# TODO Для корректной работы задания достаточно будет указать пити вида icons и icons_by_year.
 path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009"
 path = os.path.normpath(path)
 target_path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons_by_year"
