@@ -86,9 +86,7 @@ class CountSymbol:
 
 
 class CountSymbolNumUp(CountSymbol):
-    # TODO Похоже, что index_operator в этом классе нужно сделать 0.
-    #  Сейчас настройки в CountSymbolNumUp и CountSymbolAlfUp совпадают.
-    index_operator = 1
+    index_operator = 0
     mode_sort = False
 
 
