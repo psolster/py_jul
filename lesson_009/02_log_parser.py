@@ -28,6 +28,10 @@ from collections import defaultdict
 
 
 class LogParser:
+    slice_date_start_1 = 0
+    slice_date_finish_1 = 17
+    slice_date_start_2 = 0
+    slice_date_finish_2 = 0
 
     def __init__(self, filename):
         self.filename = filename
@@ -47,7 +51,8 @@ class LogParser:
             for n, line in enumerate(ff, 1):
                 data = line
                 if data[29:] == 'NOK\n':
-                    time = data[0:17] + ']'
+                    time = data[self.slice_date_start_1:self.slice_date_finish_1] + ']' + \
+                           ' ' + '[' + data[self.slice_date_start_2:self.slice_date_finish_2] + ']'
                     self.voc_time_nok[time] += 1
         return self.voc_time_nok
 
@@ -64,43 +69,25 @@ class LogParser:
 
 
 class LogParserHours(LogParser):
-    def list_number_lines_w_nok(self):
-        with open(self.filename, 'r', encoding='cp1251') as ff:
-            for n, line in enumerate(ff, 1):
-                data = line
-                if data[29:] == 'NOK\n':
-                    time = data[0:11] + ']' + ' ' + '[' + data[12:14] + ']'
-                    self.voc_time_nok[time] += 1
-        return self.voc_time_nok
+    slice_date_start_1 = 0
+    slice_date_finish_1 = 11
+    slice_date_start_2 = 12
+    slice_date_finish_2 = 14
 
 
 class LogParserMonth(LogParser):
-    def list_number_lines_w_nok(self):
-        with open(self.filename, 'r', encoding='cp1251') as ff:
-            for n, line in enumerate(ff, 1):
-                data = line
-                if data[29:] == 'NOK\n':
-                    time = data[0:5] + '-' + data[6:8] + ']'
-                    # time = data[0:5] + ']'
-                    self.voc_time_nok[time] += 1
-        return self.voc_time_nok
+    slice_date_start_1 = 0
+    slice_date_finish_1 = 5
+    slice_date_start_2 = 6
+    slice_date_finish_2 = 8
 
 
 class LogParserYear(LogParser):
-    def list_number_lines_w_nok(self):
-        with open(self.filename, 'r', encoding='cp1251') as ff:
-            for n, line in enumerate(ff, 1):
-                data = line
-                if data[29:] == 'NOK\n':
-                    time = data[0:5] + ']'
-                    self.voc_time_nok[time] += 1
-        return self.voc_time_nok
+    slice_date_start_1 = 0
+    slice_date_finish_1 = 5
+    slice_date_start_2 = 0
+    slice_date_finish_2 = 0
 
-
-# TODO Методы list_number_lines_w_nok в классах отличаются только в одной строке
-#  time = data... Если не делать квадратных скобок вокруг часов, то код группировки
-#  событий можно будет сделать универсальным и классы наследники станут похожи на
-#  классы из первого задания.
 
 file_names = 'events.txt'
 work = LogParser(file_names)
