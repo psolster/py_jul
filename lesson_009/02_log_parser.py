@@ -96,6 +96,11 @@ class LogParserYear(LogParser):
         return self.voc_time_nok
 
 
+# TODO Методы list_number_lines_w_nok в классах отличаются только в одной строке
+#  time = data... Если не делать квадратных скобок вокруг часов, то код группировки
+#  событий можно будет сделать универсальным и классы наследники станут похожи на
+#  классы из первого задания.
+
 file_names = 'events.txt'
 work = LogParser(file_names)
 work.how_to_work()
