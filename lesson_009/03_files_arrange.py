@@ -74,13 +74,7 @@ class SortFilesInFolder:
                     fulL_names = os.path.join(curent_path, name_file)
                     mtime = os.path.getmtime(fulL_names)
                     date_str = time.ctime(mtime)
-                    # TODO  Разделитель '\\' будет корректно работать только в windows.
-                    #  Старайтесь делать универсальные решения, используя стандартные
-                    #  библиотеки. Если в os.path.join передать
-                    #  os.path.join(target_path, date_str[20:24], date_str[4:7])
-                    #  То в windiws будет сформирован путь с \, а в других ОС с /
-                    added = date_str[20:24] + '\\' + date_str[4:7] + '\\'
-                    path_for_copy_this_file = os.path.join(target_path, added)
+                    path_for_copy_this_file = os.path.join(target_path, date_str[20:24], date_str[4:7])
                     if not os.path.isdir(path_for_copy_this_file):
                         os.makedirs(path_for_copy_this_file)
                         shutil.copy2(os.path.join(path, name_file), path_for_copy_this_file)
@@ -88,17 +82,9 @@ class SortFilesInFolder:
                         shutil.copy2(os.path.join(path, name_file), path_for_copy_this_file)
 
 
-#  Для корректной работы задания достаточно будет указать пити вида icons и icons_by_year.
-# Тут не много не понял замечания...нужно как то изменить вид исходных путей?
-# TODO
-#  Сейчас для запуска заданий нужно, чтобы оно запускалось на комьютере с ОС windows,
-#  в которой в каталоге Users\kampa\PycharmProjects\python_base\lesson_009\icons
-#  находятся иконки. Нужно сделать универсальное решение и указать простые
-#  пути: path = icons и target_path=icons_by_year или вычислять путь относительно расоложения
-#  модуля с заданием.
-path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons"
+path = "icons"
 path = os.path.normpath(path)
-target_path = "C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_009\\icons_by_year"
+target_path = "icons_by_year"
 target_path = os.path.normpath(target_path)
 sort = SortFilesInFolder(path=path, target_path=target_path)
 sort.work_plane()
