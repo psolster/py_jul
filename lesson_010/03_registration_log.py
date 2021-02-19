@@ -42,6 +42,7 @@ class NotEmailError(Exception):
         return self.message
 
 
+# TODO Обрабатывать исключения в этом задании нужно вне функции filling_check.
 def filling_check(file):
     with open(file, 'r', encoding='utf8') as ff:
         for line in ff:
@@ -58,6 +59,7 @@ def filling_check(file):
                     except NotNameError as exc:
                         print(f'Поймано исключение {exc}')
                         f_no_good = open(
+                            # TODO Используйте локальные пути для открытия файлов.
                             'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_bad.log',
                             'a+', encoding='utf8')
                         f_no_good.write(line + ' '+str({exc})+' нет имени \n')
@@ -89,6 +91,14 @@ def filling_check(file):
                     fgood.close()
 
 
+# TODO Каждый раз открывать файл на запись довольно ресурсозатратно.
+#  Будет правильнее открыть все файлы до цикла.
+#  Вы можете открыть сразу несколько файлов в одном контест менеджере.
+#  with open('file1', 'w') as file1, open('file2', 'w') as file2:
+
+
+# TODO Используйте относительные пути и библиотеку os.path или pathlib для формирования
+#  корректных путей к файлам. Задание должно корректно запускаться без редактирования кода.
 name_file = 'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations.txt'
 name_file = os.path.normpath(name_file)
 filling_check(name_file)
