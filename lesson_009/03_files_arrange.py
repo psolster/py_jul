@@ -66,6 +66,7 @@ class SortFilesInFolder:
             self.list_of_filename = []
         return self.voc_name_files_in_dir
 
+
     def create_new_path_and_copy(self, enter_data):
         for path, names_list in enter_data.items():
             curent_path = path
