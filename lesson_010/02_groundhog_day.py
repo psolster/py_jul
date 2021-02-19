@@ -21,6 +21,9 @@ from random import randint
 ENLIGHTENMENT_CARMA_LEVEL = 777
 
 
+# TODO Для исключений, созданных в этом задании лучше сделать общий родительский класс,
+#  например MainException, унаследованный от Exception, от которого нужно
+#  наследовать остальные а в except перехватывать общее исключение.
 class IamGodError(Exception):
 
     def __init__(self):
@@ -79,6 +82,9 @@ def one_day():
     devil_day = randint(1, 14)
     if devil_day == 13:
         choose_exep = randint(1, 7)
+        # TODO Можно упростить код с условиями:
+        #  Перечислить исключения в списке или кортеже, случайно выбирать один
+        #  из элементов списка и вызывать полученное исключение.
         if choose_exep == 1:
             try:
                 raise IamGodError
@@ -114,6 +120,8 @@ def one_day():
     return carma
 
 
+# TODO В функции one_day нужно только выбрасывать исключение. Обрабатывать его
+#  нужно в цикле while.
 total = 0
 day = 0
 while ENLIGHTENMENT_CARMA_LEVEL >= total:
