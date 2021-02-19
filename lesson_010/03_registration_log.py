@@ -42,63 +42,38 @@ class NotEmailError(Exception):
         return self.message
 
 
-# TODO Обрабатывать исключения в этом задании нужно вне функции filling_check.
 def filling_check(file):
-    with open(file, 'r', encoding='utf8') as ff:
+    with open(file, 'r', encoding='utf8') as ff, open('registrations_good.log', 'a+', encoding='utf8') as fg, open(
+            'registrations_bad.log', 'a+', encoding='utf8') as fb:
         for line in ff:
             line = line[:-1]
-            try:
-                name, e_male, age = line.split(' ')
-                age = int(age)
-            except ValueError as ve1:
-                print(f'ошибка не соответствия содержания строки {ve1}')
-            if len(name) or len(e_male) or len(age) != 0:
+            name, e_male, age = line.split(' ')
+            age = int(age)
+            if len(name) or len(e_male) or len(str(age)) != 0:
                 if not name.isalpha():
-                    try:
-                        raise NotNameError
-                    except NotNameError as exc:
-                        print(f'Поймано исключение {exc}')
-                        f_no_good = open(
-                            # TODO Используйте локальные пути для открытия файлов.
-                            'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_bad.log',
-                            'a+', encoding='utf8')
-                        f_no_good.write(line + ' '+str({exc})+' нет имени \n')
-                        fgood.close()
+                    fb.write(line + '\n')
+                    raise NotNameError()
+
                 elif '@' and '.' not in e_male:
-                    try:
-                        raise NotEmailError
-                    except NotEmailError as exc:
-                        print(f'Поймано исключение {exc}')
-                        f_no_good = open(
-                            'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_bad.log',
-                            'a+', encoding='utf8')
-                        f_no_good.write(line + ' '+str({exc}) + ' нет e-mail\n')
-                        fgood.close()
+                    fb.write(line + '\n')
+                    raise NotEmailError()
+
                 elif not 10 < age < 99:
-                    try:
-                        raise ValueError
-                    except ValueError as exc:
-                        print(f'Поймано исключение {exc}, возраст не соответствует')
-                        f_no_good = open(
-                            'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_bad.log',
-                            'a+', encoding='utf8')
-                        f_no_good.write(line + ' '+str({exc}) + ' возраст не соответствует \n')
-                        f_no_good.close()
+                    raise ValueError('возраст не тот')
                 else:
-                    fgood = open('C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations_good.log',
-                                 'a+', encoding='utf8')
-                    fgood.write(line+'\n')
-                    fgood.close()
+                    fg.write(line + '\n')
+
 
 
 # TODO Каждый раз открывать файл на запись довольно ресурсозатратно.
- #  Будет правильнее открыть все файлы до цикла.
+#  Будет правильнее открыть все файлы до цикла.
 #  Вы можете открыть сразу несколько файлов в одном контест менеджере.
 #  with open('file1', 'w') as file1, open('file2', 'w') as file2:
 
 
-# TODO Используйте относительные пути и библиотеку os.path или pathlib для формирования
-#  корректных путей к файлам. Задание должно корректно запускаться без редактирования кода.
-name_file = 'C:\\Users\\kampa\\PycharmProjects\\python_base\\lesson_010\\registrations.txt'
-name_file = os.path.normpath(name_file)
-filling_check(name_file)
+name_file = 'registrations.txt'
+
+try:
+    filling_check(name_file)
+except (NotNameError, NotEmailError, ValueError) as err:
+    print(f'возникла ошибка {err}')
