@@ -66,7 +66,6 @@ class SortFilesInFolder:
             self.list_of_filename = []
         return self.voc_name_files_in_dir
 
-
     def create_new_path_and_copy(self, enter_data):
         for path, names_list in enter_data.items():
             curent_path = path
@@ -95,3 +94,5 @@ sort.work_plane()
 # Это относится только к чтению файлов в архиве. В случае паттерна "Шаблонный метод" изменяется способ
 # получения данных (читаем os.walk() или zip.namelist и т.д.)
 # Документация по zipfile: API https://docs.python.org/3/library/zipfile.html
+
+# Зачёт!
