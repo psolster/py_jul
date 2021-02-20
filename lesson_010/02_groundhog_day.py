@@ -24,58 +24,48 @@ ENLIGHTENMENT_CARMA_LEVEL = 777
 # TODO Для исключений, созданных в этом задании лучше сделать общий родительский класс,
 #  например MainException, унаследованный от Exception, от которого нужно
 #  наследовать остальные а в except перехватывать общее исключение.
-class IamGodError(Exception):
+class MainException(Exception):
+    def __init__(self):
+        self.message = 'ошибка родительского класса'
+
+    def __str__(self):
+        return self.message
+
+
+class IamGodError(MainException):
 
     def __init__(self):
         self.message = 'ошибка режима бог'
 
-    def __str__(self):
-        return self.message
 
-
-class DrunkError(Exception):
+class DrunkError(MainException):
 
     def __init__(self):
         self.message = 'перепил - хуже, чем недопил'
 
-    def __str__(self):
-        return self.message
 
-
-class CarCrashError(Exception):
+class CarCrashError(MainException):
 
     def __init__(self):
         self.message = 'перепил - хуже, чем недопил'
 
-    def __str__(self):
-        return self.message
 
-
-class GluttonyError(Exception):
+class GluttonyError(MainException):
 
     def __init__(self):
         self.message = 'чревоугодие - это грех'
 
-    def __str__(self):
-        return self.message
 
-
-class SuicideError(Exception):
+class SuicideError(MainException):
 
     def __init__(self):
         self.message = 'самоубийцы попадают в ад'
 
-    def __str__(self):
-        return self.message
 
-
-class DepressionError(Exception):
+class DepressionError(MainException):
 
     def __init__(self):
         self.message = 'деперссия это отстой'
-
-    def __str__(self):
-        return self.message
 
 
 def one_day():
@@ -97,5 +87,5 @@ while ENLIGHTENMENT_CARMA_LEVEL >= total:
         print(exc)
         total += res
         day += 1
-print(f'карму накомпил {total} за {day} дней')
+print(f'карму накопил {total} за {day} дней')
 # https://goo.gl/JnsDqu
