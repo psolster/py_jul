@@ -79,54 +79,23 @@ class DepressionError(Exception):
 
 
 def one_day():
+    list_of_except = [IamGodError, DrunkError, CarCrashError, GluttonyError, DepressionError, SuicideError]
     devil_day = randint(1, 14)
     if devil_day == 13:
-        choose_exep = randint(1, 7)
-        # TODO Можно упростить код с условиями:
-        #  Перечислить исключения в списке или кортеже, случайно выбирать один
-        #  из элементов списка и вызывать полученное исключение.
-        if choose_exep == 1:
-            try:
-                raise IamGodError
-            except IamGodError as exc:
-                print(f'Поймано исключение {exc}')
-        elif choose_exep == 2:
-            try:
-                raise DrunkError
-            except DrunkError as exc:
-                print(f'Поймано исключение {exc}')
-        elif choose_exep == 3:
-            try:
-                raise CarCrashError
-            except CarCrashError as exc:
-                print(f'Поймано исключение {exc}')
-        elif choose_exep == 4:
-            try:
-                raise GluttonyError
-            except GluttonyError as exc:
-                print(f'Поймано исключение {exc}')
-        elif choose_exep == 5:
-            try:
-                raise DepressionError
-            except DepressionError as exc:
-                print(f'Поймано исключение {exc}')
-        else:
-            try:
-                raise SuicideError
-            except SuicideError as exc:
-                print(f'Поймано исключение {exc}')
-
-    carma = randint(1, 8)
+        choose_exep = randint(0, 5)
+        raise list_of_except[choose_exep]
+    carma = randint(1, 7)
     return carma
 
 
-# TODO В функции one_day нужно только выбрасывать исключение. Обрабатывать его
-#  нужно в цикле while.
 total = 0
 day = 0
 while ENLIGHTENMENT_CARMA_LEVEL >= total:
-    res = one_day()
-    total += res
-    day += 1
+    try:
+        res = one_day()
+    except (IamGodError, DrunkError, CarCrashError, GluttonyError, DepressionError, SuicideError) as exc:
+        print(exc)
+        total += res
+        day += 1
 print(f'карму накомпил {total} за {day} дней')
 # https://goo.gl/JnsDqu
