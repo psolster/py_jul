@@ -51,17 +51,22 @@ def filling_check(file):
             age = int(age)
             if len(name) or len(e_male) or len(str(age)) != 0:
                 if not name.isalpha():
-                    fb.write(line + '\n')
+                    fb.write(line + ' ошибка имени ' + '\n')
                     raise NotNameError()
 
                 elif '@' and '.' not in e_male:
-                    fb.write(line + '\n')
+                    fb.write(line + ' ошибка e-mail ' + '\n')
                     raise NotEmailError()
 
                 elif not 10 < age < 99:
+                    fb.write(line + ' ошибка возраста ' + '\n')
                     raise ValueError('возраст не тот')
+
                 else:
                     fg.write(line + '\n')
+            else:
+                raise ValueError('не все поля заполнены')
+
 
 
 
@@ -73,7 +78,12 @@ def filling_check(file):
 
 name_file = 'registrations.txt'
 
+# данном коде не могу понять, как продолжить цикл четения файла, после выкидывния исключения?
+# на первой же строке исключение, он его ловит и завершает код?
+
 try:
     filling_check(name_file)
 except (NotNameError, NotEmailError, ValueError) as err:
     print(f'возникла ошибка {err}')
+finally:
+    print('продолжим')
