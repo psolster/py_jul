@@ -21,7 +21,7 @@ from random import randint
 ENLIGHTENMENT_CARMA_LEVEL = 777
 
 
-# TODO Для исключений, созданных в этом задании лучше сделать общий родительский класс,
+#  Для исключений, созданных в этом задании лучше сделать общий родительский класс,
 #  например MainException, унаследованный от Exception, от которого нужно
 #  наследовать остальные а в except перехватывать общее исключение.
 class MainException(Exception):
@@ -69,6 +69,7 @@ class DepressionError(MainException):
 
 
 def one_day():
+    # TODO Список исключений лучше создавать вне функции.
     list_of_except = [IamGodError, DrunkError, CarCrashError, GluttonyError, DepressionError, SuicideError]
     devil_day = randint(1, 14)
     if devil_day == 13:
@@ -83,6 +84,7 @@ day = 0
 while ENLIGHTENMENT_CARMA_LEVEL >= total:
     try:
         res = one_day()
+        # TODO Здесь удобнее перехватывать исключене MainException
     except (IamGodError, DrunkError, CarCrashError, GluttonyError, DepressionError, SuicideError) as exc:
         print(exc)
         total += res
