@@ -80,7 +80,7 @@ name_file = 'registrations.txt'
 
 # данном коде не могу понять, как продолжить цикл четения файла, после выкидывния исключения?
 # на первой же строке исключение, он его ловит и завершает код?
-
+# TODO Нужно делать проверки для каждой строки, а цикл с блоками try/except разместить во внешнем коде.
 try:
     filling_check(name_file)
 except (NotNameError, NotEmailError, ValueError) as err:
