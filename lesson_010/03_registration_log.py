@@ -42,9 +42,10 @@ class NotEmailError(Exception):
         return self.message
 
 
-def filling_check(file):
-    with open(file, 'r', encoding='utf8') as ff, open('registrations_good.log', 'a+', encoding='utf8') as fg, open(
-            'registrations_bad.log', 'a+', encoding='utf8') as fb:
+def filling_check():
+
+    # with open(file, 'r', encoding='utf8') as ff, open('registrations_good.log', 'a+', encoding='utf8') as fg, open(
+    #         'registrations_bad.log', 'a+', encoding='utf8') as fb:
         for line in ff:
             line = line[:-1]
             name, e_male, age = line.split(' ')
@@ -81,9 +82,15 @@ name_file = 'registrations.txt'
 # данном коде не могу понять, как продолжить цикл четения файла, после выкидывния исключения?
 # на первой же строке исключение, он его ловит и завершает код?
 # TODO Нужно делать проверки для каждой строки, а цикл с блоками try/except разместить во внешнем коде.
-try:
-    filling_check(name_file)
-except (NotNameError, NotEmailError, ValueError) as err:
-    print(f'возникла ошибка {err}')
-finally:
-    print('продолжим')
+with open(name_file, 'r', encoding='utf8') as ff, open('registrations_good.log', 'a+', encoding='utf8') as fg, open(
+        'registrations_bad.log', 'a+', encoding='utf8') as fb:
+    while True:
+        # try:
+        try:
+            filling_check()
+        except (NotNameError, NotEmailError, ValueError, EOFError) as err:
+            print(f'возникла ошибка {err}')
+            if 'EOFError' in err:
+                break
+
+
