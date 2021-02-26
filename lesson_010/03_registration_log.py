@@ -21,7 +21,7 @@
 # - поле емейл НЕ содержит @ и .(точку): NotEmailError (кастомное исключение)
 # - поле возраст НЕ является числом от 10 до 99: ValueError
 # Вызов метода обернуть в try-except.
-import os
+# import os
 
 
 class NotNameError(Exception):
@@ -42,55 +42,32 @@ class NotEmailError(Exception):
         return self.message
 
 
-def filling_check():
-
-    # with open(file, 'r', encoding='utf8') as ff, open('registrations_good.log', 'a+', encoding='utf8') as fg, open(
-    #         'registrations_bad.log', 'a+', encoding='utf8') as fb:
-        for line in ff:
-            line = line[:-1]
-            name, e_male, age = line.split(' ')
-            age = int(age)
-            if len(name) or len(e_male) or len(str(age)) != 0:
-                if not name.isalpha():
-                    fb.write(line + ' ошибка имени ' + '\n')
-                    raise NotNameError()
-
-                elif '@' and '.' not in e_male:
-                    fb.write(line + ' ошибка e-mail ' + '\n')
-                    raise NotEmailError()
-
-                elif not 10 < age < 99:
-                    fb.write(line + ' ошибка возраста ' + '\n')
-                    raise ValueError('возраст не тот')
-
-                else:
-                    fg.write(line + '\n')
+def filling_check(line):
+    name, e_male, age = line.split(' ')
+    age = int(age)
+    try:
+        if len(name) or len(e_male) or len(str(age)) != 0:
+            if not name.isalpha():
+                fb.write(line + ' ошибка имени ' + '\n')
+                raise NotNameError()
+            elif '@' and '.' not in e_male:
+                fb.write(line + ' ошибка e-mail ' + '\n')
+                raise NotEmailError()
+            elif not 10 < age < 99:
+                fb.write(line + ' ошибка возраста ' + '\n')
+                raise ValueError('возраст не тот')
             else:
-                raise ValueError('не все поля заполнены')
-
-
-
-
-# TODO Каждый раз открывать файл на запись довольно ресурсозатратно.
-#  Будет правильнее открыть все файлы до цикла.
-#  Вы можете открыть сразу несколько файлов в одном контест менеджере.
-#  with open('file1', 'w') as file1, open('file2', 'w') as file2:
+                fg.write(line + '\n')
+    finally:
+        print('*')
 
 
 name_file = 'registrations.txt'
-
-# данном коде не могу понять, как продолжить цикл четения файла, после выкидывния исключения?
-# на первой же строке исключение, он его ловит и завершает код?
-# TODO Нужно делать проверки для каждой строки, а цикл с блоками try/except разместить во внешнем коде.
 with open(name_file, 'r', encoding='utf8') as ff, open('registrations_good.log', 'a+', encoding='utf8') as fg, open(
         'registrations_bad.log', 'a+', encoding='utf8') as fb:
-    while True:
-        # try:
+    for line in ff:
+        line = line[:-1]
         try:
-            filling_check()
-        except (NotNameError, NotEmailError, ValueError, EOFError) as err:
+            filling_check(line)
+        except (NotNameError, NotEmailError, ValueError) as err:
             print(f'возникла ошибка {err}')
-            if 'EOFError' in err:
-                break
-
-
