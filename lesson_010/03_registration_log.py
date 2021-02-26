@@ -42,24 +42,22 @@ class NotEmailError(Exception):
         return self.message
 
 
-def filling_check(line):
-    name, e_male, age = line.split(' ')
+def filling_check(sline):
+    name, e_male, age = sline.split(' ')
     age = int(age)
     try:
         if len(name) or len(e_male) or len(str(age)) != 0:
             if not name.isalpha():
-                fb.write(line + ' ошибка имени ' + '\n')
                 raise NotNameError()
-            elif '@' and '.' not in e_male:
-                fb.write(line + ' ошибка e-mail ' + '\n')
-                raise NotEmailError()
+            elif '@' not in e_male:
+                if '.' not in e_male:
+                    raise NotEmailError()
             elif not 10 < age < 99:
-                fb.write(line + ' ошибка возраста ' + '\n')
                 raise ValueError('возраст не тот')
             else:
                 fg.write(line + '\n')
     finally:
-        print('*')
+        pass
 
 
 name_file = 'registrations.txt'
@@ -70,4 +68,5 @@ with open(name_file, 'r', encoding='utf8') as ff, open('registrations_good.log',
         try:
             filling_check(line)
         except (NotNameError, NotEmailError, ValueError) as err:
-            print(f'возникла ошибка {err}')
+            fb.write(line + ' ошибка ' + str(err) + '\n')
+
