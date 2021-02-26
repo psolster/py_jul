@@ -68,9 +68,10 @@ class DepressionError(MainException):
         self.message = 'деперссия это отстой'
 
 
+list_of_except = [IamGodError, DrunkError, CarCrashError, GluttonyError, DepressionError, SuicideError]
+
+
 def one_day():
-    # TODO Список исключений лучше создавать вне функции.
-    list_of_except = [IamGodError, DrunkError, CarCrashError, GluttonyError, DepressionError, SuicideError]
     devil_day = randint(1, 14)
     if devil_day == 13:
         choose_exep = randint(0, 5)
@@ -84,8 +85,7 @@ day = 0
 while ENLIGHTENMENT_CARMA_LEVEL >= total:
     try:
         res = one_day()
-        # TODO Здесь удобнее перехватывать исключене MainException
-    except (IamGodError, DrunkError, CarCrashError, GluttonyError, DepressionError, SuicideError) as exc:
+    except (MainException) as exc:
         print(exc)
         total += res
         day += 1
