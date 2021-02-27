@@ -70,3 +70,4 @@ with open(name_file, 'r', encoding='utf8') as ff, open('registrations_good.log',
         except (NotNameError, NotEmailError, ValueError) as err:
             fb.write(line + ' ошибка ' + str(err) + '\n')
 
+# Зачёт!

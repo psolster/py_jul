@@ -85,9 +85,12 @@ day = 0
 while ENLIGHTENMENT_CARMA_LEVEL >= total:
     try:
         res = one_day()
+    # TODO Скобки в следующей строке лишние и их нужно убрать.
     except (MainException) as exc:
         print(exc)
         total += res
         day += 1
 print(f'карму накопил {total} за {day} дней')
 # https://goo.gl/JnsDqu
+
+# Зачёт!
