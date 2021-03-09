@@ -31,6 +31,6 @@ def get_polygon(n):
     return draw_fig
 
 
-draw_triangle = get_polygon(n=6)
-draw_triangle(sd.get_point(200, 200), 15, 200)
+draw_triangle = get_polygon(n=3)
+draw_triangle(sd.get_point(200, 200), 30, 200)
 sd.pause()
