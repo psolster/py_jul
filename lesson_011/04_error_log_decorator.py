@@ -13,6 +13,7 @@ def log_errors(func):
     # TODO здесь ваш код
 
 
+
 # Проверить работу на следующих функциях
 @log_errors
 def perky(param):
