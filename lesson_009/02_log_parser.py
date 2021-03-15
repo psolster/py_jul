@@ -50,7 +50,7 @@ class LogParser:
         with open(self.filename, 'r', encoding='cp1251') as ff:
             for n, line in enumerate(ff, 1):
                 data = line
-                if data[29:] == 'NOK\n':
+                if data[29:-1] == 'NOK':
                     time = data[self.slice_date_start_1:self.slice_date_finish_1] + ']' + \
                            ' ' + '[' + data[self.slice_date_start_2:self.slice_date_finish_2] + ']'
                     self.voc_time_nok[time] += 1

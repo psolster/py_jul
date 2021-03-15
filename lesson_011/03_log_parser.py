@@ -14,4 +14,26 @@
 #
 # [2018-05-17 01:57] 1234
 
-# TODO здесь ваш код
+from collections import defaultdict
+
+
+file_names = 'events.txt'
+slice_date_start_1 = 0
+slice_date_finish_1 = 17
+slice_date_start_2 = 0
+slice_date_finish_2 = 0
+voc_time_nok = defaultdict(int)
+
+
+def generate_line_w_nok(filename):
+    with open(filename, 'r', encoding='cp1251') as ff:
+        for line in ff:
+            if line[29:-1] == 'NOK':
+                time = line[slice_date_start_1:slice_date_finish_1] + ']'
+                yield time
+
+
+for data in generate_line_w_nok(filename=file_names):
+    voc_time_nok[data] += 1
+for key, it in voc_time_nok.items():
+    print(key, it)
