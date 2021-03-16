@@ -9,9 +9,18 @@
 
 
 def log_errors(func):
-    pass
-    # TODO здесь ваш код
+    def exception_catcher(*args, **kwargs):
+        try:
+            start = func(*args, **kwargs)
+            return start
+        except BaseException as err:
+            with open(file='function_errors.log', mode='a', encoding='utf8') as ff:
+                ff.writelines(f'Ошибка в функции {func.__name__}, параметры функции {args, kwargs}'
+                              f'вот что не так {err.args}' + '\n')
+                print(f'Ошибка в функции {func.__name__}, параметры функции {args, kwargs}'
+                      f'вот что не так {err.args}' + '\n')
 
+    return exception_catcher
 
 
 # Проверить работу на следующих функциях
@@ -44,6 +53,8 @@ for line in lines:
         check_line(line)
     except Exception as exc:
         print(f'Invalid format: {exc}')
+
+
 perky(param=42)
 
 
