@@ -34,3 +34,5 @@ def get_polygon(n):
 draw_triangle = get_polygon(n=3)
 draw_triangle(sd.get_point(200, 200), 30, 200)
 sd.pause()
+
+# Зачёт!

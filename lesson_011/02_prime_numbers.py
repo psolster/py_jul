@@ -48,11 +48,13 @@ class PrimeNumbers:
             raise StopIteration()
 
 
-prime_number_iterator = PrimeNumbers(n=1000)
+prime_number_iterator = PrimeNumbers(n=10000)
 for number in prime_number_iterator:
     print(number)
 
-# TODO после подтверждения части 1 преподователем, можно делать
+#  после подтверждения части 1 преподователем, можно делать
+
+# TODO Переходите ко второй части задания.
 # Часть 2
 # Теперь нужно создать генератор, который выдает последовательность простых чисел до n
 # Распечатать все простые числа до 10000 в столбик
