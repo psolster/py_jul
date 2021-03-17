@@ -19,6 +19,7 @@ def log_errors(func):
                               f'вот что не так {err.args}' + '\n')
                 print(f'Ошибка в функции {func.__name__}, параметры функции {args, kwargs}'
                       f'вот что не так {err.args}' + '\n')
+                raise err
                 # TODO После обработки ошибки, исключение нужно выбросить (raise) дальше.
 
     return exception_catcher
