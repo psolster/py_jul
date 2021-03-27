@@ -17,7 +17,7 @@
 from collections import defaultdict
 
 file_names = 'events.txt'
-slice_date_start_1 = 0
+slice_date_start_1 = 1
 slice_date_finish_1 = 17
 slice_date_start_2 = 0
 slice_date_finish_2 = 0
@@ -29,29 +29,31 @@ def get_lines(file_name):
             if not line:
                 continue
             line = line[:-1]
-            yield line
+            if line[29:] == 'NOK':
+                time = line[slice_date_start_1:slice_date_finish_1]
+                yield line, time
+            # else:
+            #     continue
 
 
 def grouped_events():
     count = 0
-    for line in get_lines(file_name=file_names):
-
-
-
-        if line[29:] == 'NOK':
-            time = line[slice_date_start_1:slice_date_finish_1]
-            count += 1
+    per = '0000-00-00 00:00'
+    for line, time in get_lines(file_name=file_names):
+        if time != per:
             per = time
+            count += 1
+            yield time, count
+        else:
+            count += 1
 
-            yield time+']', count
 
-    # with open(filename, 'r', encoding='cp1251') as ff:
-    #
-    #     for line in ff:
-    #         time = line[slice_date_start_1:slice_date_finish_1]
-    #         count = 0
-    #         if line[29:-1] != 'NOK':
-    #             count += 1
+
+
+
+        yield time , count
+
+
 
 
 # TODO Группировка событий должна происходить внутри функции генератора,
