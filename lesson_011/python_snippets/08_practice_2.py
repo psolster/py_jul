@@ -13,7 +13,7 @@
 # Нужно вычислить все операции и найти сумму их результата.
 
 ops = {
-    '*': lambda x, y: x + y,
+    '*': lambda x, y: x * y,
     '/': lambda x, y: x / y,
     '+': lambda x, y: x + y,
     '-': lambda x, y: x - y,

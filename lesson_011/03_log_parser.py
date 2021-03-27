@@ -16,21 +16,42 @@
 
 from collections import defaultdict
 
-
 file_names = 'events.txt'
 slice_date_start_1 = 0
 slice_date_finish_1 = 17
 slice_date_start_2 = 0
 slice_date_finish_2 = 0
-voc_time_nok = defaultdict(int)
 
 
-def generate_line_w_nok(filename):
-    with open(filename, 'r', encoding='cp1251') as ff:
+def get_lines(file_name):
+    with open(file_name, 'r') as ff:
         for line in ff:
-            if line[29:-1] == 'NOK':
-                time = line[slice_date_start_1:slice_date_finish_1] + ']'
-                yield time
+            if not line:
+                continue
+            line = line[:-1]
+            yield line
+
+
+def grouped_events():
+    count = 0
+    for line in get_lines(file_name=file_names):
+
+
+
+        if line[29:] == 'NOK':
+            time = line[slice_date_start_1:slice_date_finish_1]
+            count += 1
+            per = time
+
+            yield time+']', count
+
+    # with open(filename, 'r', encoding='cp1251') as ff:
+    #
+    #     for line in ff:
+    #         time = line[slice_date_start_1:slice_date_finish_1]
+    #         count = 0
+    #         if line[29:-1] != 'NOK':
+    #             count += 1
 
 
 # TODO Группировка событий должна происходить внутри функции генератора,
@@ -45,7 +66,8 @@ def generate_line_w_nok(filename):
 #  И заменяете старый период на новый. После завершения цикла по строкам файлов нужно сделать
 #  заключительным yield, возвращая последний накопленный результат.
 
-for data in generate_line_w_nok(filename=file_names):
-    voc_time_nok[data] += 1
-for key, it in voc_time_nok.items():
-    print(key, it)
+even = grouped_events()
+for time, count in even:
+    print(time, count)
+
+
