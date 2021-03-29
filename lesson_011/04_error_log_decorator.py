@@ -20,7 +20,6 @@ def log_errors(func):
                 print(f'Ошибка в функции {func.__name__}, параметры функции {args, kwargs}'
                       f'вот что не так {err.args}' + '\n')
                 raise err
-                # TODO После обработки ошибки, исключение нужно выбросить (raise) дальше.
 
     return exception_catcher
 
@@ -56,9 +55,7 @@ for line in lines:
     except Exception as exc:
         print(f'Invalid format: {exc}')
 
-
 perky(param=42)
-
 
 # Усложненное задание (делать по желанию).
 # Написать декоратор с параметром - именем файла
