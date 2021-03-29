@@ -23,40 +23,52 @@ slice_date_start_2 = 0
 slice_date_finish_2 = 0
 
 
-def get_lines(file_name):
+def grouped_events(file_name):
+    count = 0
+    start_per = ''
     with open(file_name, 'r') as ff:
         for line in ff:
             if not line:
                 continue
             line = line[:-1]
             if line[29:] == 'NOK':
-                # time = line[slice_date_start_1:slice_date_finish_1]
-                yield line
-            # else:
-            #     continue
+                if start_per == '':
+                    start_per = line[slice_date_start_1:slice_date_finish_1]
+                time = line[slice_date_start_1:slice_date_finish_1]
+                if time == start_per:
+                    count += 1
+                else:
+                    old_per = start_per
+                    start_per = time
+                    sum_count = count
+                    count = 0
+                    yield old_per, sum_count
+            else:
+                continue
+
+        # else:
+        #     continue
 
 
-def grouped_events():
-    count = 0
-    start_per = get_lines(file_name=file_names)
-
-    for data in get_lines(file_name=file_names):
-        time = data[slice_date_start_1:slice_date_finish_1]
-        if time != start_per:
-            start_per = time
-            count += 1
-            # yield time, count
-        else:
-            count += 1
-        yield start_per, count
-
-
-
-
-
-        yield time , count
-
-
+# def grouped_events():
+#     count = 0
+#     start_per = get_lines(file_name=file_names)
+#
+#     for data in get_lines(file_name=file_names):
+#         time = data[slice_date_start_1:slice_date_finish_1]
+#         if time != start_per:
+#             start_per = time
+#             count += 1
+#             # yield time, count
+#         else:
+#             count += 1
+#         yield start_per, count
+#
+#
+#
+#
+#
+#         yield time , count
 
 
 # TODO Группировка событий должна происходить внутри функции генератора,
@@ -71,8 +83,6 @@ def grouped_events():
 #  И заменяете старый период на новый. После завершения цикла по строкам файлов нужно сделать
 #  заключительным yield, возвращая последний накопленный результат.
 
-even = grouped_events()
+even = grouped_events(file_name=file_names)
 for time, count in even:
     print(time, count)
-
-
