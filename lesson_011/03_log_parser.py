@@ -41,48 +41,12 @@ def grouped_events(file_name):
                     old_per = start_per
                     start_per = time
                     sum_count = count
-                    count = 0
+                    count = 1
                     yield old_per, sum_count
             else:
                 continue
 
-        # else:
-        #     continue
-
-
-# def grouped_events():
-#     count = 0
-#     start_per = get_lines(file_name=file_names)
-#
-#     for data in get_lines(file_name=file_names):
-#         time = data[slice_date_start_1:slice_date_finish_1]
-#         if time != start_per:
-#             start_per = time
-#             count += 1
-#             # yield time, count
-#         else:
-#             count += 1
-#         yield start_per, count
-#
-#
-#
-#
-#
-#         yield time , count
-
-
-# TODO Группировка событий должна происходить внутри функции генератора,
-#  который должен выдавать время и количество событий.
-#  События в файле отсортированы по возрастанию даты и времени.
-#  Поэтому нет необходимости предварительно обрабатывать данные, и только потом возвращать.
-#  Такой подход не оптимален из-за необходимости хранить все данные.
-#  Нужно переделать код таким образом, чтобы возвращать (yield) результат сразу после его получения.
-#  Т. е. хранить нужно только счётчик событий и строку с текущим периодом времени.
-#  При обработке строки нужно проверять, что период совпадает, и тогда нужно только увеличить
-#  счётчик. Если значение не совпадает, то нужно возвращать период и накопленное количество событий.
-#  И заменяете старый период на новый. После завершения цикла по строкам файлов нужно сделать
-#  заключительным yield, возвращая последний накопленный результат.
 
 even = grouped_events(file_name=file_names)
 for time, count in even:
-    print(time, count)
+    print(f'[{time}] {count}')
