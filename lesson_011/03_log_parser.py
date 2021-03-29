@@ -30,22 +30,25 @@ def get_lines(file_name):
                 continue
             line = line[:-1]
             if line[29:] == 'NOK':
-                time = line[slice_date_start_1:slice_date_finish_1]
-                yield line, time
+                # time = line[slice_date_start_1:slice_date_finish_1]
+                yield line
             # else:
             #     continue
 
 
 def grouped_events():
     count = 0
-    per = '0000-00-00 00:00'
-    for line, time in get_lines(file_name=file_names):
-        if time != per:
-            per = time
+    start_per = get_lines(file_name=file_names)
+
+    for data in get_lines(file_name=file_names):
+        time = data[slice_date_start_1:slice_date_finish_1]
+        if time != start_per:
+            start_per = time
             count += 1
-            yield time, count
+            # yield time, count
         else:
             count += 1
+        yield start_per, count
 
 
 
