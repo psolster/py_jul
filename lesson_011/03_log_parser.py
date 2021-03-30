@@ -28,6 +28,11 @@ def grouped_events(file_name):
     start_per = ''
     with open(file_name, 'r') as ff:
         for line in ff:
+            # TODO Можно оптимизировать и упростить код, если добавить генератор
+            #  или генераторное выражение, который будет возвращать части строк,
+            #  заканчивающихся на NOK, где строки будут обрезаны до нужного
+            #  фрагмента даты.
+            #
             if not line:
                 continue
             line = line[:-1]
@@ -47,6 +52,8 @@ def grouped_events(file_name):
                 continue
 
 
+# TODO При работе генератора теряется последнее накопленное значение.
+#  Должна выводиться строка с количеством событий в 2018-05-17 11:34.
 even = grouped_events(file_name=file_names)
 for time, count in even:
     print(f'[{time}] {count}')
