@@ -20,37 +20,37 @@
 # который выдает последовательность простых чисел до n
 #
 # Распечатать все простые числа до 10000 в столбик
-
+#
 # TODO Не нужно Комментировать код задания. Можно выключить
 #  вывод результатов, закомментировав цикл, но класс должен
 #  быть раскомментирован.
-#
-# class PrimeNumbers:
-#     def __init__(self, n):
-#         self.max_n = n
-#         self.prime_numbers = []
-#         self.count = 0
-#
-#     def __iter__(self):
-#         self.count = 1
-#         return self
-#
-#     def get_prime_numbers(self):
-#         self.count += 1
-#         for prime in self.prime_numbers:
-#             if self.count % prime == 0:
-#                 return False
-#         return True
-#
-#     def __next__(self):
-#         while self.count < self.max_n:
-#             if self.get_prime_numbers():
-#                 self.prime_numbers.append(self.count)
-#                 return self.count
-#         else:
-#             raise StopIteration()
-#
-#
+
+class PrimeNumbers:
+    def __init__(self, n):
+        self.max_n = n
+        self.prime_numbers = []
+        self.count = 0
+
+    def __iter__(self):
+        self.count = 1
+        return self
+
+    def get_prime_numbers(self):
+        self.count += 1
+        for prime in self.prime_numbers:
+            if self.count % prime == 0:
+                return False
+        return True
+
+    def __next__(self):
+        while self.count < self.max_n:
+            if self.get_prime_numbers():
+                self.prime_numbers.append(self.count)
+                return self.count
+        else:
+            raise StopIteration()
+
+
 # prime_number_iterator = PrimeNumbers(n=10000)
 # for number in prime_number_iterator:
 #     print(number)
@@ -65,10 +65,6 @@
 
 def prime_numbers_generator(n):
     prime_numbers = []
-    # TODO Переменная с именем number существует не только внутри
-    #  функции, но и на уровне видимости модуля. Иногда подобное
-    #  совпадение имеён может привести к труднодиагностируемым ошибкам.
-    #  Нужно переименовать переменную либо в функции либо в цикле.
     for number in range(2, n + 1):
         for prime in prime_numbers:
             if number % prime == 0:
@@ -80,8 +76,6 @@ def prime_numbers_generator(n):
 
 for number in prime_numbers_generator(n=10000):
     print(number)
-
-# TODO Переходите к третьей части задания.
 
 # Часть 3
 # Написать несколько функций-фильтров, которые выдает True, если число:
