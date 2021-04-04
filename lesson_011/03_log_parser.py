@@ -39,11 +39,11 @@ def gen_lines(file_name):
 def grouped_events():
     count = 0
     start_per = ''
-    line = gen_lines(file_name=file_names)
-        if line[29:] == 'NOK':
-            if start_per == '':
-                start_per = line[slice_date_start_1:slice_date_finish_1]
-                time = line[slice_date_start_1:slice_date_finish_1]
+    line = gen_lines(data)
+    if line[29:] == 'NOK':
+        if start_per == '':
+            start_per = line[slice_date_start_1:slice_date_finish_1]
+            time = line[slice_date_start_1:slice_date_finish_1]
                 if time == start_per:
                     count += 1
                 else:
@@ -52,8 +52,8 @@ def grouped_events():
                     sum_count = count
                     count = 1
                     yield old_per, sum_count
-            else:
-                continue
+
+
 
 
 # TODO При работе генератора теряется последнее накопленное значение.
