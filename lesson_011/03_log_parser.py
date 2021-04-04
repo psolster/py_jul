@@ -23,22 +23,26 @@ slice_date_start_2 = 0
 slice_date_finish_2 = 0
 
 
-def grouped_events(file_name):
-    count = 0
-    start_per = ''
+def gen_lines(file_name):
     with open(file_name, 'r') as ff:
         for line in ff:
-            # TODO Можно оптимизировать и упростить код, если добавить генератор
-            #  или генераторное выражение, который будет возвращать части строк,
-            #  заканчивающихся на NOK, где строки будут обрезаны до нужного
-            #  фрагмента даты.
-            #
+
             if not line:
                 continue
             line = line[:-1]
             if line[29:] == 'NOK':
-                if start_per == '':
-                    start_per = line[slice_date_start_1:slice_date_finish_1]
+                line_w_nok = line[slice_date_start_1:slice_date_finish_1]
+                yield line_w_nok
+
+
+
+def grouped_events():
+    count = 0
+    start_per = ''
+    line = gen_lines(file_name=file_names)
+        if line[29:] == 'NOK':
+            if start_per == '':
+                start_per = line[slice_date_start_1:slice_date_finish_1]
                 time = line[slice_date_start_1:slice_date_finish_1]
                 if time == start_per:
                     count += 1
