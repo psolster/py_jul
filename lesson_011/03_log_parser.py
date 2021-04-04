@@ -14,7 +14,6 @@
 #
 # [2018-05-17 01:57] 1234
 
-from collections import defaultdict
 
 file_names = 'events.txt'
 slice_date_start_1 = 1
@@ -26,7 +25,6 @@ slice_date_finish_2 = 0
 def gen_lines(file_name):
     with open(file_name, 'r') as ff:
         for line in ff:
-
             if not line:
                 continue
             line = line[:-1]
@@ -35,29 +33,28 @@ def gen_lines(file_name):
                 yield line_w_nok
 
 
-
 def grouped_events():
+    global time
     count = 0
     start_per = ''
-    line = gen_lines(data)
-    if line[29:] == 'NOK':
+    next_str = gen_lines(file_name=file_names)
+    for line in next_str:
+        time = line
         if start_per == '':
-            start_per = line[slice_date_start_1:slice_date_finish_1]
-            time = line[slice_date_start_1:slice_date_finish_1]
-                if time == start_per:
-                    count += 1
-                else:
-                    old_per = start_per
-                    start_per = time
-                    sum_count = count
-                    count = 1
-                    yield old_per, sum_count
-
-
+            start_per = line
+        if time == start_per:
+            start_per = line
+            count += 1
+        else:
+            old_per = start_per
+            start_per = time
+            sum_count = count
+            count = 1
+            yield old_per, sum_count
 
 
 # TODO При работе генератора теряется последнее накопленное значение.
 #  Должна выводиться строка с количеством событий в 2018-05-17 11:34.
-even = grouped_events(file_name=file_names)
-for time, count in even:
-    print(f'[{time}] {count}')
+even = grouped_events()
+for time, counts in even:
+    print(f'[{time}] {counts}')
