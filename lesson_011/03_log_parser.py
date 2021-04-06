@@ -38,6 +38,7 @@ def grouped_events():
     count = 0
     start_per = ''
     next_str = gen_lines(file_name=file_names)
+
     for line in next_str:
         time = line
         if start_per == '':
@@ -49,16 +50,15 @@ def grouped_events():
             old_per = start_per
             start_per = time
             sum_count = count
-            count = 1
+
             yield old_per, sum_count
+            count = 1
+    else:
+        old_per = start_per
+        sum_count = count
+        yield old_per, sum_count
 
 
-# TODO При работе генератора теряется последнее накопленное значение.
-#  Должна выводиться строка с количеством событий в 2018-05-17 11:34.
-#   Для вывода последнего значения проще всего добавить блок else цикла for
-#   и добавить в него ещё один yield
-
-# Не могу понять, почему она пропадает
 even = grouped_events()
 for time, counts in even:
     print(f'[{time}] {counts}')
