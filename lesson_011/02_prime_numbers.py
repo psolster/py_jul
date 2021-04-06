@@ -94,3 +94,26 @@ for number in prime_numbers_generator(n=10000):
 # простых счастливых палиндромных чисел и так далее. Придумать не менее 2х способов.
 #
 # Подсказка: возможно, нужно будет добавить параметр в итератор/генератор.
+
+def fun_number(number):
+    if len(str(number)) // 2:
+        lenght = len(str(number))
+        number = str(number)
+        if lenght <= 2:
+           if number[0] == number[1]:
+               return True
+           else:
+               return False
+        elif lenght > 2:
+            left_side = number[0: lenght / 2]
+            right_side = number[lenght / 2:]
+            sum_1 = sum(list(left_side))
+            sum_2 = sum(list(right_side))
+        if sum_1 ==sum_2:
+            return True
+        else:
+            return False
+
+for number in prime_numbers_generator(n=10000):
+    res = fun_number(number=number)
+    print(res)
