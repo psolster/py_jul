@@ -101,7 +101,7 @@ def fun_number(number):
     if lenght < 2:
         return True
     if lenght % 2 == 0:
-        bit_depth = int(lenght/2)
+        bit_depth = int(lenght / 2)
         left = number[:bit_depth]
         right = number[bit_depth:]
         if left == right:
@@ -109,9 +109,9 @@ def fun_number(number):
         else:
             return False
     else:
-        bit_depht = int((lenght-1)/2)
+        bit_depht = int((lenght - 1) / 2)
         left = (number[:bit_depht])
-        right = (number[bit_depht+1:])
+        right = (number[bit_depht + 1:])
         list_left = list(left)
         list_right = list(right)
         list_left_d = map(int, list_left)
@@ -124,6 +124,26 @@ def fun_number(number):
             return False
 
 
+# for number in prime_numbers_generator(n=100000):
+#     res = fun_number(number=number)
+#     print(f'Number-> {number} Fun {res}')
+
+
+def palindromic_number(number):
+    number = str(number)
+    lenght = len(number)
+    bit_depht = int((lenght - 1) / 2)
+    left = (number[:bit_depht])
+    right = (number[bit_depht + 1:])
+    list_left = list(left)
+    list_right = list(right)
+    list_right.reverse()
+    if list_left == list_right:
+        return True
+
+
 for number in prime_numbers_generator(n=100000):
+    if len(str(number)) < 3:
+        continue
     res = fun_number(number=number)
-    print(f'Number-> {number} Fun {res}')
+    print(f'Number-> {number} Palindromic {res}')
