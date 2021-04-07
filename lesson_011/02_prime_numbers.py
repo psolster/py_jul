@@ -96,19 +96,34 @@ def prime_numbers_generator(n):
 # Подсказка: возможно, нужно будет добавить параметр в итератор/генератор.
 
 def fun_number(number):
-    if len(str(number)) < 2:
-        return
-    if len(str(number)) // 2:
-        lenght = len(str(number))
-        number = str(number)
-        bit_depth = int(lenght/2-1)
+    number = str(number)
+    lenght = len(number)
+    if lenght < 2:
+        return True
+    if lenght % 2 == 0:
+        bit_depth = int(lenght/2)
         left = number[:bit_depth]
-        right = number[bit_depth+1:]
+        right = number[bit_depth:]
         if left == right:
             return True
         else:
             return False
+    else:
+        bit_depht = int((lenght-1)/2)
+        left = (number[:bit_depht])
+        right = (number[bit_depht+1:])
+        list_left = list(left)
+        list_right = list(right)
+        list_left_d = map(int, list_left)
+        list_right_d = map(int, list_right)
+        sum_left = sum(list_left_d)
+        sum_right = sum(list_right_d)
+        if sum_left == sum_right:
+            return True
+        else:
+            return False
 
-for number in prime_numbers_generator(n=10000):
+
+for number in prime_numbers_generator(n=100000):
     res = fun_number(number=number)
     print(f'Number-> {number} Fun {res}')
