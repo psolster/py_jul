@@ -21,9 +21,6 @@
 #
 # Распечатать все простые числа до 10000 в столбик
 #
-# TODO Не нужно Комментировать код задания. Можно выключить
-#  вывод результатов, закомментировав цикл, но класс должен
-#  быть раскомментирован.
 
 class PrimeNumbers:
     def __init__(self, n):
@@ -133,7 +130,6 @@ def trimorphic_number(number):
 
 # for number in prime_numbers_generator(n=10000):
 #     print(number)
-
 
 
 # Часть 3
