@@ -62,3 +62,5 @@ def grouped_events():
 even = grouped_events()
 for time, counts in even:
     print(f'[{time}] {counts}')
+
+# Зачёт!
