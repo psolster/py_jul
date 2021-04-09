@@ -58,74 +58,15 @@ class PrimeNumbers:
 # Часть 2
 # Теперь нужно создать генератор, который выдает последовательность простых чисел до n
 # Распечатать все простые числа до 10000 в столбик
-
-
-def prime_numbers_generator(n):
-    prime_numbers = []
-    for number in range(2, n + 1):
-        for prime in prime_numbers:
-            if number % prime == 0:
-                break
-        else:
-            prime_numbers.append(number)
-            yield number
-
-
-def fun_number(number):
-    number = str(number)
-    lenght = len(number)
-    if lenght < 2:
-        return True
-    if lenght % 2 == 0:
-        bit_depth = int(lenght / 2)
-        left = number[:bit_depth]
-        right = number[bit_depth:]
-        if left == right:
-            return True
-        else:
-            return False
-    else:
-        bit_depht = int((lenght - 1) / 2)
-        left = (number[:bit_depht])
-        right = (number[bit_depht + 1:])
-        list_left = list(left)
-        list_right = list(right)
-        list_left_d = map(int, list_left)
-        list_right_d = map(int, list_right)
-        sum_left = sum(list_left_d)
-        sum_right = sum(list_right_d)
-        if sum_left == sum_right:
-            return True
-        else:
-            return False
-
-
-def palindromic_number(number):
-    number = str(number)
-    lenght = len(number)
-    bit_depht = int((lenght - 1) / 2)
-    left = (number[:bit_depht])
-    right = (number[bit_depht + 1:])
-    list_left = list(left)
-    list_right = list(right)
-    list_right.reverse()
-    if list_left == list_right:
-        return True
-    else:
-        return False
-
-
-def trimorphic_number(number):
-    kub_namber = number ** 3
-    number = str(number)
-    kub_namber = str(kub_namber)
-    lenght_kub = len(kub_namber)
-    lenght = len(number)
-    slic = lenght_kub - lenght
-    if kub_namber[slic:] == number:
-        return True
-    else:
-        return False
+# def prime_numbers_generator(n):
+#     prime_numbers = []
+#     for number in range(2, n + 1):
+#         for prime in prime_numbers:
+#             if number % prime == 0:
+#                 break
+#         else:
+#             prime_numbers.append(number)
+#             yield number
 
 
 # for number in prime_numbers_generator(n=10000):
@@ -149,28 +90,55 @@ def trimorphic_number(number):
 # Подсказка: возможно, нужно будет добавить параметр в итератор/генератор.
 
 
-# for number in prime_numbers_generator(n=100000):
-#     res = fun_number(number=number)
-#     print(f'Number-> {number} Fun {res}')
+def prime_numbers_generator(n, filter):
+    prime_numbers = []
+    for number in range(2, n + 1):
+        for prime in prime_numbers:
+            if number % prime == 0:
+                break
+        else:
+            prime_numbers.append(number)
+            if filter(str(number)):
+                yield str(number)
 
 
-# for number in prime_numbers_generator(n=100000):
-#     if len(str(number)) < 3:
-#         continue
-#     res = palindromic_number(number=number)
-#     print(f'Number-> {number} Palindromic {res}')
+def sum_numbers(number):
+    return sum(map(int, number))
 
 
-for number in prime_numbers_generator(n=10000):
-    third_degree = number ** 3
-    res = trimorphic_number(number=number)
-    print(f'Number-> {number} third degree {third_degree} Trimorphic {res}')
+def fun_number(number):
+    middle = len(number) // 2
+    return sum_numbers(number[:middle]) == sum_numbers(number[-middle:])
 
 
-# TODO В части 3 нужно сделать фильтрация простых чисел двумя  способи.
-#  Для первого способа нужно изменить генератор так, чтобы он принимал в
-#  аргумент список функция фильтров. Возвращаться должно только такое число,
-#  для которого все функции фильтры выдадут True. При отсутствии функций
-#  в аргументах генератор должен работать как обычно и возвращать все
-#  простые числа.
-#  Вторым способом можно использовать встроенную в python функцию filter.
+def palindromic_number(number):
+    lenght = len(number)
+    bit_depht = int((lenght - 1) / 2)
+    left = (number[:bit_depht])
+    right = (number[bit_depht + 1:])
+    list_left = list(left)
+    list_right = list(right)
+    list_right.reverse()
+    if list_left == list_right:
+        return number
+
+
+def trimorphic_number(number):
+    kub_namber = int(number) ** 3
+    kub_namber = str(kub_namber)
+    lenght_kub = len(kub_namber)
+    lenght = len(number)
+    slic = lenght_kub - lenght
+    if kub_namber[slic:] == number:
+        return number
+
+
+for x in prime_numbers_generator(1000, fun_number):
+    print(f'Fun numbers -> {x}')
+
+for x in prime_numbers_generator(1000, palindromic_number):
+    print(f'Palindromic -> {x}')
+
+for x in prime_numbers_generator(1000, trimorphic_number):
+    y = int(x) ** 3
+    print(f'Trimorphic -> {x} ^3 -> {y}')
