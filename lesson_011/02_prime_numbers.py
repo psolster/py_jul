@@ -90,6 +90,10 @@ class PrimeNumbers:
 # Подсказка: возможно, нужно будет добавить параметр в итератор/генератор.
 
 
+# TODO Генератор должен иметь возможность принимать несколько фильтров.
+#  После нахождения простого числа нужно в цикле проверить его по всем
+#  фильтрам.
+#  Аргумент filter совпадает с названием функции, встроенной в python.
 def prime_numbers_generator(n, filter):
     prime_numbers = []
     for number in range(2, n + 1):
@@ -142,3 +146,7 @@ for x in prime_numbers_generator(1000, palindromic_number):
 for x in prime_numbers_generator(1000, trimorphic_number):
     y = int(x) ** 3
     print(f'Trimorphic -> {x} ^3 -> {y}')
+
+# TODO Добавьте второй способ применить фильтры к последовательности,
+#  возвращающей простые числа. Способ должен отличаться от передачи
+#  функций в генератор.
