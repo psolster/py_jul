@@ -94,7 +94,7 @@ class PrimeNumbers:
 #  После нахождения простого числа нужно в цикле проверить его по всем
 #  фильтрам.
 #  Аргумент filter совпадает с названием функции, встроенной в python.
-def prime_numbers_generator(n, filter):
+def prime_numbers_generator(n, my_filter, my_filter_2, my_filter_3):
     prime_numbers = []
     for number in range(2, n + 1):
         for prime in prime_numbers:
@@ -102,8 +102,13 @@ def prime_numbers_generator(n, filter):
                 break
         else:
             prime_numbers.append(number)
-            if filter(str(number)):
-                yield str(number)
+            if my_filter(str(number)):
+                yield 'Fun numbers ->', str(number)
+            if my_filter_2(str(number)):
+                yield 'Palindromic ->', str(number)
+            if my_filter_3(str(number)):
+
+                yield 'Trimorphic -> ', str(number)
 
 
 def sum_numbers(number):
@@ -137,15 +142,15 @@ def trimorphic_number(number):
         return number
 
 
-for x in prime_numbers_generator(1000, fun_number):
-    print(f'Fun numbers -> {x}')
+for x in prime_numbers_generator(1000, fun_number, palindromic_number, trimorphic_number):
+    print(f' -> {x}')
 
-for x in prime_numbers_generator(1000, palindromic_number):
-    print(f'Palindromic -> {x}')
-
-for x in prime_numbers_generator(1000, trimorphic_number):
-    y = int(x) ** 3
-    print(f'Trimorphic -> {x} ^3 -> {y}')
+# for x in prime_numbers_generator(1000, palindromic_number):
+#     print(f'Palindromic -> {x}')
+#
+# for x in prime_numbers_generator(1000, trimorphic_number):
+#     y = int(x) ** 3
+#     print(f'Trimorphic -> {x} ^3 -> {y}')
 
 # TODO Добавьте второй способ применить фильтры к последовательности,
 #  возвращающей простые числа. Способ должен отличаться от передачи
