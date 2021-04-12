@@ -89,12 +89,70 @@ class PrimeNumbers:
 #
 # Подсказка: возможно, нужно будет добавить параметр в итератор/генератор.
 
+# def prime_numbers_generator(n, my_filter, my_filter_2, my_filter_3):
+#     prime_numbers = []
+#     for number in range(2, n + 1):
+#         for prime in prime_numbers:
+#             if number % prime == 0:
+#                 break
+#         else:
+#             prime_numbers.append(number)
+#             if my_filter(str(number)):
+#                 yield 'Fun numbers ->', str(number)
+#             if my_filter_2(str(number)):
+#                 yield 'Palindromic ->', str(number)
+#             if my_filter_3(str(number)):
+#                 yield 'Trimorphic -> ', str(number)
 
-# TODO Генератор должен иметь возможность принимать несколько фильтров.
-#  После нахождения простого числа нужно в цикле проверить его по всем
-#  фильтрам.
-#  Аргумент filter совпадает с названием функции, встроенной в python.
-def prime_numbers_generator(n, my_filter, my_filter_2, my_filter_3):
+
+# def prime_numbers_generator_2(n):
+#     prime_numbers = []
+#     for number in range(2, n + 1):
+#         for prime in prime_numbers:
+#             if number % prime == 0:
+#                 break
+#         else:
+#             prime_numbers.append(number)
+#             yield str(number)
+
+
+# def sum_numbers(number):
+#     return sum(map(int, number))
+#
+#
+# def fun_number(number):
+#     middle = len(number) // 2
+#     return sum_numbers(number[:middle]) == sum_numbers(number[-middle:])
+#
+#
+# def palindromic_number(number):
+#     lenght = len(number)
+#     bit_depht = int((lenght - 1) / 2)
+#     left = (number[:bit_depht])
+#     right = (number[bit_depht + 1:])
+#     list_left = list(left)
+#     list_right = list(right)
+#     list_right.reverse()
+#     if list_left == list_right:
+#         return number
+#
+#
+# def trimorphic_number(number):
+#     kub_namber = int(number) ** 3
+#     kub_namber = str(kub_namber)
+#     lenght_kub = len(kub_namber)
+#     lenght = len(number)
+#     slic = lenght_kub - lenght
+#     if kub_namber[slic:] == number:
+#         return number
+
+
+# for x in prime_numbers_generator(1000, fun_number, palindromic_number, trimorphic_number):
+#     print(f' -> {x}')
+
+# TODO еще способ решения
+
+def prime_numbers_generator(n):
     prime_numbers = []
     for number in range(2, n + 1):
         for prime in prime_numbers:
@@ -102,22 +160,16 @@ def prime_numbers_generator(n, my_filter, my_filter_2, my_filter_3):
                 break
         else:
             prime_numbers.append(number)
-            if my_filter(str(number)):
-                yield 'Fun numbers ->', str(number)
-            if my_filter_2(str(number)):
-                yield 'Palindromic ->', str(number)
-            if my_filter_3(str(number)):
-
-                yield 'Trimorphic -> ', str(number)
+            yield str(number)
 
 
-def sum_numbers(number):
-    return sum(map(int, number))
+def sum_digits(digit):
+    return sum(map(int, digit))
 
 
-def fun_number(number):
-    middle = len(number) // 2
-    return sum_numbers(number[:middle]) == sum_numbers(number[-middle:])
+def fun_number(res_gener):
+    middle = len(res_gener) // 2
+    return sum_digits(res_gener[:middle]) == sum_digits(res_gener[-middle:])
 
 
 def palindromic_number(number):
@@ -142,16 +194,10 @@ def trimorphic_number(number):
         return number
 
 
-for x in prime_numbers_generator(1000, fun_number, palindromic_number, trimorphic_number):
-    print(f' -> {x}')
-
-# for x in prime_numbers_generator(1000, palindromic_number):
-#     print(f'Palindromic -> {x}')
-#
-# for x in prime_numbers_generator(1000, trimorphic_number):
-#     y = int(x) ** 3
-#     print(f'Trimorphic -> {x} ^3 -> {y}')
-
-# TODO Добавьте второй способ применить фильтры к последовательности,
-#  возвращающей простые числа. Способ должен отличаться от передачи
-#  функций в генератор.
+for s in prime_numbers_generator(n=1000):
+    if fun_number(s):
+        print('fun->', s)
+    elif palindromic_number(s):
+        print('palindromik->', s)
+    elif trimorphic_number(s):
+        print('trimorphic_number->', s, '->', int(s) ** 3)
