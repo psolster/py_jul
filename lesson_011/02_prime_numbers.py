@@ -146,11 +146,20 @@ class PrimeNumbers:
 #     if kub_namber[slic:] == number:
 #         return number
 
-
+# TODO Для первого способа генератор должен принимать произвольное количество функций генераторов.
+#  В позапрошлую проверку и писал:
+#  Для первого способа нужно изменить генератор так, чтобы он принимал в
+#  аргумент список функция фильтров. Возвращаться должно только такое число,
+#  для которого все функции фильтры выдадут True. При отсутствии функций
+#  в аргументах генератор должен работать как обычно и возвращать все
+#  простые числа.
+#  Добавьте внутри генератора список функций фильтров.
+#  Пожалуйста не комментируйте код задиний.
+#  Если код закомментирован, не понятно  нужно ли его проверять.
 # for x in prime_numbers_generator(1000, fun_number, palindromic_number, trimorphic_number):
 #     print(f' -> {x}')
 
-# TODO еще способ решения
+#  еще способ решения
 
 def prime_numbers_generator(n):
     prime_numbers = []
@@ -201,3 +210,12 @@ for s in prime_numbers_generator(n=1000):
         print('palindromik->', s)
     elif trimorphic_number(s):
         print('trimorphic_number->', s, '->', int(s) ** 3)
+
+# TODO Функция filter принимает функцию, возвращающую True или False
+#  и итерируемый объект.
+#  filter(palindromic_number, prime_numbers_generator(1000))
+#  В результате получается тоже итерируемый объект, поэтому
+#  вызовы можно объединять в цепочку:
+#  result = filter(palindromic_number, filter(palindromic_number, filter(..., prime_numbers_generator(1000))))
+#  Содержимое result можно будет вывести с помощью цикла или преопразовать в список:
+#  list(result)
