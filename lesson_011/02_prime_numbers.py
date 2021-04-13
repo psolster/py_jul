@@ -203,19 +203,28 @@ def trimorphic_number(number):
         return number
 
 
-for s in prime_numbers_generator(n=1000):
-    if fun_number(s):
-        print('fun->', s)
-    elif palindromic_number(s):
-        print('palindromik->', s)
-    elif trimorphic_number(s):
-        print('trimorphic_number->', s, '->', int(s) ** 3)
+# for s in prime_numbers_generator(n=10000):
+#     if fun_number(s):
+#         print('fun->', s)
+#     elif palindromic_number(s):
+#         print('palindromik->', s)
+#     elif trimorphic_number(s):
+#         print('trimorphic_number->', s, '->', int(s) ** 3)
 
-# TODO Функция filter принимает функцию, возвращающую True или False
-#  и итерируемый объект.
-#  filter(palindromic_number, prime_numbers_generator(1000))
-#  В результате получается тоже итерируемый объект, поэтому
-#  вызовы можно объединять в цепочку:
-#  result = filter(palindromic_number, filter(palindromic_number, filter(..., prime_numbers_generator(1000))))
-#  Содержимое result можно будет вывести с помощью цикла или преопразовать в список:
-#  list(result)
+# TODO c цепочкой вызовов как то не "зашло", трудно читабельно показалось, а поэтапно все понятно
+result = filter(fun_number, prime_numbers_generator(1000))
+fun = list(result)
+for i in fun:
+    print('Fun->', i)
+
+result = filter(palindromic_number, prime_numbers_generator(1000))
+fun = list(result)
+for i in fun:
+    print('Palindromic_number', i)
+
+result = filter(trimorphic_number, prime_numbers_generator(1000))
+fun = list(result)
+for i in fun:
+    print('Trimorphic_number', i)
+
+
