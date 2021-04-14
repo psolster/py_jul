@@ -211,8 +211,11 @@ def trimorphic_number(number):
 #     elif trimorphic_number(s):
 #         print('trimorphic_number->', s, '->', int(s) ** 3)
 
-# TODO c цепочкой вызовов как то не "зашло", трудно читабельно показалось, а поэтапно все понятно
-result = filter(fun_number, prime_numbers_generator(1000))
+#  c цепочкой вызовов как то не "зашло", трудно читабельно показалось, а поэтапно все понятно
+#  Можно без цепочки вызовов, а поочерёдно применять фильтры в несколько строк.
+#  result = filter(fun_number, prime_numbers_generator(1000))
+#  result = filter(fun_number, prime_numbers_generator(1000))
+#  result = filter(palindromic_number, result)
 fun = list(result)
 for i in fun:
     print('Fun->', i)
@@ -227,4 +230,4 @@ fun = list(result)
 for i in fun:
     print('Trimorphic_number', i)
 
-
+# Зачёт!
