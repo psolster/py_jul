@@ -84,6 +84,7 @@ class Treader:
         # self.quantity = quantity
         # os.path.normpath(self.path)
 
+
     def run(self):
         list_files = self.read_names_of_files(self.path)
         self.read_each_files(list_files)
@@ -95,6 +96,7 @@ class Treader:
         return files
 
     def read_each_files(self, list_files):
+        list_price = []
         for tikcer in list_files:
             files_for_open = self.path +'/'+ tikcer
             print('путь к файлу->', files_for_open)
@@ -106,7 +108,13 @@ class Treader:
                         continue
                     else:
                         self.secid, self.tradetime, self.price, self.quantity = line.split(',')
-                        print(self.secid, self.tradetime, self.price, self.quantity)
+                        list_price.append(float(self.price)/float(self.quantity))
+                        # print(list_price)
+                list_price.sort()
+                half_sum = (list_price[0] + list_price[-1])/2
+                print(self.secid, half_sum)
+
+                        # print(f'ticker->{self.secid} list_price {list_price}')
 
 
 
