@@ -87,9 +87,9 @@ class Treader:
 
     def run(self):
         list_files = self.read_names_of_files(self.path)
-        self.read_each_files(list_files)
-        # calculate_volat()
-        return list_files
+        data = self.read_each_files(list_files)
+        res = self.res_calc(data)
+        return res
 
     def read_names_of_files(self, path):
         files = os.listdir(path=path)
@@ -108,11 +108,16 @@ class Treader:
                         continue
                     else:
                         self.secid, self.tradetime, self.price, self.quantity = line.split(',')
-                        list_price.append(float(self.price)/float(self.quantity))
-                        # print(list_price)
+                        list_price.append(float(self.price))
+
                 list_price.sort()
+
                 half_sum = (list_price[0] + list_price[-1])/2
-                print(self.secid, half_sum)
+                volatility = ((list_price[-1] - list_price[0])/half_sum) * 100
+                # print(self.secid, list_price[0], list_price[-1], half_sum, volatility)
+                return self.secid, volatility
+    def res_calc(self, data):
+        print(data)
 
                         # print(f'ticker->{self.secid} list_price {list_price}')
 
