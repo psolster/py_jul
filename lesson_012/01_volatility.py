@@ -72,5 +72,45 @@
 #
 #     def run(self):
 #         <обработка данных>
+import os
 
-# TODO написать код в однопоточном/однопроцессорном стиле
+
+class Treader:
+    def __init__(self, path):
+        self.path = path
+        # self.secid = secid
+        # self.tradetime = tradetime
+        # self.price = price
+        # self.quantity = quantity
+        # os.path.normpath(self.path)
+
+    def run(self):
+        list_files = self.read_names_of_files(self.path)
+        self.read_each_files(list_files)
+        # calculate_volat()
+        return list_files
+
+    def read_names_of_files(self, path):
+        files = os.listdir(path=path)
+        return files
+
+    def read_each_files(self, list_files):
+        for tikcer in list_files:
+            files_for_open = self.path +'/'+ tikcer
+            print('путь к файлу->', files_for_open)
+            with open(files_for_open, 'r', encoding='utf8') as ff:
+
+                for line in ff:
+                    prov = line[:5]
+                    if prov.isalpha():
+                        continue
+                    else:
+                        self.secid, self.tradetime, self.price, self.quantity = line.split(',')
+                        print(self.secid, self.tradetime, self.price, self.quantity)
+
+
+
+
+path = 'trades'
+start = Treader(path=path)
+start.run()

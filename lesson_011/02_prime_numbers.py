@@ -225,7 +225,7 @@ fun = list(result)
 for i in fun:
     print('Palindromic_number', i)
 
-result = filter(trimorphic_number, prime_numbers_generator(1000))
+result = filter(trimorphic_number, prime_numbers_generator(10000))
 fun = list(result)
 for i in fun:
     print('Trimorphic_number', i)
