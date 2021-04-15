@@ -135,16 +135,34 @@ class Treader:
     def sort_count_ticker(self, data):
         sorted_tuple = sorted(data.items(), key=operator.itemgetter(1))
         dict(sorted_tuple)
-        # print(sorted_tuple)
+        print(sorted_tuple)
         return sorted_tuple
 
     def output_data(self, dic):
+        index = 0
+        volat_list = list(dic)
         max_volat = list(dic)[-1:-4:-1]
         print('Максимальная волантильность')
         for i in max_volat:
             ticker = str(i[0])
             volat = round(float(i[1]), 3)
             print(f'Тикер-> {ticker} - {volat} %')
+        print('Минимальная волантильность')
+        for i in volat_list:
+
+            if i[1] > 0:
+                start_index = index
+                min_volat = volat_list[start_index:start_index+3]
+                min_volat.reverse()
+                break
+            index += 1
+        for i in min_volat:
+            ticker = str(i[0])
+            volat = round(float(i[1]), 3)
+            print(f'Тикер-> {ticker} - {volat} %')
+
+
+
 
 
 
