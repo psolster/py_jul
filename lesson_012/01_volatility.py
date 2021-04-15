@@ -81,11 +81,6 @@ class Treader:
     def __init__(self, path):
         self.path = path
         self.count_ticker = defaultdict(str)
-        # self.secid = secid
-        # self.tradetime = tradetime
-        # self.price = price
-        # self.quantity = quantity
-        # os.path.normpath(self.path)
 
     def run(self):
         list_files = self.read_names_of_files(self.path)
@@ -94,19 +89,15 @@ class Treader:
         res_sort = self.sort_count_ticker(res)
         self.output_data(res_sort)
 
-
     def read_names_of_files(self, path):
         files = os.listdir(path=path)
         return files
 
     def read_each_files(self, list_files):
-
         for tikcer in list_files:
             list_price = []
             files_for_open = self.path + '/' + tikcer
-            # print('путь к файлу->', files_for_open)
             with open(files_for_open, 'r', encoding='utf8') as ff:
-
                 for line in ff:
                     prov = line[:5]
                     if prov.isalpha():
@@ -115,19 +106,16 @@ class Treader:
                         self.secid, self.tradetime, self.price, self.quantity = line.split(',')
                         list_price.append(float(self.price))
                 if len(list_price) <= 1:
-                    print(f'По тикеру {self.secid} недостаточно торгуемы')
+                    print(f'По тикеру {self.secid} недостаточно данных')
                 else:
                     list_price.sort()
-
                 half_sum = (list_price[0] + list_price[-1]) / 2
                 volatility = ((list_price[-1] - list_price[0]) / half_sum) * 100
-                # print(self.secid, list_price[0], list_price[-1], half_sum, volatility)
                 yield self.secid, volatility
 
     def res_calc(self, data):
         self.number_ticker = 1
         for ticer, volat in data:
-            # print(f' Тикер-> {ticer} Волатильность -> {volat} номер тикера - {self.number_ticker}')
             self.number_ticker += 1
             self.count_ticker[ticer] = volat
         return self.count_ticker
@@ -135,11 +123,11 @@ class Treader:
     def sort_count_ticker(self, data):
         sorted_tuple = sorted(data.items(), key=operator.itemgetter(1))
         dict(sorted_tuple)
-        print(sorted_tuple)
         return sorted_tuple
 
     def output_data(self, dic):
         index = 0
+        name_zero_tick = []
         volat_list = list(dic)
         max_volat = list(dic)[-1:-4:-1]
         print('Максимальная волантильность')
@@ -149,10 +137,9 @@ class Treader:
             print(f'Тикер-> {ticker} - {volat} %')
         print('Минимальная волантильность')
         for i in volat_list:
-
             if i[1] > 0:
                 start_index = index
-                min_volat = volat_list[start_index:start_index+3]
+                min_volat = volat_list[start_index:start_index + 3]
                 min_volat.reverse()
                 break
             index += 1
@@ -160,16 +147,14 @@ class Treader:
             ticker = str(i[0])
             volat = round(float(i[1]), 3)
             print(f'Тикер-> {ticker} - {volat} %')
-
-
-
-
-
-
-
+        print('Нулевая волантильность')
+        zero_volont = volat_list[:start_index]
+        for i in zero_volont:
+            name_zero_tick.append(i[0])
+        name_zero_tick.sort()
+        print(str(name_zero_tick))
 
 
 path = 'trades'
 start = Treader(path=path)
-data = start.run()
-
+start.run()
