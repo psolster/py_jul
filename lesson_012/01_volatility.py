@@ -72,34 +72,39 @@
 #
 #     def run(self):
 #         <обработка данных>
+import operator
 import os
+from collections import defaultdict
 
 
 class Treader:
     def __init__(self, path):
         self.path = path
+        self.count_ticker = defaultdict(str)
         # self.secid = secid
         # self.tradetime = tradetime
         # self.price = price
         # self.quantity = quantity
         # os.path.normpath(self.path)
 
-
     def run(self):
         list_files = self.read_names_of_files(self.path)
         data = self.read_each_files(list_files)
         res = self.res_calc(data)
-        return res
+        res_sort = self.sort_count_ticker(res)
+        self.output_data(res_sort)
+
 
     def read_names_of_files(self, path):
         files = os.listdir(path=path)
         return files
 
     def read_each_files(self, list_files):
-        list_price = []
+
         for tikcer in list_files:
-            files_for_open = self.path +'/'+ tikcer
-            print('путь к файлу->', files_for_open)
+            list_price = []
+            files_for_open = self.path + '/' + tikcer
+            # print('путь к файлу->', files_for_open)
             with open(files_for_open, 'r', encoding='utf8') as ff:
 
                 for line in ff:
@@ -109,21 +114,44 @@ class Treader:
                     else:
                         self.secid, self.tradetime, self.price, self.quantity = line.split(',')
                         list_price.append(float(self.price))
+                if len(list_price) <= 1:
+                    print(f'По тикеру {self.secid} недостаточно торгуемы')
+                else:
+                    list_price.sort()
 
-                list_price.sort()
-
-                half_sum = (list_price[0] + list_price[-1])/2
-                volatility = ((list_price[-1] - list_price[0])/half_sum) * 100
+                half_sum = (list_price[0] + list_price[-1]) / 2
+                volatility = ((list_price[-1] - list_price[0]) / half_sum) * 100
                 # print(self.secid, list_price[0], list_price[-1], half_sum, volatility)
-                return self.secid, volatility
-    def res_calc(self, data):
-        print(data)
+                yield self.secid, volatility
 
-                        # print(f'ticker->{self.secid} list_price {list_price}')
+    def res_calc(self, data):
+        self.number_ticker = 1
+        for ticer, volat in data:
+            # print(f' Тикер-> {ticer} Волатильность -> {volat} номер тикера - {self.number_ticker}')
+            self.number_ticker += 1
+            self.count_ticker[ticer] = volat
+        return self.count_ticker
+
+    def sort_count_ticker(self, data):
+        sorted_tuple = sorted(data.items(), key=operator.itemgetter(1))
+        dict(sorted_tuple)
+        # print(sorted_tuple)
+        return sorted_tuple
+
+    def output_data(self, dic):
+        max_volat = list(dic)[-1:-4:-1]
+        print('Максимальная волантильность')
+        for i in max_volat:
+            ticker = str(i[0])
+            volat = round(float(i[1]), 3)
+            print(f'Тикер-> {ticker} - {volat} %')
+
+
 
 
 
 
 path = 'trades'
 start = Treader(path=path)
-start.run()
+data = start.run()
+
