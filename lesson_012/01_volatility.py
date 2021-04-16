@@ -97,6 +97,12 @@ class Treader:
         for tikcer in list_files:
             list_price = []
             files_for_open = self.path + '/' + tikcer
+            # TODO Можно воспользоваться знанием о том, что файл является итерируемым объектом
+            #  и сначала считать не сохраняя первую строку с заголовками, а потом
+            #  первую строку с данными, из которой можно получить название тикера и начальное
+            #  значение цены для price_min и price_max. Получить следующий элемент итерируемого
+            #  объекта можно, используя функцию next:
+            #  line = next(file)
             with open(files_for_open, 'r', encoding='utf8') as ff:
                 for line in ff:
                     prov = line[:5]
@@ -158,3 +164,13 @@ class Treader:
 path = 'trades'
 start = Treader(path=path)
 start.run()
+
+# TODO Класс тикера должен отвечать за обработку одного файла и в нём обязательно
+#  должен быть метод run().
+#  Получение списка файлов и цикл по ним нужно сделать либо в ещё одном классе,
+#  либо в функции. Должно получиться что-то подобное:
+#  tickers_data = {}
+#  for file in files:
+#      ticker = Ticker(file)
+#      ticker.run()
+#      tickers_data[ticker.name] = ticker.volatility
