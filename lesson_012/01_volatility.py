@@ -74,103 +74,97 @@
 #         <обработка данных>
 import operator
 import os
-from collections import defaultdict
-
-
-class Treader:
-    def __init__(self, path):
-        self.path = path
-        self.count_ticker = defaultdict(str)
-
-    def run(self):
-        list_files = self.read_names_of_files(self.path)
-        data = self.read_each_files(list_files)
-        res = self.res_calc(data)
-        res_sort = self.sort_count_ticker(res)
-        self.output_data(res_sort)
-
-    def read_names_of_files(self, path):
-        files = os.listdir(path=path)
-        return files
-
-    def read_each_files(self, list_files):
-        for tikcer in list_files:
-            list_price = []
-            files_for_open = self.path + '/' + tikcer
-            # TODO Можно воспользоваться знанием о том, что файл является итерируемым объектом
-            #  и сначала считать не сохраняя первую строку с заголовками, а потом
-            #  первую строку с данными, из которой можно получить название тикера и начальное
-            #  значение цены для price_min и price_max. Получить следующий элемент итерируемого
-            #  объекта можно, используя функцию next:
-            #  line = next(file)
-            with open(files_for_open, 'r', encoding='utf8') as ff:
-                for line in ff:
-                    prov = line[:5]
-                    if prov.isalpha():
-                        continue
-                    else:
-                        self.secid, self.tradetime, self.price, self.quantity = line.split(',')
-                        list_price.append(float(self.price))
-                if len(list_price) <= 1:
-                    print(f'По тикеру {self.secid} недостаточно данных')
-                else:
-                    list_price.sort()
-                half_sum = (list_price[0] + list_price[-1]) / 2
-                volatility = ((list_price[-1] - list_price[0]) / half_sum) * 100
-                yield self.secid, volatility
-
-    def res_calc(self, data):
-        self.number_ticker = 1
-        for ticer, volat in data:
-            self.number_ticker += 1
-            self.count_ticker[ticer] = volat
-        return self.count_ticker
-
-    def sort_count_ticker(self, data):
-        sorted_tuple = sorted(data.items(), key=operator.itemgetter(1))
-        dict(sorted_tuple)
-        return sorted_tuple
-
-    def output_data(self, dic):
-        index = 0
-        name_zero_tick = []
-        volat_list = list(dic)
-        max_volat = list(dic)[-1:-4:-1]
-        print('Максимальная волантильность')
-        for i in max_volat:
-            ticker = str(i[0])
-            volat = round(float(i[1]), 3)
-            print(f'Тикер-> {ticker} - {volat} %')
-        print('Минимальная волантильность')
-        for i in volat_list:
-            if i[1] > 0:
-                start_index = index
-                min_volat = volat_list[start_index:start_index + 3]
-                min_volat.reverse()
-                break
-            index += 1
-        for i in min_volat:
-            ticker = str(i[0])
-            volat = round(float(i[1]), 3)
-            print(f'Тикер-> {ticker} - {volat} %')
-        print('Нулевая волантильность')
-        zero_volont = volat_list[:start_index]
-        for i in zero_volont:
-            name_zero_tick.append(i[0])
-        name_zero_tick.sort()
-        print(str(name_zero_tick))
-
 
 path = 'trades'
-start = Treader(path=path)
-start.run()
 
-# TODO Класс тикера должен отвечать за обработку одного файла и в нём обязательно
-#  должен быть метод run().
-#  Получение списка файлов и цикл по ним нужно сделать либо в ещё одном классе,
-#  либо в функции. Должно получиться что-то подобное:
-#  tickers_data = {}
-#  for file in files:
-#      ticker = Ticker(file)
-#      ticker.run()
-#      tickers_data[ticker.name] = ticker.volatility
+
+def read_dir(path):
+    files = os.listdir(path=path)
+    return files
+
+
+def next_file_name():
+    list_files = read_dir(path=path)
+    for name_files in list_files:
+        yield str(name_files)
+
+
+def sort_count_ticker(data):
+    sorted_tuple = sorted(data.items(), key=operator.itemgetter(1))
+    dict(sorted_tuple)
+    return sorted_tuple
+
+
+def output_data(dic):
+    index = 0
+    name_zero_tick = []
+    volat_list = list(dic)
+    max_volat = list(dic)[-1:-4:-1]
+    print('Максимальная волантильность')
+    for i in max_volat:
+        ticker = str(i[0])
+        volat = round(float(i[1]), 3)
+        print(f'Тикер-> {ticker} - {volat} %')
+    print('Минимальная волантильность')
+    for i in volat_list:
+        if i[1] > 0:
+            start_index = index
+            min_volat = volat_list[start_index:start_index + 3]
+            min_volat.reverse()
+            break
+        index += 1
+    for i in min_volat:
+        ticker = str(i[0])
+        volat = round(float(i[1]), 3)
+        print(f'Тикер-> {ticker} - {volat} %')
+    print('Нулевая волантильность')
+    zero_volont = volat_list[:start_index]
+    for i in zero_volont:
+        name_zero_tick.append(i[0])
+    name_zero_tick.sort()
+    print(str(name_zero_tick))
+
+
+class Ticker:
+    def __init__(self, next_file):
+        self.name_file = next_file
+        self.min_price_tickers = 0
+        self.max_price_tickers = 0
+        self.half = 0
+        self.volat = 0
+        self.path = path
+
+    def run(self):
+        real_files = os.path.normpath(self.path) + '/' + self.name_file
+        with open(real_files, 'r', encoding='utf8') as ft:
+            for cnt, line in enumerate(ft):
+                line = line[:-1]
+                if cnt == 0:
+                    continue
+                elif cnt == 1:
+                    secid, tradetime, price, quantity = line.split(',')
+                    self.min_price_tickers = float(price)
+                    self.max_price_tickers = float(price)
+                else:
+                    secid, tradetime, price, quantity = line.split(',')
+                    if self.min_price_tickers > float(price):
+                        self.min_price_tickers = float(price)
+                    elif self.max_price_tickers < float(price):
+                        self.max_price_tickers = float(price)
+            if cnt <= 1:
+                self.volat = 0
+                return secid, self.volat
+            self.half = (self.max_price_tickers + self.min_price_tickers) / 2
+            self.volat = ((self.max_price_tickers - self.min_price_tickers) / self.half) * 100
+        return secid, self.volat
+
+
+files = next_file_name()
+tickers_data = {}
+for file in files:
+    ticker = Ticker(file)
+    data = ticker.run()
+    tickers_data[data[0]] = data[1]
+res_1 = sort_count_ticker(tickers_data)
+output_data(res_1)
+
