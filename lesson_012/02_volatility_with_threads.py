@@ -20,7 +20,7 @@
 import operator
 import os
 import threading
-from utils import time_track
+
 
 path = 'trades'
 
@@ -73,7 +73,8 @@ def output_data(dic):
 
 
 class Ticker(threading.Thread):
-    def __init__(self, next_file):
+    def __init__(self, next_file, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.name_file = next_file
         self.min_price_tickers = 0
         self.max_price_tickers = 0
@@ -100,6 +101,15 @@ class Ticker(threading.Thread):
             self.half = (self.max_price_tickers + self.min_price_tickers) / 2
             self.volat = ((self.max_price_tickers - self.min_price_tickers) / self.half) * 100
         return secid, self.volat
+
+
+def main():
+    volants = [Ticker(file) for file in files]
+
+    for volant in volants:
+        volant.start()
+    for volant in volants:
+        volant.join()
 
 
 files = next_file_name()
