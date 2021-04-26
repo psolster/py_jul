@@ -137,28 +137,19 @@ class Ticker:
     def run(self):
         real_files = os.path.normpath(self.path) + '/' + self.name_file
         with open(real_files, 'r', encoding='utf8') as ft:
+            line = ft.readline()
+            line = next(ft)
+            line = line[:-1]
+            secid, tradetime, price, quantity = line.split(',')
+            self.min_price_tickers = float(price)
+            self.max_price_tickers = float(price)
             for cnt, line in enumerate(ft):
                 line = line[:-1]
-                # TODO Используя знания, что файл является итерируемым объектом,
-                #  можно избежать двух проверок, которые происходят на каждой итерации,
-                #  а нужны только для первых строк файла.
-                #  Считайте до цикла первые две строки и получите из второй строки
-                #  значение цены для минимума и максимума.
-                if cnt == 0:
-                    continue
-                elif cnt == 1:
-                    secid, tradetime, price, quantity = line.split(',')
+                secid, tradetime, price, quantity = line.split(',')
+                if self.min_price_tickers > float(price):
                     self.min_price_tickers = float(price)
+                elif self.max_price_tickers < float(price):
                     self.max_price_tickers = float(price)
-                else:
-                    secid, tradetime, price, quantity = line.split(',')
-                    if self.min_price_tickers > float(price):
-                        self.min_price_tickers = float(price)
-                    elif self.max_price_tickers < float(price):
-                        self.max_price_tickers = float(price)
-            if cnt <= 1:
-                self.volat = 0
-                return secid, self.volat
             self.half = (self.max_price_tickers + self.min_price_tickers) / 2
             self.volat = ((self.max_price_tickers - self.min_price_tickers) / self.half) * 100
         return secid, self.volat
@@ -173,4 +164,4 @@ for file in files:
 res_1 = sort_count_ticker(tickers_data)
 output_data(res_1)
 
-# TODO После исправления замечания переходите ко второму заданию.
+
