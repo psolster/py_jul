@@ -74,6 +74,7 @@
 #         <обработка данных>
 import operator
 import os
+import time
 
 path = 'trades'
 
@@ -125,6 +126,20 @@ def output_data(dic):
     print(str(name_zero_tick))
 
 
+def time_track(func):
+    def surrogate(*args, **kwargs):
+        started_at = time.time()
+
+        result = func(*args, **kwargs)
+
+        ended_at = time.time()
+        elapsed = round(ended_at - started_at, 4)
+        print(f'Функция работала {elapsed} секунд(ы)')
+        return result
+
+    return surrogate
+
+
 class Ticker:
     def __init__(self, next_file):
         self.name_file = next_file
@@ -154,14 +169,15 @@ class Ticker:
             self.volat = ((self.max_price_tickers - self.min_price_tickers) / self.half) * 100
         return secid, self.volat
 
+@time_track
+def start():
+    files = next_file_name()
+    tickers_data = {}
+    for file in files:
+        ticker = Ticker(file)
+        data = ticker.run()
+        tickers_data[data[0]] = data[1]
+    res_1 = sort_count_ticker(tickers_data)
+    output_data(res_1)
 
-files = next_file_name()
-tickers_data = {}
-for file in files:
-    ticker = Ticker(file)
-    data = ticker.run()
-    tickers_data[data[0]] = data[1]
-res_1 = sort_count_ticker(tickers_data)
-output_data(res_1)
-
-
+start()

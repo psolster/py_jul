@@ -20,7 +20,7 @@
 import operator
 import os
 import threading
-
+import time
 
 path = 'trades'
 
@@ -81,6 +81,7 @@ class Ticker(threading.Thread):
         self.half = 0
         self.volat = 0
         self.path = path
+        self.name_ticker = ''
 
     def run(self):
         real_files = os.path.normpath(self.path) + '/' + self.name_file
@@ -89,6 +90,7 @@ class Ticker(threading.Thread):
             line = next(ft)
             line = line[:-1]
             secid, tradetime, price, quantity = line.split(',')
+            self.name_ticker = secid
             self.min_price_tickers = float(price)
             self.max_price_tickers = float(price)
             for cnt, line in enumerate(ft):
@@ -100,23 +102,37 @@ class Ticker(threading.Thread):
                     self.max_price_tickers = float(price)
             self.half = (self.max_price_tickers + self.min_price_tickers) / 2
             self.volat = ((self.max_price_tickers - self.min_price_tickers) / self.half) * 100
-        return secid, self.volat
+        return self.name_ticker, self.volat
 
 
+def time_track(func):
+    def surrogate(*args, **kwargs):
+        started_at = time.time()
+
+        result = func(*args, **kwargs)
+
+        ended_at = time.time()
+        elapsed = round(ended_at - started_at, 4)
+        print(f'Функция работала {elapsed} секунд(ы)')
+        return result
+
+    return surrogate
+
+
+@time_track
 def main():
-    volants = [Ticker(file) for file in files]
-
+    volants = [Ticker(file) for file in next_file_name()]
+    tickers_data = {}
     for volant in volants:
         volant.start()
     for volant in volants:
         volant.join()
 
+    for volant in volants:
+        tickers_data[volant.name_ticker] = volant.volat
+    res_1 = sort_count_ticker(tickers_data)
+    output_data(res_1)
 
-files = next_file_name()
-tickers_data = {}
-for file in files:
-    ticker = Ticker(file)
-    data = ticker.run()
-    tickers_data[data[0]] = data[1]
-res_1 = sort_count_ticker(tickers_data)
-output_data(res_1)
+
+if __name__ == '__main__':
+    main()
