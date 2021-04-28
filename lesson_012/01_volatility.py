@@ -79,13 +79,13 @@ import time
 path = 'trades'
 
 
-def read_dir(path):
-    files = os.listdir(path=path)
+def read_dir(path_dir):
+    files = os.listdir(path=path_dir)
     return files
 
 
 def next_file_name():
-    list_files = read_dir(path=path)
+    list_files = read_dir(path_dir=path)
     for name_files in list_files:
         yield str(name_files)
 
@@ -152,8 +152,7 @@ class Ticker:
     def run(self):
         real_files = os.path.normpath(self.path) + '/' + self.name_file
         with open(real_files, 'r', encoding='utf8') as ft:
-            # TODO В следующей строке присваивать переменную не нужно.
-            line = ft.readline()
+            ft.readline()
             line = next(ft)
             line = line[:-1]
             secid, tradetime, price, quantity = line.split(',')
@@ -170,6 +169,7 @@ class Ticker:
             self.volat = ((self.max_price_tickers - self.min_price_tickers) / self.half) * 100
         return secid, self.volat
 
+
 @time_track
 def start():
     files = next_file_name()
@@ -181,6 +181,7 @@ def start():
     res_1 = sort_count_ticker(tickers_data)
     output_data(res_1)
 
+
 start()
 
-# TODO Исправьте оформление кода и замечания среды разработки.
+

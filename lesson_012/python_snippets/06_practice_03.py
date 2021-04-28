@@ -6,11 +6,12 @@
 # - подсчитать общий размер этих файлов
 # - вывести на консоль результаты
 import multiprocessing
+import time
 
 import requests
 
 from extractor import LinkExtractor
-from utils import time_track
+
 
 sites = [
     'https://www.fl.ru',
@@ -60,6 +61,19 @@ class PageSizer(multiprocessing.Process):
         else:
             return res.text
 
+
+def time_track(func):
+    def surrogate(*args, **kwargs):
+        started_at = time.time()
+
+        result = func(*args, **kwargs)
+
+        ended_at = time.time()
+        elapsed = round(ended_at - started_at, 4)
+        print(f'Функция работала {elapsed} секунд(ы)')
+        return result
+
+    return surrogate
 
 @time_track
 def main():
