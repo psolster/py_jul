@@ -105,7 +105,6 @@ class Ticker(threading.Thread):
                     self.max_price_tickers = float(price)
             self.half = (self.max_price_tickers + self.min_price_tickers) / 2
             self.volat = ((self.max_price_tickers - self.min_price_tickers) / self.half) * 100
-        return self.name_ticker, self.volat
 
 
 def time_track(func):
