@@ -86,6 +86,7 @@ class Ticker(threading.Thread):
     def run(self):
         real_files = os.path.normpath(self.path) + '/' + self.name_file
         with open(real_files, 'r', encoding='utf8') as ft:
+            # TODO В следующей строке присваивать переменную не нужно.
             line = ft.readline()
             line = next(ft)
             line = line[:-1]
@@ -136,3 +137,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# TODO Исправьте оформление кода и замечания среды разработки.
