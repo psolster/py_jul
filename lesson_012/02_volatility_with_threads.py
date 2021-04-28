@@ -22,16 +22,17 @@ import os
 import threading
 import time
 
+
 path = 'trades'
 
 
-def read_dir(path):
-    files = os.listdir(path=path)
+def read_dir(path_dir):
+    files = os.listdir(path=path_dir)
     return files
 
 
 def next_file_name():
-    list_files = read_dir(path=path)
+    list_files = read_dir(path_dir=path)
     for name_files in list_files:
         yield str(name_files)
 
@@ -43,10 +44,12 @@ def sort_count_ticker(data):
 
 
 def output_data(dic):
+    start_index = 0
     index = 0
     name_zero_tick = []
     volat_list = list(dic)
     max_volat = list(dic)[-1:-4:-1]
+    min_volat = []
     print('Максимальная волантильность')
     for i in max_volat:
         ticker = str(i[0])
@@ -86,8 +89,7 @@ class Ticker(threading.Thread):
     def run(self):
         real_files = os.path.normpath(self.path) + '/' + self.name_file
         with open(real_files, 'r', encoding='utf8') as ft:
-            # TODO В следующей строке присваивать переменную не нужно.
-            line = ft.readline()
+            ft.readline()
             line = next(ft)
             line = line[:-1]
             secid, tradetime, price, quantity = line.split(',')
@@ -137,5 +139,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# TODO Исправьте оформление кода и замечания среды разработки.

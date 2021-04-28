@@ -97,10 +97,12 @@ def sort_count_ticker(data):
 
 
 def output_data(dic):
+    start_index = 0
     index = 0
     name_zero_tick = []
     volat_list = list(dic)
     max_volat = list(dic)[-1:-4:-1]
+    min_volat = []
     print('Максимальная волантильность')
     for i in max_volat:
         ticker = str(i[0])
@@ -129,9 +131,7 @@ def output_data(dic):
 def time_track(func):
     def surrogate(*args, **kwargs):
         started_at = time.time()
-
         result = func(*args, **kwargs)
-
         ended_at = time.time()
         elapsed = round(ended_at - started_at, 4)
         print(f'Функция работала {elapsed} секунд(ы)')
@@ -183,5 +183,3 @@ def start():
 
 
 start()
-
-
