@@ -1,4 +1,12 @@
 from random import randint
+# TODO Импорт токена лучше сделать с обработкой ошибки
+#  try:
+#     from settings import tok
+#  except ImportError:
+#     settings = None  # Для того, чтобы убрать замечание среду разработки.
+#     print('Для работы бота...')
+#     exit()
+
 from _my_bot_token import token
 import vk_api
 import vk_api.bot_longpoll
@@ -25,6 +33,10 @@ class FerstBot:
     def on_event(self, event):
         if event.type == vk_api.bot_longpoll.VkBotEventType.MESSAGE_NEW:
             print(event.object.text)
+            # TODO При отправке сообщения вы сами генерируете random_id. В библиотеке для генерации идентификатора
+            #  есть специальная функция vk_api.utils.get_random_id.
+            #  Подробнее можете посмотреть в примерах библиотеки:
+            #  https://github.com/python273/vk_api/blob/master/examples/messages_bot/user_messages_bot.py#L55
             self.api.messages.send(
                 message=event.object.text + ' я пока тока эхоо',
                 random_id=randint(1, 2 ** 20),
