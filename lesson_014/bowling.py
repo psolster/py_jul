@@ -28,11 +28,11 @@ def game_set():
             GAME_RESULT += str(frame_throw)
             _frame_calc += .5
         second_throw = throw()
-        if second_throw >= lost:
-            GAME_RESULT += '/'
+        if second_throw < lost:
+            GAME_RESULT += str(second_throw)
             _frame_calc += .5
         else:
-            GAME_RESULT += str(second_throw)
+            GAME_RESULT += '/'
             _frame_calc += .5
 
     return GAME_RESULT
