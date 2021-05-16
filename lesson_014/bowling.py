@@ -12,28 +12,37 @@ def throw():
 def game_set():
     print('вошли в фрейм игры')
     global GAME_RESULT
+    global _frame_calc
     _frame_calc = 0.0
-    _frame_stage = False
+    full_frame = True
+
     while _frame_calc < 10:
-        frame_throw = throw()
-        lost = 10-frame_throw
-        if frame_throw == 10:
-            _frame_stage = True
+        ferst_throw = throw()
+        lost_numder = 10 - ferst_throw
+        _frame_calc += .5
+        if ferst_throw == 10:
+            full_frame = True
             _frame_calc += 1
             GAME_RESULT += 'X'
-        elif frame_throw == 0:
-            GAME_RESULT += '-'
-            _frame_calc += .5
+        elif ferst_throw == 0:
+            full_frame = False
+            _frame_calc = .5
+            GAME_RESULT += str(ferst_throw)
         else:
-            GAME_RESULT += str(frame_throw)
-            _frame_calc += .5
-        second_throw = throw()
-        if second_throw < lost:
-            GAME_RESULT += str(second_throw)
-            _frame_calc += .5
-        else:
-            GAME_RESULT += '/'
-            _frame_calc += .5
+            GAME_RESULT += str(ferst_throw)
+            second_throw = throw()
+            if second_throw == 0:
+                GAME_RESULT += '-'
+                _frame_calc = .5
+                full_frame = True
+            else:
+                if second_throw >= lost_numder:
+                    GAME_RESULT += '/'
+                    _frame_calc = .5
+                    full_frame = True
+                else:
+                    GAME_RESULT += str(second_throw)
+                    _frame_calc += .5
 
     return GAME_RESULT
 
