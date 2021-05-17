@@ -3,7 +3,6 @@ from random import randint
 
 
 class GameSet:
-
     def __init__(self):
         self.GAME_RESULT = ''
 
