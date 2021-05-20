@@ -4,7 +4,7 @@ from random import randint
 
 class GameSet:
     def __init__(self):
-        self.GAME_RESULT = ''
+        self._game_result = ''
 
     def ferst_throw(self):
         throw_result = randint(0, 10)
@@ -18,24 +18,24 @@ class GameSet:
             lost = 10 - int(self.throw)
             if 1 <= self.throw <= 9:
                 _frame_calc += .5
-                self.GAME_RESULT += str(self.throw)
+                self._game_result += str(self.throw)
                 second_throw = self.ferst_throw()
                 if second_throw >= lost:
-                    self.GAME_RESULT += '/'
+                    self._game_result += '/ '
                     _frame_calc += .5
                 elif second_throw == 0:
-                    self.GAME_RESULT += '-'
+                    self._game_result += '- '
                     _frame_calc += .5
                 else:
-                    self.GAME_RESULT += str(second_throw)
+                    self._game_result += str(second_throw) + ' '
                     _frame_calc += .5
             elif self.throw == 10:
                 _frame_calc += 1
-                self.GAME_RESULT += 'X'
+                self._game_result += 'X '
             elif self.throw == 0:
                 _frame_calc += .5
-                self.GAME_RESULT += '-'
-        return self.GAME_RESULT
+                self._game_result += ' -'
+        return self._game_result
 
 
 game = GameSet()

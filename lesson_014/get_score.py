@@ -35,14 +35,12 @@ def get_score(game_result):
 
 def error_control(game_result):
     try:
-        if game_result in '/X':
+        if game_result in 'X/':
             raise FormatError
     except print('ошибка формата'):
         print('не прошло')
 
     return False
-
-
 
 
 
