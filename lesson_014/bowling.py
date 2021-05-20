@@ -5,39 +5,65 @@ from random import randint
 class GameSet:
     def __init__(self):
         self._game_result = ''
+        self.all_frame_calc = 0
+        self.frame_result = ''
+        self.lost = 0
 
-    def ferst_throw(self):
+    def throw_now(self):
         throw_result = randint(0, 10)
         return throw_result
 
-    def run(self):
-        print('вошли в фрейм игры')
+    def frame(self):
+
+        print('вошли в метод фрейма')
+        throw_res = self.throw_now()
         _frame_calc = 0.0
-        while _frame_calc < 10:
-            self.throw = self.ferst_throw()
-            lost = 10 - int(self.throw)
-            if 1 <= self.throw <= 9:
+        self.frame_result = ''
+        if throw_res == 10:
+            _frame_calc += 1
+            self.frame_result = 'X'
+            # return self.frame_result
+        elif throw_res == 0:
+            _frame_calc += .5
+            self.frame_result += '-'
+        else:
+            _frame_calc += .5
+            self.frame_result += str(throw_res)
+            self.lost = 10 - throw_res
+        if _frame_calc < 1:
+            do_throw = self.throw_now()
+            if do_throw >= self.lost:
+                self.frame_result += '/'
                 _frame_calc += .5
-                self._game_result += str(self.throw)
-                second_throw = self.ferst_throw()
-                if second_throw >= lost:
-                    self._game_result += '/ '
-                    _frame_calc += .5
-                elif second_throw == 0:
-                    self._game_result += '- '
-                    _frame_calc += .5
-                else:
-                    self._game_result += str(second_throw) + ' '
-                    _frame_calc += .5
-            elif self.throw == 10:
-                _frame_calc += 1
-                self._game_result += 'X '
-            elif self.throw == 0:
+                return self.frame_result
+            elif do_throw == 0:
+                self.frame_result += '-'
                 _frame_calc += .5
-                self._game_result += ' -'
+                return self.frame_result
+            elif do_throw < self.lost:
+                self.frame_result += str(do_throw)
+                _frame_calc += .5
+                return self.frame_result
+        self.all_frame_calc += 1
+        print(self.frame_result)
+        return self.frame_result
+
+    def game(self):
+        print('начинаем перебирать фреймы')
+        while self.all_frame_calc < 10:
+            print('фрейм', self.all_frame_calc)
+            game_res = self.frame()
+            self._game_result += str(game_res)
+            self.all_frame_calc += 1
         return self._game_result
+
+    def run(self):
+        print('вошли в запуск игры')
+        start = self.game()
+        return start
+
 
 
 game = GameSet()
 result = game.run()
-print(result)
+# print(str(result))
