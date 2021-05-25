@@ -14,7 +14,6 @@ def get_score(game_result):
     err = error_control(game_result)
     try:
         if not err:
-
             count_stike = game_result.count('X')
             count_second_throw = game_result.count('/')
             list_results = list(game_result)
@@ -41,7 +40,6 @@ def error_control(game_result):
         print('не прошло')
 
     return False
-
 
 
 start = get_score(game_result=result)
