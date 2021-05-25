@@ -15,14 +15,13 @@ class GameSet:
 
     def frame(self):
 
-        print('вошли в метод фрейма')
+        # print('вошли в метод фрейма')
         throw_res = self.throw_now()
         _frame_calc = 0.0
         self.frame_result = ''
         if throw_res == 10:
             _frame_calc += 1
             self.frame_result = 'X'
-            # return self.frame_result
         elif throw_res == 0:
             _frame_calc += .5
             self.frame_result += '-'
@@ -49,9 +48,9 @@ class GameSet:
         return self.frame_result
 
     def game(self):
-        print('начинаем перебирать фреймы')
+        # print('начинаем перебирать фреймы')
         while self.all_frame_calc < 10:
-            print('фрейм', self.all_frame_calc)
+            # print('фрейм', self.all_frame_calc)
             game_res = self.frame()
             self._game_result += str(game_res)
             self.all_frame_calc += 1
@@ -63,7 +62,6 @@ class GameSet:
         return start
 
 
-
 game = GameSet()
 result = game.run()
-# print(str(result))
+
