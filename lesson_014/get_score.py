@@ -3,7 +3,6 @@
 
 import bowling
 
-
 result = bowling.result
 
 
@@ -62,17 +61,12 @@ def error_control(game_result):
         for symb, i in enumerate(result_for_control):
             try:
                 if symb == '/':
-                    if result_for_control[i-1].isdigit():
+                    if result_for_control[i - 1].isdigit():
                         return False
                     else:
                         raise PosError()
             finally:
                 pass
-
-
-
-
-
 
 
 start = get_score(game_result=result)
