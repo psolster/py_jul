@@ -33,18 +33,19 @@
 #   Количество очков для результатов ХХХ - УУУ.
 
 
-import argparse as argparse
+import argparse as ar
 import get_score
 
-parser = argparse.ArgumentParser()
+parser = ar.ArgumentParser()
 parser.add_argument('--result', help="import result from bowling")
 args = parser.parse_args()
 
 if args.result == '--result':
     print('запускаю get_score')
-    get_score.start
+    get_score.start()
 
-
+else:
+    print('нет аргументов')
 
 
 # При написании кода помнить, что заказчик может захотеть доработок и новых возможностей...
