@@ -44,7 +44,7 @@ class GameSet:
                 _frame_calc += .5
                 return self.frame_result
         self.all_frame_calc += 1
-        print(self.frame_result)
+        # print(self.frame_result)
         return self.frame_result
 
     def game(self):
