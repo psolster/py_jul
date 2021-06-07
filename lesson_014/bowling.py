@@ -65,4 +65,3 @@ class GameSet:
 if __name__ == "__main__":
     game = GameSet()
     result = game.run()
-

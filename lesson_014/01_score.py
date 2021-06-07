@@ -43,7 +43,7 @@ args = parser.parse_args()
 
 if args.result == '--result':
     print('запускаю get_score')
-    get_score(game_result=bowling.game.run)
+    get_score(game_result=bowling.GameSet.run)
 
 else:
     print('нет аргументов')

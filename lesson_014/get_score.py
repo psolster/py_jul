@@ -69,5 +69,6 @@ def error_control(game_result):
                 pass
 
 
-start = get_score(game_result=bowling.GameSet.run)
-print(result, '-', start)
+if __name__ == "__main__":
+    start = get_score(game_result=result)
+    print(result, '-', start)
