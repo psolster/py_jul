@@ -3,7 +3,7 @@
 
 import bowling
 
-result = bowling.result
+result = bowling.GameSet.run
 
 
 class FormatError(Exception):
@@ -69,5 +69,6 @@ def error_control(game_result):
                 pass
 
 
-start = get_score(game_result=result)
-print(result, '-', start)
+if __name__ == "__main__":
+    start = get_score(game_result=result)
+    print(result, '-', start)

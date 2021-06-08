@@ -62,6 +62,6 @@ class GameSet:
         return start
 
 
-game = GameSet()
-result = game.run()
-
+if __name__ == "__main__":
+    game = GameSet()
+    result = game.run()

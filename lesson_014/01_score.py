@@ -35,6 +35,7 @@
 
 import argparse as ar
 import get_score
+import bowling
 
 parser = ar.ArgumentParser()
 parser.add_argument('--result', help="import result from bowling")
@@ -42,7 +43,7 @@ args = parser.parse_args()
 
 if args.result == '--result':
     print('запускаю get_score')
-    get_score.start()
+    get_score(game_result=bowling.GameSet.run)
 
 else:
     print('нет аргументов')
