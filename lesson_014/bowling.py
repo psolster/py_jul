@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from random import randint
+import sys
 
 
 class GameSet:
@@ -83,6 +84,7 @@ def get_score(game_result):
         error_control(game_result)
     except FormatError as errr:
         print(f'Поймано исключение {str(errr)}')
+        sys.exit()
 
     count_stike = game_result.count('X')
     count_second_throw = game_result.count('/')

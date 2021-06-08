@@ -21,7 +21,6 @@ class FerstBot:
             except Exception as bag:
                 print(bag)
 
-
     def on_event(self, event):
         if event.type == vk_api.bot_longpoll.VkBotEventType.MESSAGE_NEW:
             print(event.object.text)
