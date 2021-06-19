@@ -79,54 +79,61 @@ class PosError(Exception):
         return self.message
 
 
-def get_score(game_result):
-    try:
-        error_control(game_result)
-    except FormatError as errr:
-        print(f'Поймано исключение {str(errr)}')
-        sys.exit()
+class GetScore:
+    def __init__(self, result):
+        self.game_result = result
+        self.total_count = 0
 
-    count_stike = game_result.count('X')
-    count_second_throw = game_result.count('/')
-    list_results = list(game_result)
-    for i, symb in enumerate(list_results):
-        if symb == 'X':
-            list_results[i] = '0'
-        elif symb == '/':
-            list_results[i - 1] = '0'
-            list_results[i] = '0'
-        elif symb == '-':
-            list_results[i] = '0'
-    result = [int(item) for item in list_results]
-    total_count = count_stike * 20 + count_second_throw * 15 + sum(result)
+    def __str__(self):
+        return str(self.total_count)
 
-    return total_count
+    def get_score(self):
+        try:
+            error_control(self.game_result)
+        except FormatError as errr:
+            print(f'Поймано исключение {str(errr)}')
+            sys.exit()
 
+        count_stike = game_result.count('X')
+        count_second_throw = game_result.count('/')
+        list_results = list(game_result)
+        for i, symb in enumerate(list_results):
+            if symb == 'X':
+                list_results[i] = '0'
+            elif symb == '/':
+                list_results[i - 1] = '0'
+                list_results[i] = '0'
+            elif symb == '-':
+                list_results[i] = '0'
+        result = [int(item) for item in list_results]
+        self.total_count = count_stike * 20 + count_second_throw * 15 + sum(result)
 
-def error_control(game_result):
-    result_for_control = list(game_result)
-    strike = result_for_control.count('X')
-    all_lenght = len(result_for_control) + strike * 2
-    try:
-        if all_lenght != 20:
-            raise FormatError()
-        else:
-            return False
-    finally:
+        return self.total_count
 
-        for symb, i in enumerate(result_for_control):
-            try:
-                if symb == '/':
-                    if result_for_control[i - 1].isdigit():
-                        return False
-                    else:
-                        raise PosError()
-            finally:
-                pass
+    def error_control(self, game_result):
+        result_for_control = list(game_result)
+        strike = result_for_control.count('X')
+        all_lenght = len(result_for_control) + strike * 2
+        try:
+            if all_lenght != 20:
+                raise FormatError()
+            else:
+                return False
+        finally:
+
+            for symb, i in enumerate(result_for_control):
+                try:
+                    if symb == '/':
+                        if result_for_control[i - 1].isdigit():
+                            return False
+                        else:
+                            raise PosError()
+                finally:
+                    pass
 
 
 if __name__ == "__main__":
     game = GameSet()
     result = game.run()
-    start = get_score(result)
+    start = GetScore.get_score(result)
     print(result, '-', start)
