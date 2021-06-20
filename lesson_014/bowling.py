@@ -87,16 +87,16 @@ class GetScore:
     def __str__(self):
         return str(self.total_count)
 
-    def get_score(self, result):
+    def get_score(self, result_f_sc):
         try:
-            self.error_control(self.game_result)
+            self.error_control(result_f_sc)
         except FormatError as errr:
             print(f'Поймано исключение {str(errr)}')
             sys.exit()
 
-        count_stike = self.game_result.count('X')
-        count_second_throw = self.game_result.count('/')
-        list_results = list(self.game_result)
+        count_stike = result_f_sc.count('X')
+        count_second_throw = result_f_sc.count('/')
+        list_results = list(result_f_sc)
         for i, symb in enumerate(list_results):
             if symb == 'X':
                 list_results[i] = '0'
@@ -132,8 +132,8 @@ class GetScore:
                     pass
 
     def run(self, result_for_gs):
-        self.game_result = result_for_gs
-        result_gs = self.get_score(self.game_result)
+        game_result = result_for_gs
+        result_gs = self.get_score(game_result)
         return result_gs
 
 
