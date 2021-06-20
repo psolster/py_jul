@@ -140,5 +140,5 @@ if __name__ == "__main__":
     game = GameSet()
     result = game.run()
     start = GetScore()
-    start.run(result)
-    print(result, '-', start)
+    res = start.run(result)
+    print(result, '-', res)
