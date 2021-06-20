@@ -40,8 +40,9 @@ parser = argparse.ArgumentParser(description='result for calculate')
 parser.add_argument('result', type=str, help='Input result str')
 
 args = parser.parse_args()
-start = bowling.get_score(args.result)
-print(args.result, '-', start)
+start = bowling.GetScore
+res = start.get_score(result=args.result)
+print(args.result, '-', res)
 
 
 # При написании кода помнить, что заказчик может захотеть доработок и новых возможностей...
