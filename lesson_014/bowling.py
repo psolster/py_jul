@@ -80,23 +80,23 @@ class PosError(Exception):
 
 
 class GetScore:
-    def __init__(self, result):
-        self.game_result = result
+    def __init__(self):
+
         self.total_count = 0
 
     def __str__(self):
         return str(self.total_count)
 
-    def get_score(self):
+    def get_score(self, result):
         try:
-            error_control(self.game_result)
+            self.error_control(self.game_result)
         except FormatError as errr:
             print(f'Поймано исключение {str(errr)}')
             sys.exit()
 
-        count_stike = game_result.count('X')
-        count_second_throw = game_result.count('/')
-        list_results = list(game_result)
+        count_stike = self.game_result.count('X')
+        count_second_throw = self.game_result.count('/')
+        list_results = list(self.game_result)
         for i, symb in enumerate(list_results):
             if symb == 'X':
                 list_results[i] = '0'
@@ -131,9 +131,15 @@ class GetScore:
                 finally:
                     pass
 
+    def run(self, result_for_gs):
+        self.game_result = result_for_gs
+        result_gs = self.get_score(self.game_result)
+        return result_gs
+
 
 if __name__ == "__main__":
     game = GameSet()
     result = game.run()
-    start = GetScore.get_score(result)
+    start = GetScore()
+    start.run(result)
     print(result, '-', start)
