@@ -106,9 +106,9 @@ class GetScore:
             elif symb == '-':
                 list_results[i] = '0'
         result = [int(item) for item in list_results]
-        self.total_count = count_stike * 20 + count_second_throw * 15 + sum(result)
+        total_count = count_stike * 20 + count_second_throw * 15 + sum(result)
 
-        return self.total_count
+        return total_count
 
     def error_control(self, game_result):
         result_for_control = list(game_result)
@@ -132,8 +132,7 @@ class GetScore:
                     pass
 
     def run(self, result_for_gs):
-        game_result = result_for_gs
-        result_gs = self.get_score(game_result)
+        result_gs = self.get_score(result_for_gs)
         return result_gs
 
 
