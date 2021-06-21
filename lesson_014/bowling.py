@@ -81,7 +81,6 @@ class PosError(Exception):
 
 class GetScore:
     def __init__(self):
-
         self.total_count = 0
 
     def __str__(self):
