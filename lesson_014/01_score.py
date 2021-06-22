@@ -41,7 +41,7 @@ parser.add_argument('result', type=str, help='Input result str')
 
 args = parser.parse_args()
 start = bowling.GetScore()
-res = start.run(result_for_gs=args.result)
+res = start.run(args.result)
 print(args.result, '-', res)
 
 

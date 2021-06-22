@@ -80,7 +80,7 @@ class PosError(Exception):
 
 
 class GetScore:
-    def __init__(self):
+    def __init__(self, ):
         self.total_count = 0
 
     def __str__(self):
@@ -130,8 +130,8 @@ class GetScore:
                 finally:
                     pass
 
-    def run(self, result_for_gs):
-        result_gs = self.get_score(result_for_gs)
+    def run(self, result_f_sc):
+        result_gs = self.get_score(result_f_sc)
         return result_gs
 
 
