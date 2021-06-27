@@ -10,19 +10,19 @@ class GameSet:
         self.frame_result = ''
         self.lost = 0
 
-    def throw_now(self):
-        throw_result = randint(0, 10)
+    def throw_now(self, n=10):
+        max_ceg = n
+        throw_result = randint(0, max_ceg)
         return throw_result
 
     def frame(self):
-
         # print('вошли в метод фрейма')
-        throw_res = self.throw_now()
+        throw_res = self.throw_now(n=10)
         _frame_calc = 0.0
         self.frame_result = ''
         if throw_res == 10:
             _frame_calc += 1
-            self.frame_result = 'X'
+            self.frame_result += 'X'
         elif throw_res == 0:
             _frame_calc += .5
             self.frame_result += '-'
@@ -30,9 +30,9 @@ class GameSet:
             _frame_calc += .5
             self.frame_result += str(throw_res)
             self.lost = 10 - throw_res
-        if _frame_calc < 1:
-            do_throw = self.throw_now()
-            if do_throw >= self.lost:
+        if _frame_calc % 2 != 0:
+            do_throw = self.throw_now(self.lost)
+            if do_throw == self.lost:
                 self.frame_result += '/'
                 _frame_calc += .5
                 return self.frame_result
@@ -44,7 +44,7 @@ class GameSet:
                 self.frame_result += str(do_throw)
                 _frame_calc += .5
                 return self.frame_result
-        self.all_frame_calc += 1
+        # self.all_frame_calc += 1
         # print(self.frame_result)
         return self.frame_result
 
