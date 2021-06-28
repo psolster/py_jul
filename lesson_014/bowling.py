@@ -30,7 +30,8 @@ class GameSet:
             _frame_calc += .5
             self.frame_result += str(throw_res)
             self.lost = 10 - throw_res
-        if _frame_calc % 2 != 0:
+        if _frame_calc / 2 != 0.5:
+            self.lost = 10 - throw_res
             do_throw = self.throw_now(self.lost)
             if do_throw == self.lost:
                 self.frame_result += '/'
@@ -43,6 +44,8 @@ class GameSet:
             elif do_throw < self.lost:
                 self.frame_result += str(do_throw)
                 _frame_calc += .5
+                return self.frame_result
+            else:
                 return self.frame_result
         # self.all_frame_calc += 1
         # print(self.frame_result)
