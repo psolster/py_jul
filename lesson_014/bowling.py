@@ -125,8 +125,8 @@ class GetScore:
 
             for symb, i in enumerate(result_for_control):
                 try:
-                    if symb == '/':
-                        if result_for_control[i - 1].isdigit():
+                    if i == '/':
+                        if result_for_control[symb - 1].isdigit():
                             return False
                         else:
                             raise PosError()
