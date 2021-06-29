@@ -2,8 +2,8 @@
 import unittest
 import bowling
 
-_test_date = '1--/418/22527/41243/'
-_result_test_date = 88
+_test_date = '4152442234528-26-125'
+_result_test_date = 62
 
 
 class Get_Score_From_bowling_Test(unittest.TestCase):

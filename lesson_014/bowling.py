@@ -115,7 +115,7 @@ class GetScore:
     def error_control(self, game_result):
         result_for_control = list(game_result)
         strike = result_for_control.count('X')
-        all_lenght = len(result_for_control) + strike * 2
+        all_lenght = len(result_for_control) + strike
         try:
             if all_lenght != 20:
                 raise FormatError()
@@ -126,7 +126,7 @@ class GetScore:
             for symb, i in enumerate(result_for_control):
                 try:
                     if i == '/':
-                        if result_for_control[symb - 1].isdigit():
+                        if result_for_control[symb - 1].isdigit() or '-':
                             return False
                         else:
                             raise PosError()
