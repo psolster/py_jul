@@ -82,6 +82,14 @@ class PosError(Exception):
         return self.message
 
 
+class Sum_Frame(Exception):
+    def __init__(self):
+        self.message = 'Не верное количество кеглей в фрейме'
+
+    def __str__(self):
+        return self.message
+
+
 class GetScore:
     def __init__(self, ):
         self.total_count = 0
@@ -113,25 +121,71 @@ class GetScore:
         return total_count
 
     def error_control(self, game_result):
-        result_for_control = list(game_result)
-        strike = result_for_control.count('X')
-        all_lenght = len(result_for_control) + strike
-        try:
-            if all_lenght != 20:
-                raise FormatError()
+        res_list = list(game_result)
+        res_fram = []
+        n = 0
+        while n < len(res_list):
+            symb = res_list[n]
+            if symb == 'X':
+                res_fram.append(symb)
+                n += 1
             else:
-                return False
-        finally:
+                 fram = res_list[n: n + 2]
+                 res_fram.append(fram)
+                 n += 2
+        sum_each_fram = []
+        for i in res_fram:
+            if len(i) == 2:
+                fram_sl = ''.join(i)
+                if fram_sl.isdigit():
+                    obr = list(fram_sl)
+                    res_lst = [int(x) for x in obr]
+                    sum_fram = sum(res_lst)
 
-            for symb, i in enumerate(result_for_control):
+                elif '-' in i:
+                    if i == ['-', '-']:
+                            sum_fram = '0'
+                    elif '/' in i:
+                            sum_fram = 10
+                    else:
+                        print(i)
+                        pos = i.index('-')
+                        i[pos] = '0'
+                        fram_sl = ''.join(i)
+                        obr = list(fram_sl)
+                        res_lst = [int(x) for x in obr]
+                        sum_fram = sum(res_lst)
+                else:
+                    sum_fram = 10
+                sum_each_fram.append(sum_fram)
+            else:
+                sum_each_fram.append(10)
+
+        for sum_fr in sum_each_fram:
+            try:
+                if int(sum_fr) > 10:
+                    raise Sum_Frame
+
+            finally:
                 try:
-                    if i == '/':
-                        if result_for_control[symb - 1].isdigit() or '-':
-                            return False
-                        else:
-                            raise PosError()
+                    if len(res_fram) != 10:
+                        raise FormatError
                 finally:
                     pass
+
+        # return res_fram, result, sum_each_fram
+
+        for symb, i in enumerate(res_list):
+            try:
+                if i == '/':
+                    if res_list[symb - 1].isdigit() or '-':
+                        return False
+                    else:
+                        raise PosError()
+            finally:
+                pass
+        return False
+
 
     def run(self, result_f_sc):
         result_gs = self.get_score(result_f_sc)
