@@ -148,7 +148,7 @@ class GetScore:
                     elif '/' in i:
                             sum_fram = 10
                     else:
-                        print(i)
+                        # print(i)
                         pos = i.index('-')
                         i[pos] = '0'
                         fram_sl = ''.join(i)
