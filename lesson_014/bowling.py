@@ -144,9 +144,13 @@ class GetScore:
 
                 elif '-' in i:
                     if i == ['-', '-']:
-                            sum_fram = '0'
+                        sum_fram = '0'
                     elif '/' in i:
-                            sum_fram = 10
+                        sum_fram = 10
+                    elif 'X' in i:
+                        sum_fram = 10
+
+
                     else:
                         # print(i)
                         pos = i.index('-')

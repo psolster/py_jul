@@ -34,17 +34,18 @@ def calculate_tour_res(res_previous_tour):
     res_for_calc = res_previous_tour
     start = bowling.GetScore()
     result = start.run(res_for_calc)
-    print(result)
+
     return result
 
 
-input_file = 'tournament_lit.txt'
+input_file = 'tournament.txt'
 output_file = 'tournament_out.txt'
 start_read = generate_tour(input_file=input_file, output_file=output_file)
 for line in start_read:
+
     for name, res in line.items():
         res_for_gamer = calculate_tour_res(res)
-        print(res_for_gamer)
+        print(name, res, res_for_gamer)
 
 
 
