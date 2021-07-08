@@ -166,12 +166,15 @@ class GetScore:
             try:
                 if int(sum_fr) > 10:
                     raise Sum_Frame
+            except Sum_Frame as exc_1:
+                print(f'Исключение {exc_1}')
 
-            finally:
                 try:
                     if len(res_fram) != 10:
                         raise FormatError
-                finally:
+                except FormatError as exc:
+                    print(f'Исключение {exc}')
+
                     continue
 
         for symb, i in enumerate(res_list):
@@ -181,8 +184,9 @@ class GetScore:
                         return False
                     else:
                         raise PosError()
+
             finally:
-                pass
+                continue
         return False
 
     def run(self, result_f_sc):
