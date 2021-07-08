@@ -130,9 +130,9 @@ class GetScore:
                 res_fram.append(symb)
                 n += 1
             else:
-                 fram = res_list[n: n + 2]
-                 res_fram.append(fram)
-                 n += 2
+                fram = res_list[n: n + 2]
+                res_fram.append(fram)
+                n += 2
         sum_each_fram = []
         for i in res_fram:
             if len(i) == 2:
@@ -141,7 +141,6 @@ class GetScore:
                     obr = list(fram_sl)
                     res_lst = [int(x) for x in obr]
                     sum_fram = sum(res_lst)
-
                 elif '-' in i:
                     if i == ['-', '-']:
                         sum_fram = '0'
@@ -149,8 +148,6 @@ class GetScore:
                         sum_fram = 10
                     elif 'X' in i:
                         sum_fram = 10
-
-
                     else:
                         # print(i)
                         pos = i.index('-')
@@ -175,9 +172,7 @@ class GetScore:
                     if len(res_fram) != 10:
                         raise FormatError
                 finally:
-                    pass
-
-        # return res_fram, result, sum_each_fram
+                    continue
 
         for symb, i in enumerate(res_list):
             try:
@@ -189,7 +184,6 @@ class GetScore:
             finally:
                 pass
         return False
-
 
     def run(self, result_f_sc):
         result_gs = self.get_score(result_f_sc)
