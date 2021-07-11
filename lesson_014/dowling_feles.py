@@ -5,9 +5,9 @@ import os
 import bowling
 
 
-def generate_tour(input_file):
+def generate_tour(input_file_tour):
     tour_data = {}
-    file_whith_data = input_file
+    file_whith_data = input_file_tour
     with open(file_whith_data, 'r', encoding='utf8') as rf:
         while True:
             line_for_analysis = rf.readline()
@@ -16,8 +16,8 @@ def generate_tour(input_file):
             elif '#' in line_for_analysis:
                 line_for_analysis = next(rf)
                 while 'winner' not in line_for_analysis:
-                    name, res_set = line_for_analysis.split('\t')
-                    tour_data[name] = res_set[:-1]
+                    name_plr, res_set = line_for_analysis.split('\t')
+                    tour_data[name_plr] = res_set[:-1]
                     line_for_analysis = rf.readline()
                 else:
                     yield tour_data
@@ -35,7 +35,7 @@ def calculate_tour_res(res_previous_tour):
 
 input_file = 'tournament.txt'
 output_file = 'tournament_out.txt'
-start_read = generate_tour(input_file=input_file )
+start_read = generate_tour(input_file_tour=input_file)
 tour_number = 0
 for line in start_read:
     tour_number += 1
@@ -48,7 +48,7 @@ for line in start_read:
         voc_result_tour[name] = res_for_gamer
     sorted_tuple = sorted(voc_result_tour.items(), key=lambda x: x[1])
     for name_pl, res_gam in line.items():
-        rw.write(name_pl+'\t'+str(res_gam)+'\t'+str(voc_result_tour[name_pl])+'\n')
-    rw.write('Winner is '+str(sorted_tuple[-1][0]+'\n'))
+        rw.write(name_pl + '\t' + str(res_gam) + '\t' + str(voc_result_tour[name_pl]) + '\n')
+    rw.write('Winner is ' + str(sorted_tuple[-1][0] + '\n'))
     rw.write('\n')
     rw.close()
